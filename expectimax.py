@@ -16,6 +16,7 @@ for a in xrange(16):
             for d in xrange(16):
                 s = (a,b,c,d)
                 rowUtility[s] = _getRowUtility(list(s))
+                #rowUtility[a|b<<4|c<<8|d<<16] = _getRowUtility(list(s))
 
 class Expectimax2048:
 
@@ -55,7 +56,7 @@ class Expectimax2048:
 		"""
 
 		def expectimax(state, d=self.dVal):
-			self.calls += 1
+			#self.calls += 1
 
 			# losing state
 			if len(state.getTransitions())==0:
@@ -87,8 +88,9 @@ class Expectimax2048:
 
 			return bestAction if d==self.dVal else bestScore
 
-		self.calls=0
-		action = expectimax(state)
-		print "CALLS: "+str(self.calls)
-		return action
+		#self.calls=0
+		#action = expectimax(state)
+		#print "CALLS: "+str(self.calls)
+		#return action
+		return expectimax(state)
 		

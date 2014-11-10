@@ -26,6 +26,26 @@ for a in xrange(16):
                 if s!=tr:
                     rowTrans[s] = tr
 
+rowTrans2 = []
+for a in xrange(16):
+    x = []
+    for b in xrange(16):
+        y = []
+        for c in xrange(16):
+            z = []
+            for d in xrange(16):
+                s = (a,b,c,d)
+                tr = _getRowTrans(list(s))
+                if s!=tr:
+                    z.append(tr)
+                else:
+                    z.append(None)
+            y.append(tuple(z))
+        x.append(tuple(y))
+    rowTrans2.append(tuple(x))
+rowTrans2 = tuple(rowTrans2)
+
+
 # return list of (i,j) tuples where board has a blank space
 getBoardBlanks = lambda board: [i for i, x in enumerate(board) if x == 0]
 
@@ -45,9 +65,48 @@ def _successors(board, i):
         newBoard = board[:]
         newBoard[x] = i
         successors.append(State2048(newBoard))
-
     return successors
 
+def _transU(board):
+    b = board[:]
+    isValid = False
+    for i in xrange(4):
+        newRow = rowTrans2[b[i]][b[i+4]][b[i+8]][b[i+12]]
+        if newRow != None:
+            isValid = True
+            b[i],b[i+4],b[i+8],b[i+12] = newRow
+    return b, isValid    
+
+def _transD(board):
+    b = board[:]
+    isValid = False
+    for i in xrange(3,-1,-1):
+        newRow = rowTrans2[b[i]][b[i+4]][b[i+8]][b[i+12]]
+        if newRow != None:
+            isValid = True
+            b[i+12],b[i+8],b[i+4],b[i] = newRow
+    return b, isValid
+
+def _transL(board):
+    b = board[:]
+    isValid = False
+    for i in xrange(0,13,4):
+        newRow = rowTrans2[b[i]][b[i+1]][b[i+2]][b[i+3]]
+        if newRow != None:
+            isValid = True
+            b[i],b[i+1],b[i+2],b[i+3] = newRow
+    return b, isValid
+
+def _transR(board):
+    b = board[:]
+    isValid = False
+    for i in xrange(0,13,4):
+        newRow = rowTrans2[b[i+3]][b[i+2]][b[i+1]][b[i]]
+        if newRow != None:
+            isValid = True
+            b[i+3],b[i+2],b[i+1],b[i] = newRow
+    return b, isValid
+"""
 def _transU(board):
     b = board[:]
     isValid = False
@@ -87,6 +146,7 @@ def _transR(board):
             isValid = True
             b[i+3],b[i+2],b[i+1],b[i] = rowTrans[row]
     return b, isValid
+"""
 
 def initialState():
     board = array("b", [0 for _ in range(16)])
@@ -99,10 +159,10 @@ def initialState():
     return board
 
 class Action2048:
-    UP = 0
-    RIGHT = 1
-    DOWN = 2
-    LEFT = 3
+    UP = "U"
+    RIGHT = "R"
+    DOWN = "D"
+    LEFT = "L"
     ACTION_LIST = (UP,RIGHT,DOWN,LEFT)
 
 class State2048:
@@ -132,7 +192,7 @@ class State2048:
 
     def _computeTransitions(self):
         successors = {}
-        t()
+        #t()
         newBoard, valid = _transU(self.board)
         if valid:
             successors[Action2048.UP] = newBoard
@@ -145,7 +205,7 @@ class State2048:
         newBoard, valid = _transR(self.board)
         if valid:
             successors[Action2048.RIGHT] = newBoard
-        t(0)
+        #t(0)
         self.transitions = successors
     """
     def _computeBoardTransition(self, action):
