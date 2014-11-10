@@ -2,6 +2,7 @@ from random import random,choice,randint
 from array import array
 from t import *
 
+# function used to precompute row transitions
 def _getRowTrans(s):
     for i in xrange(1,4):
         if s[i]!=0:
@@ -16,17 +17,8 @@ def _getRowTrans(s):
                 s[i],s[j] = 0, s[i]
     return tuple(map(lambda i: abs(i), s))
 
-rowTrans = {}
-for a in xrange(16):
-    for b in xrange(16):
-        for c in xrange(16):
-            for d in xrange(16):
-                s = (a,b,c,d)
-                tr = _getRowTrans(list(s))
-                if s!=tr:
-                    rowTrans[s] = tr
-
-rowTrans2 = []
+# precomputation of row transitions
+rowTrans = []
 for a in xrange(16):
     x = []
     for b in xrange(16):
@@ -42,19 +34,10 @@ for a in xrange(16):
                     z.append(None)
             y.append(tuple(z))
         x.append(tuple(y))
-    rowTrans2.append(tuple(x))
-rowTrans2 = tuple(rowTrans2)
+    rowTrans.append(tuple(x))
+rowTrans = tuple(rowTrans)
 
-
-# return list of (i,j) tuples where board has a blank space
-getBoardBlanks = lambda board: [i for i, x in enumerate(board) if x == 0]
-
-def computeTransSuccessors2(board):
-    return _successors(board, 1)
-
-def computeTransSuccessors4(board):
-    return _successors(board, 2)
-
+# used by computeTransSuccessors2 and computeTransSuccessors4
 def _successors(board, i):
     blanks = getBoardBlanks(board)
     if len(blanks)==0:
@@ -67,21 +50,22 @@ def _successors(board, i):
         successors.append(State2048(newBoard))
     return successors
 
+# transition functions for board states
 def _transU(board):
     b = board[:]
     isValid = False
     for i in xrange(4):
-        newRow = rowTrans2[b[i]][b[i+4]][b[i+8]][b[i+12]]
+        newRow = rowTrans[b[i]][b[i+4]][b[i+8]][b[i+12]]
         if newRow != None:
             isValid = True
             b[i],b[i+4],b[i+8],b[i+12] = newRow
-    return b, isValid    
+    return b, isValid
 
 def _transD(board):
     b = board[:]
     isValid = False
     for i in xrange(3,-1,-1):
-        newRow = rowTrans2[b[i]][b[i+4]][b[i+8]][b[i+12]]
+        newRow = rowTrans[b[i+12]][b[i+8]][b[i+4]][b[i]]
         if newRow != None:
             isValid = True
             b[i+12],b[i+8],b[i+4],b[i] = newRow
@@ -91,7 +75,7 @@ def _transL(board):
     b = board[:]
     isValid = False
     for i in xrange(0,13,4):
-        newRow = rowTrans2[b[i]][b[i+1]][b[i+2]][b[i+3]]
+        newRow = rowTrans[b[i]][b[i+1]][b[i+2]][b[i+3]]
         if newRow != None:
             isValid = True
             b[i],b[i+1],b[i+2],b[i+3] = newRow
@@ -101,53 +85,24 @@ def _transR(board):
     b = board[:]
     isValid = False
     for i in xrange(0,13,4):
-        newRow = rowTrans2[b[i+3]][b[i+2]][b[i+1]][b[i]]
+        newRow = rowTrans[b[i+3]][b[i+2]][b[i+1]][b[i]]
         if newRow != None:
             isValid = True
             b[i+3],b[i+2],b[i+1],b[i] = newRow
     return b, isValid
-"""
-def _transU(board):
-    b = board[:]
-    isValid = False
-    for i in xrange(4):
-        row = (b[i],b[i+4],b[i+8],b[i+12])
-        if row in rowTrans:
-            isValid = True
-            b[i],b[i+4],b[i+8],b[i+12] = rowTrans[row]
-    return b, isValid    
 
-def _transD(board):
-    b = board[:]
-    isValid = False
-    for i in xrange(3,-1,-1):
-        row = (b[i+12],b[i+8],b[i+4],b[i])
-        if row in rowTrans:
-            isValid = True
-            b[i+12],b[i+8],b[i+4],b[i] = rowTrans[row]
-    return b, isValid
+# return list of (i,j) tuples where board has a blank space
+getBoardBlanks = lambda board: [i for i, x in enumerate(board) if x == 0]
 
-def _transL(board):
-    b = board[:]
-    isValid = False
-    for i in xrange(0,13,4):
-        row = (b[i],b[i+1],b[i+2],b[i+3])
-        if row in rowTrans:
-            isValid = True
-            b[i],b[i+1],b[i+2],b[i+3] = rowTrans[row]
-    return b, isValid
+# returns all successors with 2 tiles
+def computeTransSuccessors2(board):
+    return _successors(board, 1)
 
-def _transR(board):
-    b = board[:]
-    isValid = False
-    for i in xrange(0,13,4):
-        row = (b[i+3],b[i+2],b[i+1],b[i])
-        if row in rowTrans:
-            isValid = True
-            b[i+3],b[i+2],b[i+1],b[i] = rowTrans[row]
-    return b, isValid
-"""
+# returns all successors with 4 tiles
+def computeTransSuccessors4(board):
+    return _successors(board, 2)
 
+# returns a random initial state with random tiles filled
 def initialState():
     board = array("b", [0 for _ in range(16)])
     idx = randint(0,15)
@@ -158,6 +113,7 @@ def initialState():
     board[idx2] = 1 if random()<0.9 else 2
     return board
 
+# enum for actions
 class Action2048:
     UP = "U"
     RIGHT = "R"
@@ -165,6 +121,7 @@ class Action2048:
     LEFT = "L"
     ACTION_LIST = (UP,RIGHT,DOWN,LEFT)
 
+# represents a single 2048 board state
 class State2048:
 
     def __init__(self, board):
@@ -192,7 +149,6 @@ class State2048:
 
     def _computeTransitions(self):
         successors = {}
-        #t()
         newBoard, valid = _transU(self.board)
         if valid:
             successors[Action2048.UP] = newBoard
@@ -205,43 +161,7 @@ class State2048:
         newBoard, valid = _transR(self.board)
         if valid:
             successors[Action2048.RIGHT] = newBoard
-        #t(0)
         self.transitions = successors
-    """
-    def _computeBoardTransition(self, action):
-        b = self.board[:]
-        isValid = False
-
-        if action == Action2048.UP:
-            for i in xrange(4):
-                row = (b[i],b[i+4],b[i+8],b[i+12])
-                if row in rowTrans:
-                    isValid = True
-                    b[i],b[i+4],b[i+8],b[i+12] = rowTrans[row]
-
-        elif action == Action2048.DOWN:
-            for i in xrange(3,-1,-1):
-                row = (b[i+12],b[i+8],b[i+4],b[i])
-                if row in rowTrans:
-                    isValid = True
-                    b[i+12],b[i+8],b[i+4],b[i] = rowTrans[row]
-
-        elif action == Action2048.LEFT:
-            for i in xrange(0,13,4):
-                row = (b[i],b[i+1],b[i+2],b[i+3])
-                if row in rowTrans:
-                    isValid = True
-                    b[i],b[i+1],b[i+2],b[i+3] = rowTrans[row]
-        
-        elif action == Action2048.RIGHT:
-            for i in xrange(0,13,4):
-                row = (b[i+3],b[i+2],b[i+1],b[i])
-                if row in rowTrans:
-                    isValid = True
-                    b[i+3],b[i+2],b[i+1],b[i] = rowTrans[row]
-
-        return b, isValid
-    """
 
     def getScore(self):
         if self.score==None:

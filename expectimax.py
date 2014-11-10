@@ -2,6 +2,7 @@ from state import *
 from time import time
 from t import t
 
+# function used to precompute row utility
 def _getRowUtility(s):
     u = 0
     for i in s:
@@ -9,54 +10,53 @@ def _getRowUtility(s):
 			u += 2**i
     return u
 
-rowUtility = {}
+# precomputation of row utilities
+rowUtility = []
 for a in xrange(16):
+    x = []
     for b in xrange(16):
+        y = []
         for c in xrange(16):
+            z = []
             for d in xrange(16):
                 s = (a,b,c,d)
-                rowUtility[s] = _getRowUtility(list(s))
-                #rowUtility[a|b<<4|c<<8|d<<16] = _getRowUtility(list(s))
+                z.append(_getRowUtility(list(s)))
+            y.append(tuple(z))
+        x.append(tuple(y))
+    rowUtility.append(tuple(x))
+rowUtility = tuple(rowUtility)
 
 class Expectimax2048:
 
 	def __init__(self, dVal, reduceSuccessors):
 		self.dVal = dVal
 		self.reduceSuccessors = reduceSuccessors
-		#self.successorFunc = computeTransSuccessorsTwo if reduceSuccessors else computeTransSuccessors
 
 	def utility(self, state):
-		u = 0
+		# uses precomputed row utilities
+		score = 0
 		for i in xrange(4):
-			u += rowUtility[(state.board[i],state.board[i+4],state.board[i+8],state.board[i+12])]
-		return u
-		"""
-		score = 100.
-		for i in state.board:
-			if i>0:
-				score += 2**i
-		score = state.getScore()
+			score += rowUtility[state.board[i]][state.board[i+4]][state.board[i+8]][state.board[i+12]]
+		#return score
 		numBlank = len(getBoardBlanks(state.board))+1
 		numFilled = 16-numBlank
 		return score / numFilled**2 * (numBlank)**2
-		"""
 
 	def getFailScore(self):
 		return 0
 
 	def getAction(self, state):
 		"""
+		# dynamic depth
 		numBlank = len(getBoardBlanks(state.board))
-		self.calls=0
 		self.dVal = 2 if numBlank>4 else 3
-		if numBlank in [0,1,2,5,6]:
-			self.successorFunc = computeTransSuccessors
-		else:
-			self.successorFunc = computeTransSuccessorsTwo
 		"""
 
 		def expectimax(state, d=self.dVal):
-			#self.calls += 1
+			"""
+			# increment calls
+			self.calls += 1
+			"""
 
 			# losing state
 			if len(state.getTransitions())==0:
@@ -88,9 +88,12 @@ class Expectimax2048:
 
 			return bestAction if d==self.dVal else bestScore
 
-		#self.calls=0
-		#action = expectimax(state)
-		#print "CALLS: "+str(self.calls)
-		#return action
+		"""
+		# keep track of calls
+		self.calls=0
+		action = expectimax(state)
+		print "CALLS: "+str(self.calls)
+		return action
+		"""
 		return expectimax(state)
 		

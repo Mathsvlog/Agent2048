@@ -13,7 +13,7 @@ for t in s.getTransitions():
 
 """
 for d in range(3,4):
-	a = Agent2048(d,True, False)
+	a = Agent2048(d,False, False)
 	a.state = s
 	td = time()
 	print "D: "+str(d)
