@@ -10,8 +10,6 @@ class Expectimax2048:
 		#self.successorFunc = computeTransSuccessorsTwo if reduceSuccessors else computeTransSuccessors
 
 	def utility(self, state):
-		return 1
-		"""
 		score = 0.
 		for i in state.board:
 			if i>0:
@@ -20,7 +18,6 @@ class Expectimax2048:
 		numBlank = len(getBoardBlanks(state.board))+1
 		numFilled = 16-numBlank
 		return score / numFilled**2 * (numBlank)**2
-		"""
 
 	def getFailScore(self):
 		return 0
@@ -45,8 +42,7 @@ class Expectimax2048:
 
 			# depth reached
 			elif d==0:
-				u = self.utility(state)
-				return u
+				return self.utility(state)
 
 			bestAction, bestScore = -float("inf"), None
 			trans = state.getTransitions()
@@ -54,20 +50,16 @@ class Expectimax2048:
 				score = 0
 
 				successors = computeTransSuccessors2(trans[action])
-				percent = (1 if self.reduceSuccessors else 0.9)/len(trans[action])
+				percent = (1.0 if self.reduceSuccessors else 0.9)/len(successors)
 				for newState in successors:
 					score += percent*expectimax(newState, d-1)
-				if not self.reduceSuccessors:
-					percent = 0.1/len(trans[action])
-					for newState in computeTransSuccessors4(trans[action]):
-						score += percent2*expectimax(newState, d-1)
 
-				"""
-				score = 0
-				successors = self.successorFunc(trans[action])
-				for newState in successors:
-					score += successors[newState]*expectimax(newState, d-1)
-				"""
+				if not self.reduceSuccessors:
+					successors = computeTransSuccessors4(trans[action])
+					percent = 0.1/len(successors)
+					for newState in successors:
+						score += percent*expectimax(newState, d-1)
+
 				if bestScore < score:
 					bestAction, bestScore = action, score
 
