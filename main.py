@@ -1,8 +1,11 @@
-from webagent import *
 from agent import *
-from boxFinder import *
 import optparse, sys
 from time import sleep
+
+# Windows specific code (webagent, boxfinder, util)
+if os.name=="nt":
+	from webagent import *
+	from boxFinder import *
 
 if __name__ == "__main__":
 	o = optparse.OptionParser()
