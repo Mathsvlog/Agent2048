@@ -1,5 +1,4 @@
 from random import random,choice,randint
-from t import *
 
 class Action2048:
     UP = "U"
@@ -9,13 +8,12 @@ class Action2048:
     ACTION_LIST = [UP,RIGHT,DOWN,LEFT]
 
 # converts board to a tuple of tuples
-#tuple = lambda board: tuple(map(lambda row:tuple(row),board))
+computeBoardTuple = lambda board: tuple(map(lambda row:tuple(row),board))
 
 # converts board to a list of lists
-#list = lambda board: map(lambda row:list(row),board)
+computeBoardList = lambda board: map(lambda row:list(row),board)
 
 # return list of (i,j) tuples where board has a blank space
-"""
 def getBoardBlanks(board):
     blanks = []
     for i in range(4):
@@ -23,9 +21,6 @@ def getBoardBlanks(board):
             if board[i][j]==0:
                 blanks.append((i,j))
     return blanks
-"""
-
-getBoardBlanks = lambda board: [i for i, x in enumerate(board) if x == 0]
 
 # assuming board is a transition from State2048, returns dictionary of possible states
 # where a random 2 or 4 has been added, value is chance of that board happening
@@ -33,45 +28,24 @@ def computeTransSuccessors(board):
     blanks = getBoardBlanks(board)
     successors = {}
     twoWeight, fourWeight = 0.9/len(blanks), 0.1/len(blanks)
-    for i in blanks:
-        newBoard = list(board)
-        newBoard[i] = 1
-        successors[State2048(newBoard)] = twoWeight
-        newBoard[i] = 2
-        successors[State2048(newBoard)] = fourWeight
+    for i,j in blanks:
+        newBoard = computeBoardList(board)
+        newBoard[i][j] = 1
+        successors[State2048(computeBoardTuple(newBoard))] = twoWeight
+        newBoard[i][j] = 2
+        successors[State2048(computeBoardTuple(newBoard))] = fourWeight
     return successors
 
 def computeTransSuccessorsTwo(board):
     blanks = getBoardBlanks(board)
     successors = {}
-    asdf = []
     weight = 1./len(blanks)
-    for i in blanks:
-        newBoard = list(board)
-        newBoard[i] = 1
-        s = State2048(tuple(newBoard))
-        successors[s] = weight
-        asdf.append(s)
+    for i,j in blanks:
+        newBoard = computeBoardList(board)
+        newBoard[i][j] = 1
+        successors[State2048(computeBoardTuple(newBoard))] = weight
     return successors
 
-def computeTransSuccessors2(board):
-    return _successors(board, 1)
-
-def computeTransSuccessors4(board):
-    return _successors(board, 1)
-
-def _successors(board, i):
-    blanks = getBoardBlanks(board)
-    successors = {}
-    asdf = []
-    weight = 1./len(blanks)
-    for i in blanks:
-        newBoard = list(board)
-        newBoard[i] = i
-        s = State2048(tuple(newBoard))
-        successors[s] = weight
-        asdf.append(s)
-    return successors
 
 
 
@@ -81,25 +55,23 @@ class State2048:
         
         # create initial state if not specified
         if board==None:
-            board = [0 for _ in range(16)]
+            board = [[0 for _ in range(4)] for _ in range(4)]
             idx = randint(0,15)
-            board[idx] = 1 if random()<0.9 else 2
+            board[idx/4][idx%4] = 1 if random()<0.9 else 2
             idx2 = randint(0,15)
             while idx2==idx:
                 idx2 = randint(0,15)
-            board[idx2] = 1 if random()<0.9 else 2
+            board[idx2/4][idx2%4] = 1 if random()<0.9 else 2
 
-        self.board = tuple(board)
-        self._computeTransitions()
-        #self.transitions = None
-        #self.score = self._computeScore()
-        self.score = None
+        self.board = computeBoardTuple(board)
+        self.transitions = self._computeTransitions()
+        self.score = self._computeScore()
 
     def __repr__(self):
         s = ""
         for i in range(4):
             for j in range(4):
-                num = 2**self.board[i*4+j]
+                num = 2**self.board[i][j]
                 if num==1:
                     num = "-"
                 s += str(num)+"\t"
@@ -108,24 +80,23 @@ class State2048:
 
     def _computeScore(self):
         score = 0
-        for idx in self.board:
-            if idx>1:
-                score += (idx-1)*2**idx
-        self.score = score
+        for i in range(4):
+            for j in range(4):
+                idx = self.board[i][j]
+                if idx>1:
+                    score += (idx-1)*2**idx
+        return score
 
     def _computeTransitions(self):
         successors = {}
         for action in Action2048.ACTION_LIST:
             newBoard, valid = self._computeBoardTransition(action)
             if valid:
-                successors[action] = tuple(newBoard)
-        self.transitions = successors
+                successors[action] = computeBoardTuple(newBoard)
+        return successors
 
     def _computeBoardTransition(self, action):
-        return tuple(self.board), True
-    """
-    def _computeBoardTransition(self, action):
-        newBoard = list(self.board) #[row[:] for row in self.board]
+        newBoard = computeBoardList(self.board) #[row[:] for row in self.board]
         xyMap = lambda i,j,k:(k,j) if action in [Action2048.UP,Action2048.DOWN] else (i,k)
         isValid = False
 
@@ -170,25 +141,20 @@ class State2048:
         # make all items positive
         newBoard = map(lambda row:[abs(i) for i in row], newBoard)
         return newBoard, isValid
-    """
 
     def getScore(self):
-        if self.score==None:
-            self._computeScore()        
         return self.score
 
     def getTransitions(self):
-        #if self.transitions==None:
-        #    self._computeTransitions()
         return self.transitions
 
     def move(self, action):
         if action not in self.transitions:
             return None
-        newBoard = list(self.transitions[action])
+        newBoard = computeBoardList(self.transitions[action])
         blanks = getBoardBlanks(newBoard)
-        i = choice(blanks)
-        newBoard[i] = 1 if random() <= 0.9 else 2
+        i,j = choice(blanks)
+        newBoard[i][j] = 1 if random() <= 0.9 else 2
         return State2048(newBoard)
 
 """

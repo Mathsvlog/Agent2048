@@ -1,21 +1,26 @@
 from state import *
+from time import time
+from t import t
 
 class Expectimax2048:
 
 	def __init__(self, dVal, reduceSuccessors):
 		self.dVal = dVal
-		self.successorFunc = computeTransSuccessorsTwo if reduceSuccessors else computeTransSuccessors
+		self.reduceSuccessors = reduceSuccessors
+		#self.successorFunc = computeTransSuccessorsTwo if reduceSuccessors else computeTransSuccessors
 
 	def utility(self, state):
+		return 1
+		"""
 		score = 0.
-		for row in state.board:
-			for i in row:
-				if i>0:
-					score += 2**i
+		for i in state.board:
+			if i>0:
+				score += 2**i
 		#score = state.getScore()
 		numBlank = len(getBoardBlanks(state.board))+1
 		numFilled = 16-numBlank
 		return score / numFilled**2 * (numBlank)**2
+		"""
 
 	def getFailScore(self):
 		return 0
@@ -32,7 +37,7 @@ class Expectimax2048:
 		"""
 
 		def expectimax(state, d=self.dVal):
-			#self.calls += 1
+			self.calls += 1
 
 			# losing state
 			if len(state.getTransitions())==0:
@@ -40,25 +45,36 @@ class Expectimax2048:
 
 			# depth reached
 			elif d==0:
-				return self.utility(state)
+				u = self.utility(state)
+				return u
 
 			bestAction, bestScore = -float("inf"), None
 			trans = state.getTransitions()
 			for action in trans:
-				successors = self.successorFunc(trans[action])
 				score = 0
+
+				successors = computeTransSuccessors2(trans[action])
+				percent = (1 if self.reduceSuccessors else 0.9)/len(trans[action])
+				for newState in successors:
+					score += percent*expectimax(newState, d-1)
+				if not self.reduceSuccessors:
+					percent = 0.1/len(trans[action])
+					for newState in computeTransSuccessors4(trans[action]):
+						score += percent2*expectimax(newState, d-1)
+
+				"""
+				score = 0
+				successors = self.successorFunc(trans[action])
 				for newState in successors:
 					score += successors[newState]*expectimax(newState, d-1)
+				"""
 				if bestScore < score:
 					bestAction, bestScore = action, score
 
 			return bestAction if d==self.dVal else bestScore
 
-		return expectimax(state)
-		"""
+		self.calls=0
 		action = expectimax(state)
-		
-		print numBlank, (4*numBlank)**2, (4*numBlank)**3
 		print "CALLS: "+str(self.calls)
 		return action
-		"""
+		
