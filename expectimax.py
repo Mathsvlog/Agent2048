@@ -2,6 +2,21 @@ from state import *
 from time import time
 from t import t
 
+def _getRowUtility(s):
+    u = 0
+    for i in s:
+		if i>0:
+			u += 2**i
+    return u
+
+rowUtility = {}
+for a in xrange(16):
+    for b in xrange(16):
+        for c in xrange(16):
+            for d in xrange(16):
+                s = (a,b,c,d)
+                rowUtility[s] = _getRowUtility(list(s))
+
 class Expectimax2048:
 
 	def __init__(self, dVal, reduceSuccessors):
@@ -10,14 +25,20 @@ class Expectimax2048:
 		#self.successorFunc = computeTransSuccessorsTwo if reduceSuccessors else computeTransSuccessors
 
 	def utility(self, state):
-		score = 0.
+		u = 0
+		for i in xrange(4):
+			u += rowUtility[(state.board[i],state.board[i+4],state.board[i+8],state.board[i+12])]
+		return u
+		"""
+		score = 100.
 		for i in state.board:
 			if i>0:
 				score += 2**i
-		#score = state.getScore()
+		score = state.getScore()
 		numBlank = len(getBoardBlanks(state.board))+1
 		numFilled = 16-numBlank
 		return score / numFilled**2 * (numBlank)**2
+		"""
 
 	def getFailScore(self):
 		return 0
@@ -42,7 +63,11 @@ class Expectimax2048:
 
 			# depth reached
 			elif d==0:
-				return self.utility(state)
+				t()
+				u = self.utility(state)
+				t(0)
+				return u
+				#return self.utility(state)
 
 			bestAction, bestScore = -float("inf"), None
 			trans = state.getTransitions()

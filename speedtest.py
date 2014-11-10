@@ -9,9 +9,9 @@ print s
 for t in s.getTransitions():
 	print t
 	print State2048(s.getTransitions()[t])
+
+
 """
-
-
 for d in range(1,4):
 	a = Agent2048(d,True, False)
 	a.state = s

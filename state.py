@@ -1,12 +1,28 @@
 from random import random,choice,randint
+from array import array
 from t import *
 
-class Action2048:
-    UP = "U"
-    RIGHT = "R"
-    DOWN = "D"
-    LEFT = "L"
-    ACTION_LIST = [UP,RIGHT,DOWN,LEFT]
+def _getRowTrans(s):
+    for i in xrange(1,4):
+        if s[i]!=0:
+            j = i
+            while j>0 and s[j-1] in [0,s[i]]:
+                j-=1
+            if i==j:
+                pass
+            elif s[i]==s[j]:
+                s[i],s[j] = 0, -s[j]-1
+            else:
+                s[i],s[j] = 0, s[i]
+    return tuple(map(lambda i: abs(i), s))
+
+rowTrans = {}
+for a in xrange(16):
+    for b in xrange(16):
+        for c in xrange(16):
+            for d in xrange(16):
+                s = (a,b,c,d)
+                rowTrans[s] = _getRowTrans(list(s))
 
 # return list of (i,j) tuples where board has a blank space
 getBoardBlanks = lambda board: [i for i, x in enumerate(board) if x == 0]
@@ -31,19 +47,26 @@ def _successors(board, i):
 
     return successors
 
+def initialState():
+    board = array("b", [0 for _ in range(16)])
+    idx = randint(0,15)
+    board[idx] = 1 if random()<0.9 else 2
+    idx2 = randint(0,15)
+    while idx2==idx:
+        idx2 = randint(0,15)
+    board[idx2] = 1 if random()<0.9 else 2
+    return board
+
+class Action2048:
+    UP = "U"
+    RIGHT = "R"
+    DOWN = "D"
+    LEFT = "L"
+    ACTION_LIST = [UP,RIGHT,DOWN,LEFT]
+
 class State2048:
 
-    def __init__(self, board=None):
-        # create initial state if not specified
-        if board==None:
-            board = [0 for _ in range(16)]
-            idx = randint(0,15)
-            board[idx] = 1 if random()<0.9 else 2
-            idx2 = randint(0,15)
-            while idx2==idx:
-                idx2 = randint(0,15)
-            board[idx2] = 1 if random()<0.9 else 2
-
+    def __init__(self, board):
         self.board = board
         self._computeTransitions()
         self.score = None
@@ -68,11 +91,8 @@ class State2048:
 
     def _computeTransitions(self):
         successors = {}
-        asdf = []
         for action in Action2048.ACTION_LIST:
-            t()
             newBoard, valid = self._computeBoardTransition(action)
-            t(0)
             if valid:
                 successors[action] = newBoard
         self.transitions = successors
@@ -82,6 +102,10 @@ class State2048:
         isValid = False
 
         if action == Action2048.UP:
+            for i in xrange(4):
+                b[i],b[i+4],b[i+8],b[i+12] = rowTrans[(b[i],b[i+4],b[i+8],b[i+12])]
+            isValid = b!=self.board
+            """
             for i in filter(lambda x:b[x] and b[x-4] in [0,b[x]], xrange(4,16)):
                 j = i
                 while j>3 and b[j-4] in [0,b[i]]:
@@ -92,8 +116,13 @@ class State2048:
                 else:
                     isValid = True
                     b[i], b[j] = 0, b[i]
+            """
 
         elif action == Action2048.DOWN:
+            for i in xrange(3,-1,-1):
+                b[i+12],b[i+8],b[i+4],b[i] = rowTrans[(b[i+12],b[i+8],b[i+4],b[i])]
+            isValid = b!=self.board
+            """
             for i in filter(lambda x:b[x] and b[x+4] in [0,b[x]], xrange(11,-1,-1)):
                 j = i
                 while j<12 and b[j+4] in [0,b[i]]:
@@ -104,8 +133,13 @@ class State2048:
                 else:
                     isValid = True
                     b[i], b[j] = 0, b[i]
+            """
 
         elif action == Action2048.LEFT:
+            for i in xrange(0,13,4):
+                b[i],b[i+1],b[i+2],b[i+3] = rowTrans[(b[i],b[i+1],b[i+2],b[i+3])]
+            isValid = b!=self.board
+            """
             for x in xrange(1,4):
                 for y in xrange(4):
                     i = x+y*4
@@ -119,8 +153,13 @@ class State2048:
                         else:
                             isValid = True
                             b[i], b[j] = 0, b[i]
+            """
         
         elif action == Action2048.RIGHT:
+            for i in xrange(0,13,4):
+                b[i+3],b[i+2],b[i+1],b[i] = rowTrans[(b[i+3],b[i+2],b[i+1],b[i])]
+            isValid = b!=self.board
+            """
             for x in xrange(2,-1,-1):
                 for y in xrange(4):
                     i = x+y*4
@@ -134,59 +173,12 @@ class State2048:
                         else:
                             isValid = True
                             b[i], b[j] = 0, b[i]
+            """
         
-        return map(lambda i:abs(i),b), isValid
-        """
-        newBoard = self.board[:]
-        isValid = False
-        xyMap = lambda i,j,k:(k,j) if action in [Action2048.UP,Action2048.DOWN] else (i,k)
-
-        # determine what to iterate over based on direction
-        if action==Action2048.UP:
-            iRange, jRange, kMap = range(1,4), range(0,4), lambda i,j:range(i-1,-1,-1)
-        elif action==Action2048.DOWN:
-            iRange, jRange, kMap = range(2,-1,-1), range(0,4), lambda i,j:range(i+1,4)
-        elif action==Action2048.LEFT:
-            iRange, jRange, kMap = range(0,4), range(1,4), lambda i,j:range(j-1,-1,-1)
-        elif action==Action2048.RIGHT:
-            iRange, jRange, kMap = range(0,4), range(2,-1,-1), lambda i,j:range(j+1,4)
-        
-        for i in iRange:
-            for j in jRange:
-                ij = i*4+j
-                if newBoard[ij]!=0:
-
-                    # detect if space needs to move/merge
-                    merge = False
-                    for k in kMap(i,j):
-                        x,y = xyMap(i,j,k)
-                        xy = x*4+y
-                        if newBoard[xy] != 0:
-                            merge = newBoard[ij]==newBoard[xy]
-                            if not merge:
-                                k += 1 if action in [Action2048.UP,Action2048.LEFT] else -1
-                                x,y = xyMap(i,j,k)
-                            break
-
-                    # move and merge
-                    if merge:
-                        # make negative so it wont be merged again in this transition
-                        newBoard[xy] = -(newBoard[ij]+1)
-                        newBoard[ij] = 0
-                        isValid = True
-
-                    # move, don't merge
-                    elif i != x  or j!=y:
-                        newBoard[xy] = newBoard[ij]
-                        newBoard[ij] = 0
-                        isValid = True
-
-        # make all items positive
-        #newBoard = map(lambda row:[abs(i) for i in row], newBoard)
-        newBoard = map(lambda i:abs(i), newBoard)
-        return newBoard, isValid
-        """
-
+        for i in xrange(16):
+            if b[i]<0:
+                b[i]*=-1
+        return b, isValid
 
     def getScore(self):
         if self.score==None:
@@ -194,21 +186,13 @@ class State2048:
         return self.score
 
     def getTransitions(self):
-        #if self.transitions==None:
-        #    self._computeTransitions()
         return self.transitions
 
     def move(self, action):
         if action not in self.transitions:
             return None
-        newBoard = list(self.transitions[action])
+        newBoard = self.transitions[action][:]
         blanks = getBoardBlanks(newBoard)
-        try:
-            i = choice(blanks)
-        except:
-            print blanks
-            print newBoard
-            print action
-            exit()
+        i = choice(blanks)
         newBoard[i] = 1 if random() <= 0.9 else 2
         return State2048(newBoard)
