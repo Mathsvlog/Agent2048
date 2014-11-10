@@ -3,6 +3,7 @@ import optparse, sys
 from time import sleep
 
 # Windows specific code (webagent, boxfinder, util)
+import os
 if os.name=="nt":
 	from webagent import *
 	from boxFinder import *
