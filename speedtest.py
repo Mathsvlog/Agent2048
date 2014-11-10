@@ -12,12 +12,12 @@ for t in s.getTransitions():
 
 
 """
-for d in range(1,4):
+for d in range(3,4):
 	a = Agent2048(d,True, False)
 	a.state = s
 	td = time()
 	print "D: "+str(d)
-	print "ACTION: "+a.expectimax.getAction(a.state)
+	print "ACTION: "+str(a.expectimax.getAction(a.state))
 	for i in range(len(ti)):
 			print "T%i: %f"%(i,ti[i])
 	print "TIME: "+str(time()-td)

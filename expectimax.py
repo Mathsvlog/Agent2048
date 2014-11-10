@@ -63,9 +63,7 @@ class Expectimax2048:
 
 			# depth reached
 			elif d==0:
-				t()
 				u = self.utility(state)
-				t(0)
 				return u
 				#return self.utility(state)
 
@@ -73,7 +71,6 @@ class Expectimax2048:
 			trans = state.getTransitions()
 			for action in trans:
 				score = 0
-
 				successors = computeTransSuccessors2(trans[action])
 				percent = (1.0 if self.reduceSuccessors else 0.9)/len(successors)
 				for newState in successors:

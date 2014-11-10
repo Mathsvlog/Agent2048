@@ -22,7 +22,9 @@ for a in xrange(16):
         for c in xrange(16):
             for d in xrange(16):
                 s = (a,b,c,d)
-                rowTrans[s] = _getRowTrans(list(s))
+                tr = _getRowTrans(list(s))
+                if s!=tr:
+                    rowTrans[s] = tr
 
 # return list of (i,j) tuples where board has a blank space
 getBoardBlanks = lambda board: [i for i, x in enumerate(board) if x == 0]
@@ -42,10 +44,49 @@ def _successors(board, i):
     for x in blanks:
         newBoard = board[:]
         newBoard[x] = i
-        s = State2048(newBoard)
-        successors.append(s)
+        successors.append(State2048(newBoard))
 
     return successors
+
+def _transU(board):
+    b = board[:]
+    isValid = False
+    for i in xrange(4):
+        row = (b[i],b[i+4],b[i+8],b[i+12])
+        if row in rowTrans:
+            isValid = True
+            b[i],b[i+4],b[i+8],b[i+12] = rowTrans[row]
+    return b, isValid    
+
+def _transD(board):
+    b = board[:]
+    isValid = False
+    for i in xrange(3,-1,-1):
+        row = (b[i+12],b[i+8],b[i+4],b[i])
+        if row in rowTrans:
+            isValid = True
+            b[i+12],b[i+8],b[i+4],b[i] = rowTrans[row]
+    return b, isValid
+
+def _transL(board):
+    b = board[:]
+    isValid = False
+    for i in xrange(0,13,4):
+        row = (b[i],b[i+1],b[i+2],b[i+3])
+        if row in rowTrans:
+            isValid = True
+            b[i],b[i+1],b[i+2],b[i+3] = rowTrans[row]
+    return b, isValid
+
+def _transR(board):
+    b = board[:]
+    isValid = False
+    for i in xrange(0,13,4):
+        row = (b[i+3],b[i+2],b[i+1],b[i])
+        if row in rowTrans:
+            isValid = True
+            b[i+3],b[i+2],b[i+1],b[i] = rowTrans[row]
+    return b, isValid
 
 def initialState():
     board = array("b", [0 for _ in range(16)])
@@ -58,11 +99,11 @@ def initialState():
     return board
 
 class Action2048:
-    UP = "U"
-    RIGHT = "R"
-    DOWN = "D"
-    LEFT = "L"
-    ACTION_LIST = [UP,RIGHT,DOWN,LEFT]
+    UP = 0
+    RIGHT = 1
+    DOWN = 2
+    LEFT = 3
+    ACTION_LIST = (UP,RIGHT,DOWN,LEFT)
 
 class State2048:
 
@@ -91,94 +132,56 @@ class State2048:
 
     def _computeTransitions(self):
         successors = {}
-        for action in Action2048.ACTION_LIST:
-            newBoard, valid = self._computeBoardTransition(action)
-            if valid:
-                successors[action] = newBoard
+        t()
+        newBoard, valid = _transU(self.board)
+        if valid:
+            successors[Action2048.UP] = newBoard
+        newBoard, valid = _transD(self.board)
+        if valid:
+            successors[Action2048.DOWN] = newBoard
+        newBoard, valid = _transL(self.board)
+        if valid:
+            successors[Action2048.LEFT] = newBoard
+        newBoard, valid = _transR(self.board)
+        if valid:
+            successors[Action2048.RIGHT] = newBoard
+        t(0)
         self.transitions = successors
-
+    """
     def _computeBoardTransition(self, action):
         b = self.board[:]
         isValid = False
 
         if action == Action2048.UP:
             for i in xrange(4):
-                b[i],b[i+4],b[i+8],b[i+12] = rowTrans[(b[i],b[i+4],b[i+8],b[i+12])]
-            isValid = b!=self.board
-            """
-            for i in filter(lambda x:b[x] and b[x-4] in [0,b[x]], xrange(4,16)):
-                j = i
-                while j>3 and b[j-4] in [0,b[i]]:
-                    j-=4
-                if b[j]==b[i]:
+                row = (b[i],b[i+4],b[i+8],b[i+12])
+                if row in rowTrans:
                     isValid = True
-                    b[i], b[j] = 0, -b[j]-1
-                else:
-                    isValid = True
-                    b[i], b[j] = 0, b[i]
-            """
+                    b[i],b[i+4],b[i+8],b[i+12] = rowTrans[row]
 
         elif action == Action2048.DOWN:
             for i in xrange(3,-1,-1):
-                b[i+12],b[i+8],b[i+4],b[i] = rowTrans[(b[i+12],b[i+8],b[i+4],b[i])]
-            isValid = b!=self.board
-            """
-            for i in filter(lambda x:b[x] and b[x+4] in [0,b[x]], xrange(11,-1,-1)):
-                j = i
-                while j<12 and b[j+4] in [0,b[i]]:
-                    j+=4
-                if b[j]==b[i]:
+                row = (b[i+12],b[i+8],b[i+4],b[i])
+                if row in rowTrans:
                     isValid = True
-                    b[i], b[j] = 0, -b[j]-1
-                else:
-                    isValid = True
-                    b[i], b[j] = 0, b[i]
-            """
+                    b[i+12],b[i+8],b[i+4],b[i] = rowTrans[row]
 
         elif action == Action2048.LEFT:
             for i in xrange(0,13,4):
-                b[i],b[i+1],b[i+2],b[i+3] = rowTrans[(b[i],b[i+1],b[i+2],b[i+3])]
-            isValid = b!=self.board
-            """
-            for x in xrange(1,4):
-                for y in xrange(4):
-                    i = x+y*4
-                    if b[i] and b[i-1] in [0,b[i]]:
-                        j = i
-                        while j%4!=0 and b[j-1] in [0,b[i]]:
-                            j-=1
-                        if b[j]==b[i]:
-                            isValid = True
-                            b[i], b[j] = 0, -b[j]-1
-                        else:
-                            isValid = True
-                            b[i], b[j] = 0, b[i]
-            """
+                row = (b[i],b[i+1],b[i+2],b[i+3])
+                if row in rowTrans:
+                    isValid = True
+                    b[i],b[i+1],b[i+2],b[i+3] = rowTrans[row]
         
         elif action == Action2048.RIGHT:
             for i in xrange(0,13,4):
-                b[i+3],b[i+2],b[i+1],b[i] = rowTrans[(b[i+3],b[i+2],b[i+1],b[i])]
-            isValid = b!=self.board
-            """
-            for x in xrange(2,-1,-1):
-                for y in xrange(4):
-                    i = x+y*4
-                    if b[i] and b[i+1] in [0,b[i]]:
-                        j = i
-                        while j%4!=3 and b[j+1] in [0,b[i]]:
-                            j+=1
-                        if b[j]==b[i]:
-                            isValid = True
-                            b[i], b[j] = 0, -b[j]-1
-                        else:
-                            isValid = True
-                            b[i], b[j] = 0, b[i]
-            """
-        
-        for i in xrange(16):
-            if b[i]<0:
-                b[i]*=-1
+                row = (b[i+3],b[i+2],b[i+1],b[i])
+                if row in rowTrans:
+                    isValid = True
+                    b[i+3],b[i+2],b[i+1],b[i] = rowTrans[row]
+
         return b, isValid
+    """
 
     def getScore(self):
         if self.score==None:

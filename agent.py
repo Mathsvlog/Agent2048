@@ -14,8 +14,8 @@ class Agent2048:
 		while len(self.state.getTransitions())>0:
 			action = self.expectimax.getAction(self.state)
 			self.state = self.state.move(action)
-			if self.doPrint:
-				print "ACTION: "+action
+			#if self.doPrint:
+				#print "ACTION: "+action
 			self.printState()
 		if self.doPrint:
 			print "GAME OVER"
