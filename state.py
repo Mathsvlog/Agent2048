@@ -3,7 +3,7 @@ from array import array
 
 # function used to precompute row transitions
 def _getRowTrans(s):
-    for i in xrange(1,4):
+    for i in range(1,4):
         if s[i]!=0:
             j = i
             while j>0 and s[j-1] in [0,s[i]]:
@@ -18,13 +18,13 @@ def _getRowTrans(s):
 
 # precomputation of row transitions
 rowTrans = []
-for a in xrange(16):
+for a in range(16):
     x = []
-    for b in xrange(16):
+    for b in range(16):
         y = []
-        for c in xrange(16):
+        for c in range(16):
             z = []
-            for d in xrange(16):
+            for d in range(16):
                 s = (a,b,c,d)
                 tr = _getRowTrans(list(s))
                 if s!=tr:
@@ -53,7 +53,7 @@ def _successors(board, i):
 def _transU(board):
     b = board[:]
     isValid = False
-    for i in xrange(4):
+    for i in range(4):
         newRow = rowTrans[b[i]][b[i+4]][b[i+8]][b[i+12]]
         if newRow != None:
             isValid = True
@@ -63,7 +63,7 @@ def _transU(board):
 def _transD(board):
     b = board[:]
     isValid = False
-    for i in xrange(3,-1,-1):
+    for i in range(3,-1,-1):
         newRow = rowTrans[b[i+12]][b[i+8]][b[i+4]][b[i]]
         if newRow != None:
             isValid = True
@@ -73,7 +73,7 @@ def _transD(board):
 def _transL(board):
     b = board[:]
     isValid = False
-    for i in xrange(0,13,4):
+    for i in range(0,13,4):
         newRow = rowTrans[b[i]][b[i+1]][b[i+2]][b[i+3]]
         if newRow != None:
             isValid = True
@@ -83,7 +83,7 @@ def _transL(board):
 def _transR(board):
     b = board[:]
     isValid = False
-    for i in xrange(0,13,4):
+    for i in range(0,13,4):
         newRow = rowTrans[b[i+3]][b[i+2]][b[i+1]][b[i]]
         if newRow != None:
             isValid = True

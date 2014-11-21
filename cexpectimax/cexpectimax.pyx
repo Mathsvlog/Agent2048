@@ -48,7 +48,7 @@ cdef Row decompressRow(short s) nogil:
 # gets transition of a row
 cdef short getRowTrans(Row r) nogil:
     cdef char i,j
-    for i in xrange(1,4):
+    for i in range(1,4):
         if r.row[i]!=0:
             j = i
             while j>0 and r.row[j-1] in [0,r.row[i]]:
@@ -60,7 +60,7 @@ cdef short getRowTrans(Row r) nogil:
             else:
                 r.row[i],r.row[j] = 0, r.row[i]
 
-    for i in xrange(4):
+    for i in range(4):
         if r.row[i]<0:
             r.row[i] *= -1
 
@@ -75,13 +75,13 @@ cdef unsigned short idx,tr
 cdef int util
 cdef Row r
 cdef bint useRowUtility = utility.useRowUtility
-for a in xrange(16):
+for a in range(16):
     r.row[0] = a
-    for b in xrange(16):
+    for b in range(16):
         r.row[1] = b
-        for c in xrange(16):
+        for c in range(16):
             r.row[2] = c
-            for d in xrange(16):
+            for d in range(16):
                 r.row[3] = d
                 idx = compressRow(r)
                 tr = getRowTrans(r)
@@ -109,13 +109,13 @@ cdef Action charToAction(char a) nogil:
 
 # prints a Row
 cdef void printRow(Row r):
-    for i in xrange(4):
+    for i in range(4):
         print r.row[i],
     print
 
 # prints a Board
 cdef void printBoard(Board b):
-    for i in xrange(4):
+    for i in range(4):
         printRow(b.rows[i])
     print
 
@@ -125,14 +125,14 @@ cdef Board transU(Board b) nogil:
     cdef Row r, newRow
     cdef short rowShort
     cdef char i,j
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             r.row[j] = b.rows[j].row[i]
         rowShort = rowTrans[compressRow(r)]
         if rowShort!=-1:
             isValid = True
             newRow = decompressRow(rowShort)
-            for j in xrange(4):
+            for j in range(4):
                 b.rows[j].row[i] = newRow.row[j]
     if not isValid:
         b.rows[0].row[0] = -1
@@ -143,14 +143,14 @@ cdef Board transD(Board b) nogil:
     cdef Row r, newRow
     cdef short rowShort
     cdef char i,j
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             r.row[j] = b.rows[3-j].row[i]
         rowShort = rowTrans[compressRow(r)]
         if rowShort!=-1:
             isValid = True
             newRow = decompressRow(rowShort)
-            for j in xrange(4):
+            for j in range(4):
                 b.rows[j].row[i] = newRow.row[3-j]
     if not isValid:
         b.rows[0].row[0] = -1
@@ -161,14 +161,14 @@ cdef Board transL(Board b) nogil:
     cdef Row r, newRow
     cdef short rowShort
     cdef char i,j
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             r.row[j] = b.rows[i].row[j]
         rowShort = rowTrans[compressRow(r)]
         if rowShort!=-1:
             isValid = True
             newRow = decompressRow(rowShort)
-            for j in xrange(4):
+            for j in range(4):
                 b.rows[i].row[j] = newRow.row[j]
     if not isValid:
         b.rows[0].row[0] = -1
@@ -179,14 +179,14 @@ cdef Board transR(Board b) nogil:
     cdef Row r, newRow
     cdef short rowShort
     cdef char i,j
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             r.row[j] = b.rows[i].row[3-j]
         rowShort = rowTrans[compressRow(r)]
         if rowShort!=-1:
             isValid = True
             newRow = decompressRow(rowShort)
-            for j in xrange(4):
+            for j in range(4):
                 b.rows[i].row[3-j] = newRow.row[j]
     if not isValid:
         b.rows[0].row[0] = -1
@@ -205,7 +205,7 @@ cdef Transitions getTransitions(Board b) nogil:
 cdef char countTransitions(Transitions t) nogil:
     cdef char num = 0
     cdef char i
-    for i in xrange(4):
+    for i in range(4):
         if t.trans[i].rows[0].row[0] >= 0:
             num+=1
     return num
@@ -217,12 +217,12 @@ cdef int getUtility(Board b) nogil:
     cdef char i,j
     cdef Row r
     if useRowUtility:
-        for i in xrange(4):
+        for i in range(4):
             idx = compressRow(b.rows[i])
             score += rowUtilInner[idx]
         
-        for i in xrange(4):
-            for j in xrange(4):
+        for i in range(4):
+            for j in range(4):
                 r.row[i] = b.rows[j].row[i]
             idx = compressRow(r)
             score += rowUtilInner[idx]
@@ -231,8 +231,8 @@ cdef int getUtility(Board b) nogil:
 
     # board utility
     cdef int blanks = 1
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             idx = b.rows[i].row[j] 
             if idx==0:
                 blanks += 1
@@ -245,16 +245,16 @@ cdef int getUtility(Board b) nogil:
 # returns count of the number of 0 tiles on a board
 cdef char getNumBlanks(Board b) nogil:
     cdef char num = 0
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             if b.rows[i].row[j]==0:
                 num += 1
     return num
 
 cdef void copyBoard(Board *bd, Board *bs) nogil:
     #memcpy(bd, bs, sizeof(Board))
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             bd.rows[i].row[j] = bs.rows[i].row[j]
        
 # generates all possible successors of a Board with 2 or 4
@@ -267,8 +267,8 @@ cdef Successors getSuccessors(Board b, bint two) nogil:
         newTile = 1
 
     successors.numSuccessors = numBlanks
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             if b.rows[i].row[j]==0:
                 copyBoard(&successors.succ[curr], &b)
                 successors.succ[curr].rows[i].row[j] = newTile
@@ -301,19 +301,19 @@ cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:
     cdef Successors successors
     cdef int act
     cdef char i
-    for i in xrange(4):
+    for i in range(4):
         if trans.trans[i].rows[0].row[0] >= 0:
             totalScore = 0.
             successors = getSuccessors(trans.trans[i], True)
             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors
-            for j in xrange(successors.numSuccessors):
+            for j in range(successors.numSuccessors):
                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
                 totalScore += actScore.score*percent
 
             if not reduceSuccessors:
                 successors = getSuccessors(trans.trans[i], False)
                 percent = 0.1/successors.numSuccessors
-                for j in xrange(successors.numSuccessors):
+                for j in range(successors.numSuccessors):
                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
                     totalScore += actScore.score*percent
 
@@ -326,8 +326,8 @@ cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:
 actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
 def getAction(b,d,r=False):
     cdef Board board
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in range(4):
+        for j in range(4):
             board.rows[i].row[j] = b[i*4+j]
     #printBoard(board)
     #t = time()

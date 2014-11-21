@@ -768,7 +768,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
 int __pyx_module_is_main_cexpectimax = 0;
 
 /* Implementation of 'cexpectimax' */
-static PyObject *__pyx_builtin_xrange;
+static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_b, PyObject *__pyx_v_d, PyObject *__pyx_v_r); /* proto */
 static char __pyx_k_D[] = "D";
 static char __pyx_k_L[] = "L";
@@ -789,7 +789,6 @@ static char __pyx_k_clock[] = "clock";
 static char __pyx_k_print[] = "print";
 static char __pyx_k_range[] = "range";
 static char __pyx_k_import[] = "__import__";
-static char __pyx_k_xrange[] = "xrange";
 static char __pyx_k_utility[] = "utility";
 static char __pyx_k_actScore[] = "actScore";
 static char __pyx_k_getAction[] = "getAction";
@@ -825,7 +824,6 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_time;
 static PyObject *__pyx_n_s_useRowUtility;
 static PyObject *__pyx_n_s_utility;
-static PyObject *__pyx_n_s_xrange;
 static PyObject *__pyx_int_4;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
@@ -942,7 +940,7 @@ static struct __pyx_t_11cexpectimax_Row __pyx_f_11cexpectimax_decompressRow(shor
  * # gets transition of a row
  * cdef short getRowTrans(Row r) nogil:             # <<<<<<<<<<<<<<
  *     cdef char i,j
- *     for i in xrange(1,4):
+ *     for i in range(1,4):
  */
 
 static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row __pyx_v_r) {
@@ -960,7 +958,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
   /* "cexpectimax.pyx":51
  * cdef short getRowTrans(Row r) nogil:
  *     cdef char i,j
- *     for i in xrange(1,4):             # <<<<<<<<<<<<<<
+ *     for i in range(1,4):             # <<<<<<<<<<<<<<
  *         if r.row[i]!=0:
  *             j = i
  */
@@ -969,7 +967,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
 
     /* "cexpectimax.pyx":52
  *     cdef char i,j
- *     for i in xrange(1,4):
+ *     for i in range(1,4):
  *         if r.row[i]!=0:             # <<<<<<<<<<<<<<
  *             j = i
  *             while j>0 and r.row[j-1] in [0,r.row[i]]:
@@ -978,7 +976,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
     if (__pyx_t_2) {
 
       /* "cexpectimax.pyx":53
- *     for i in xrange(1,4):
+ *     for i in range(1,4):
  *         if r.row[i]!=0:
  *             j = i             # <<<<<<<<<<<<<<
  *             while j>0 and r.row[j-1] in [0,r.row[i]]:
@@ -1068,7 +1066,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
  *             else:
  *                 r.row[i],r.row[j] = 0, r.row[i]             # <<<<<<<<<<<<<<
  * 
- *     for i in xrange(4):
+ *     for i in range(4):
  */
         __pyx_t_4 = 0;
         __pyx_t_5 = (__pyx_v_r.row[__pyx_v_i]);
@@ -1084,7 +1082,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
   /* "cexpectimax.pyx":63
  *                 r.row[i],r.row[j] = 0, r.row[i]
  * 
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):             # <<<<<<<<<<<<<<
  *         if r.row[i]<0:
  *             r.row[i] *= -1
  */
@@ -1093,7 +1091,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
 
     /* "cexpectimax.pyx":64
  * 
- *     for i in xrange(4):
+ *     for i in range(4):
  *         if r.row[i]<0:             # <<<<<<<<<<<<<<
  *             r.row[i] *= -1
  * 
@@ -1102,7 +1100,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
     if (__pyx_t_2) {
 
       /* "cexpectimax.pyx":65
- *     for i in xrange(4):
+ *     for i in range(4):
  *         if r.row[i]<0:
  *             r.row[i] *= -1             # <<<<<<<<<<<<<<
  * 
@@ -1130,7 +1128,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
  * # gets transition of a row
  * cdef short getRowTrans(Row r) nogil:             # <<<<<<<<<<<<<<
  *     cdef char i,j
- *     for i in xrange(1,4):
+ *     for i in range(1,4):
  */
 
   /* function exit code */
@@ -1261,7 +1259,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
  * 
  * # prints a Row
  * cdef void printRow(Row r):             # <<<<<<<<<<<<<<
- *     for i in xrange(4):
+ *     for i in range(4):
  *         print r.row[i],
  */
 
@@ -1281,7 +1279,7 @@ static void __pyx_f_11cexpectimax_printRow(struct __pyx_t_11cexpectimax_Row __py
   /* "cexpectimax.pyx":112
  * # prints a Row
  * cdef void printRow(Row r):
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):             # <<<<<<<<<<<<<<
  *         print r.row[i],
  *     print
  */
@@ -1290,7 +1288,7 @@ static void __pyx_f_11cexpectimax_printRow(struct __pyx_t_11cexpectimax_Row __py
 
     /* "cexpectimax.pyx":113
  * cdef void printRow(Row r):
- *     for i in xrange(4):
+ *     for i in range(4):
  *         print r.row[i],             # <<<<<<<<<<<<<<
  *     print
  * 
@@ -1307,7 +1305,7 @@ static void __pyx_f_11cexpectimax_printRow(struct __pyx_t_11cexpectimax_Row __py
   }
 
   /* "cexpectimax.pyx":114
- *     for i in xrange(4):
+ *     for i in range(4):
  *         print r.row[i],
  *     print             # <<<<<<<<<<<<<<
  * 
@@ -1319,7 +1317,7 @@ static void __pyx_f_11cexpectimax_printRow(struct __pyx_t_11cexpectimax_Row __py
  * 
  * # prints a Row
  * cdef void printRow(Row r):             # <<<<<<<<<<<<<<
- *     for i in xrange(4):
+ *     for i in range(4):
  *         print r.row[i],
  */
 
@@ -1338,7 +1336,7 @@ static void __pyx_f_11cexpectimax_printRow(struct __pyx_t_11cexpectimax_Row __py
  * 
  * # prints a Board
  * cdef void printBoard(Board b):             # <<<<<<<<<<<<<<
- *     for i in xrange(4):
+ *     for i in range(4):
  *         printRow(b.rows[i])
  */
 
@@ -1356,7 +1354,7 @@ static void __pyx_f_11cexpectimax_printBoard(struct __pyx_t_11cexpectimax_Board 
   /* "cexpectimax.pyx":118
  * # prints a Board
  * cdef void printBoard(Board b):
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):             # <<<<<<<<<<<<<<
  *         printRow(b.rows[i])
  *     print
  */
@@ -1365,7 +1363,7 @@ static void __pyx_f_11cexpectimax_printBoard(struct __pyx_t_11cexpectimax_Board 
 
     /* "cexpectimax.pyx":119
  * cdef void printBoard(Board b):
- *     for i in xrange(4):
+ *     for i in range(4):
  *         printRow(b.rows[i])             # <<<<<<<<<<<<<<
  *     print
  * 
@@ -1374,7 +1372,7 @@ static void __pyx_f_11cexpectimax_printBoard(struct __pyx_t_11cexpectimax_Board 
   }
 
   /* "cexpectimax.pyx":120
- *     for i in xrange(4):
+ *     for i in range(4):
  *         printRow(b.rows[i])
  *     print             # <<<<<<<<<<<<<<
  * 
@@ -1386,7 +1384,7 @@ static void __pyx_f_11cexpectimax_printBoard(struct __pyx_t_11cexpectimax_Board 
  * 
  * # prints a Board
  * cdef void printBoard(Board b):             # <<<<<<<<<<<<<<
- *     for i in xrange(4):
+ *     for i in range(4):
  *         printRow(b.rows[i])
  */
 
@@ -1431,8 +1429,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
   /* "cexpectimax.pyx":128
  *     cdef short rowShort
  *     cdef char i,j
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             r.row[j] = b.rows[j].row[i]
  */
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
@@ -1440,8 +1438,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
 
     /* "cexpectimax.pyx":129
  *     cdef char i,j
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             r.row[j] = b.rows[j].row[i]
  *         rowShort = rowTrans[compressRow(r)]
  */
@@ -1449,8 +1447,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
       __pyx_v_j = __pyx_t_2;
 
       /* "cexpectimax.pyx":130
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             r.row[j] = b.rows[j].row[i]             # <<<<<<<<<<<<<<
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:
@@ -1459,7 +1457,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
     }
 
     /* "cexpectimax.pyx":131
- *         for j in xrange(4):
+ *         for j in range(4):
  *             r.row[j] = b.rows[j].row[i]
  *         rowShort = rowTrans[compressRow(r)]             # <<<<<<<<<<<<<<
  *         if rowShort!=-1:
@@ -1482,7 +1480,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
  *         if rowShort!=-1:
  *             isValid = True             # <<<<<<<<<<<<<<
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):
+ *             for j in range(4):
  */
       __pyx_v_isValid = 1;
 
@@ -1490,7 +1488,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
  *         if rowShort!=-1:
  *             isValid = True
  *             newRow = decompressRow(rowShort)             # <<<<<<<<<<<<<<
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[j]
  */
       __pyx_v_newRow = __pyx_f_11cexpectimax_decompressRow(__pyx_v_rowShort);
@@ -1498,7 +1496,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
       /* "cexpectimax.pyx":135
  *             isValid = True
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):             # <<<<<<<<<<<<<<
+ *             for j in range(4):             # <<<<<<<<<<<<<<
  *                 b.rows[j].row[i] = newRow.row[j]
  *     if not isValid:
  */
@@ -1507,7 +1505,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
 
         /* "cexpectimax.pyx":136
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[j]             # <<<<<<<<<<<<<<
  *     if not isValid:
  *         b.rows[0].row[0] = -1
@@ -1520,7 +1518,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
   }
 
   /* "cexpectimax.pyx":137
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[j]
  *     if not isValid:             # <<<<<<<<<<<<<<
  *         b.rows[0].row[0] = -1
@@ -1596,8 +1594,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
   /* "cexpectimax.pyx":146
  *     cdef short rowShort
  *     cdef char i,j
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             r.row[j] = b.rows[3-j].row[i]
  */
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
@@ -1605,8 +1603,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
 
     /* "cexpectimax.pyx":147
  *     cdef char i,j
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             r.row[j] = b.rows[3-j].row[i]
  *         rowShort = rowTrans[compressRow(r)]
  */
@@ -1614,8 +1612,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
       __pyx_v_j = __pyx_t_2;
 
       /* "cexpectimax.pyx":148
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             r.row[j] = b.rows[3-j].row[i]             # <<<<<<<<<<<<<<
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:
@@ -1624,7 +1622,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
     }
 
     /* "cexpectimax.pyx":149
- *         for j in xrange(4):
+ *         for j in range(4):
  *             r.row[j] = b.rows[3-j].row[i]
  *         rowShort = rowTrans[compressRow(r)]             # <<<<<<<<<<<<<<
  *         if rowShort!=-1:
@@ -1647,7 +1645,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
  *         if rowShort!=-1:
  *             isValid = True             # <<<<<<<<<<<<<<
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):
+ *             for j in range(4):
  */
       __pyx_v_isValid = 1;
 
@@ -1655,7 +1653,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
  *         if rowShort!=-1:
  *             isValid = True
  *             newRow = decompressRow(rowShort)             # <<<<<<<<<<<<<<
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[3-j]
  */
       __pyx_v_newRow = __pyx_f_11cexpectimax_decompressRow(__pyx_v_rowShort);
@@ -1663,7 +1661,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
       /* "cexpectimax.pyx":153
  *             isValid = True
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):             # <<<<<<<<<<<<<<
+ *             for j in range(4):             # <<<<<<<<<<<<<<
  *                 b.rows[j].row[i] = newRow.row[3-j]
  *     if not isValid:
  */
@@ -1672,7 +1670,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
 
         /* "cexpectimax.pyx":154
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[3-j]             # <<<<<<<<<<<<<<
  *     if not isValid:
  *         b.rows[0].row[0] = -1
@@ -1685,7 +1683,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
   }
 
   /* "cexpectimax.pyx":155
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[3-j]
  *     if not isValid:             # <<<<<<<<<<<<<<
  *         b.rows[0].row[0] = -1
@@ -1761,8 +1759,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
   /* "cexpectimax.pyx":164
  *     cdef short rowShort
  *     cdef char i,j
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             r.row[j] = b.rows[i].row[j]
  */
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
@@ -1770,8 +1768,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
 
     /* "cexpectimax.pyx":165
  *     cdef char i,j
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             r.row[j] = b.rows[i].row[j]
  *         rowShort = rowTrans[compressRow(r)]
  */
@@ -1779,8 +1777,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
       __pyx_v_j = __pyx_t_2;
 
       /* "cexpectimax.pyx":166
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             r.row[j] = b.rows[i].row[j]             # <<<<<<<<<<<<<<
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:
@@ -1789,7 +1787,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
     }
 
     /* "cexpectimax.pyx":167
- *         for j in xrange(4):
+ *         for j in range(4):
  *             r.row[j] = b.rows[i].row[j]
  *         rowShort = rowTrans[compressRow(r)]             # <<<<<<<<<<<<<<
  *         if rowShort!=-1:
@@ -1812,7 +1810,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
  *         if rowShort!=-1:
  *             isValid = True             # <<<<<<<<<<<<<<
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):
+ *             for j in range(4):
  */
       __pyx_v_isValid = 1;
 
@@ -1820,7 +1818,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
  *         if rowShort!=-1:
  *             isValid = True
  *             newRow = decompressRow(rowShort)             # <<<<<<<<<<<<<<
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[i].row[j] = newRow.row[j]
  */
       __pyx_v_newRow = __pyx_f_11cexpectimax_decompressRow(__pyx_v_rowShort);
@@ -1828,7 +1826,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
       /* "cexpectimax.pyx":171
  *             isValid = True
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):             # <<<<<<<<<<<<<<
+ *             for j in range(4):             # <<<<<<<<<<<<<<
  *                 b.rows[i].row[j] = newRow.row[j]
  *     if not isValid:
  */
@@ -1837,7 +1835,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
 
         /* "cexpectimax.pyx":172
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[i].row[j] = newRow.row[j]             # <<<<<<<<<<<<<<
  *     if not isValid:
  *         b.rows[0].row[0] = -1
@@ -1850,7 +1848,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
   }
 
   /* "cexpectimax.pyx":173
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[i].row[j] = newRow.row[j]
  *     if not isValid:             # <<<<<<<<<<<<<<
  *         b.rows[0].row[0] = -1
@@ -1926,8 +1924,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
   /* "cexpectimax.pyx":182
  *     cdef short rowShort
  *     cdef char i,j
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             r.row[j] = b.rows[i].row[3-j]
  */
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
@@ -1935,8 +1933,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
 
     /* "cexpectimax.pyx":183
  *     cdef char i,j
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             r.row[j] = b.rows[i].row[3-j]
  *         rowShort = rowTrans[compressRow(r)]
  */
@@ -1944,8 +1942,8 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
       __pyx_v_j = __pyx_t_2;
 
       /* "cexpectimax.pyx":184
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             r.row[j] = b.rows[i].row[3-j]             # <<<<<<<<<<<<<<
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:
@@ -1954,7 +1952,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
     }
 
     /* "cexpectimax.pyx":185
- *         for j in xrange(4):
+ *         for j in range(4):
  *             r.row[j] = b.rows[i].row[3-j]
  *         rowShort = rowTrans[compressRow(r)]             # <<<<<<<<<<<<<<
  *         if rowShort!=-1:
@@ -1977,7 +1975,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
  *         if rowShort!=-1:
  *             isValid = True             # <<<<<<<<<<<<<<
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):
+ *             for j in range(4):
  */
       __pyx_v_isValid = 1;
 
@@ -1985,7 +1983,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
  *         if rowShort!=-1:
  *             isValid = True
  *             newRow = decompressRow(rowShort)             # <<<<<<<<<<<<<<
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[i].row[3-j] = newRow.row[j]
  */
       __pyx_v_newRow = __pyx_f_11cexpectimax_decompressRow(__pyx_v_rowShort);
@@ -1993,7 +1991,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
       /* "cexpectimax.pyx":189
  *             isValid = True
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):             # <<<<<<<<<<<<<<
+ *             for j in range(4):             # <<<<<<<<<<<<<<
  *                 b.rows[i].row[3-j] = newRow.row[j]
  *     if not isValid:
  */
@@ -2002,7 +2000,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
 
         /* "cexpectimax.pyx":190
  *             newRow = decompressRow(rowShort)
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[i].row[3-j] = newRow.row[j]             # <<<<<<<<<<<<<<
  *     if not isValid:
  *         b.rows[0].row[0] = -1
@@ -2015,7 +2013,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
   }
 
   /* "cexpectimax.pyx":191
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 b.rows[i].row[3-j] = newRow.row[j]
  *     if not isValid:             # <<<<<<<<<<<<<<
  *         b.rows[0].row[0] = -1
@@ -2150,14 +2148,14 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
  * cdef char countTransitions(Transitions t) nogil:
  *     cdef char num = 0             # <<<<<<<<<<<<<<
  *     cdef char i
- *     for i in xrange(4):
+ *     for i in range(4):
  */
   __pyx_v_num = 0;
 
   /* "cexpectimax.pyx":208
  *     cdef char num = 0
  *     cdef char i
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):             # <<<<<<<<<<<<<<
  *         if t.trans[i].rows[0].row[0] >= 0:
  *             num+=1
  */
@@ -2166,7 +2164,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
 
     /* "cexpectimax.pyx":209
  *     cdef char i
- *     for i in xrange(4):
+ *     for i in range(4):
  *         if t.trans[i].rows[0].row[0] >= 0:             # <<<<<<<<<<<<<<
  *             num+=1
  *     return num
@@ -2175,7 +2173,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
     if (__pyx_t_2) {
 
       /* "cexpectimax.pyx":210
- *     for i in xrange(4):
+ *     for i in range(4):
  *         if t.trans[i].rows[0].row[0] >= 0:
  *             num+=1             # <<<<<<<<<<<<<<
  *     return num
@@ -2248,7 +2246,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  *     cdef char i,j
  *     cdef Row r
  *     if useRowUtility:             # <<<<<<<<<<<<<<
- *         for i in xrange(4):
+ *         for i in range(4):
  *             idx = compressRow(b.rows[i])
  */
   __pyx_t_1 = (__pyx_v_11cexpectimax_useRowUtility != 0);
@@ -2257,7 +2255,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     /* "cexpectimax.pyx":220
  *     cdef Row r
  *     if useRowUtility:
- *         for i in xrange(4):             # <<<<<<<<<<<<<<
+ *         for i in range(4):             # <<<<<<<<<<<<<<
  *             idx = compressRow(b.rows[i])
  *             score += rowUtilInner[idx]
  */
@@ -2266,7 +2264,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
 
       /* "cexpectimax.pyx":221
  *     if useRowUtility:
- *         for i in xrange(4):
+ *         for i in range(4):
  *             idx = compressRow(b.rows[i])             # <<<<<<<<<<<<<<
  *             score += rowUtilInner[idx]
  * 
@@ -2274,11 +2272,11 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       __pyx_v_idx = __pyx_f_11cexpectimax_compressRow((__pyx_v_b.rows[__pyx_v_i]));
 
       /* "cexpectimax.pyx":222
- *         for i in xrange(4):
+ *         for i in range(4):
  *             idx = compressRow(b.rows[i])
  *             score += rowUtilInner[idx]             # <<<<<<<<<<<<<<
  * 
- *         for i in xrange(4):
+ *         for i in range(4):
  */
       __pyx_v_score = (__pyx_v_score + (__pyx_v_11cexpectimax_rowUtilInner[__pyx_v_idx]));
     }
@@ -2286,8 +2284,8 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     /* "cexpectimax.pyx":224
  *             score += rowUtilInner[idx]
  * 
- *         for i in xrange(4):             # <<<<<<<<<<<<<<
- *             for j in xrange(4):
+ *         for i in range(4):             # <<<<<<<<<<<<<<
+ *             for j in range(4):
  *                 r.row[i] = b.rows[j].row[i]
  */
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
@@ -2295,8 +2293,8 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
 
       /* "cexpectimax.pyx":225
  * 
- *         for i in xrange(4):
- *             for j in xrange(4):             # <<<<<<<<<<<<<<
+ *         for i in range(4):
+ *             for j in range(4):             # <<<<<<<<<<<<<<
  *                 r.row[i] = b.rows[j].row[i]
  *             idx = compressRow(r)
  */
@@ -2304,8 +2302,8 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
         __pyx_v_j = __pyx_t_3;
 
         /* "cexpectimax.pyx":226
- *         for i in xrange(4):
- *             for j in xrange(4):
+ *         for i in range(4):
+ *             for j in range(4):
  *                 r.row[i] = b.rows[j].row[i]             # <<<<<<<<<<<<<<
  *             idx = compressRow(r)
  *             score += rowUtilInner[idx]
@@ -2314,7 +2312,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       }
 
       /* "cexpectimax.pyx":227
- *             for j in xrange(4):
+ *             for j in range(4):
  *                 r.row[i] = b.rows[j].row[i]
  *             idx = compressRow(r)             # <<<<<<<<<<<<<<
  *             score += rowUtilInner[idx]
@@ -2347,16 +2345,16 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  * 
  *     # board utility
  *     cdef int blanks = 1             # <<<<<<<<<<<<<<
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  */
   __pyx_v_blanks = 1;
 
   /* "cexpectimax.pyx":234
  *     # board utility
  *     cdef int blanks = 1
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             idx = b.rows[i].row[j]
  */
   for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
@@ -2364,8 +2362,8 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
 
     /* "cexpectimax.pyx":235
  *     cdef int blanks = 1
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             idx = b.rows[i].row[j]
  *             if idx==0:
  */
@@ -2373,8 +2371,8 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       __pyx_v_j = __pyx_t_3;
 
       /* "cexpectimax.pyx":236
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             idx = b.rows[i].row[j]             # <<<<<<<<<<<<<<
  *             if idx==0:
  *                 blanks += 1
@@ -2382,7 +2380,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       __pyx_v_idx = ((__pyx_v_b.rows[__pyx_v_i]).row[__pyx_v_j]);
 
       /* "cexpectimax.pyx":237
- *         for j in xrange(4):
+ *         for j in range(4):
  *             idx = b.rows[i].row[j]
  *             if idx==0:             # <<<<<<<<<<<<<<
  *                 blanks += 1
@@ -2477,7 +2475,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  * # returns count of the number of 0 tiles on a board
  * cdef char getNumBlanks(Board b) nogil:             # <<<<<<<<<<<<<<
  *     cdef char num = 0
- *     for i in xrange(4):
+ *     for i in range(4):
  */
 
 static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Board __pyx_v_b) {
@@ -2493,16 +2491,16 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
  * # returns count of the number of 0 tiles on a board
  * cdef char getNumBlanks(Board b) nogil:
  *     cdef char num = 0             # <<<<<<<<<<<<<<
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  */
   __pyx_v_num = 0;
 
   /* "cexpectimax.pyx":248
  * cdef char getNumBlanks(Board b) nogil:
  *     cdef char num = 0
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             if b.rows[i].row[j]==0:
  */
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
@@ -2510,8 +2508,8 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
 
     /* "cexpectimax.pyx":249
  *     cdef char num = 0
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             if b.rows[i].row[j]==0:
  *                 num += 1
  */
@@ -2519,8 +2517,8 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
       __pyx_v_j = __pyx_t_2;
 
       /* "cexpectimax.pyx":250
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             if b.rows[i].row[j]==0:             # <<<<<<<<<<<<<<
  *                 num += 1
  *     return num
@@ -2529,7 +2527,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
       if (__pyx_t_3) {
 
         /* "cexpectimax.pyx":251
- *         for j in xrange(4):
+ *         for j in range(4):
  *             if b.rows[i].row[j]==0:
  *                 num += 1             # <<<<<<<<<<<<<<
  *     return num
@@ -2557,7 +2555,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
  * # returns count of the number of 0 tiles on a board
  * cdef char getNumBlanks(Board b) nogil:             # <<<<<<<<<<<<<<
  *     cdef char num = 0
- *     for i in xrange(4):
+ *     for i in range(4):
  */
 
   /* function exit code */
@@ -2570,7 +2568,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
  * 
  * cdef void copyBoard(Board *bd, Board *bs) nogil:             # <<<<<<<<<<<<<<
  *     #memcpy(bd, bs, sizeof(Board))
- *     for i in xrange(4):
+ *     for i in range(4):
  */
 
 static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *__pyx_v_bd, struct __pyx_t_11cexpectimax_Board *__pyx_v_bs) {
@@ -2582,8 +2580,8 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
   /* "cexpectimax.pyx":256
  * cdef void copyBoard(Board *bd, Board *bs) nogil:
  *     #memcpy(bd, bs, sizeof(Board))
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             bd.rows[i].row[j] = bs.rows[i].row[j]
  */
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
@@ -2591,8 +2589,8 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
 
     /* "cexpectimax.pyx":257
  *     #memcpy(bd, bs, sizeof(Board))
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             bd.rows[i].row[j] = bs.rows[i].row[j]
  * 
  */
@@ -2600,8 +2598,8 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
       __pyx_v_j = __pyx_t_2;
 
       /* "cexpectimax.pyx":258
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             bd.rows[i].row[j] = bs.rows[i].row[j]             # <<<<<<<<<<<<<<
  * 
  * # generates all possible successors of a Board with 2 or 4
@@ -2615,7 +2613,7 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
  * 
  * cdef void copyBoard(Board *bd, Board *bs) nogil:             # <<<<<<<<<<<<<<
  *     #memcpy(bd, bs, sizeof(Board))
- *     for i in xrange(4):
+ *     for i in range(4):
  */
 
   /* function exit code */
@@ -2694,16 +2692,16 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
  *         newTile = 1
  * 
  *     successors.numSuccessors = numBlanks             # <<<<<<<<<<<<<<
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  */
   __pyx_v_successors.numSuccessors = __pyx_v_numBlanks;
 
   /* "cexpectimax.pyx":270
  * 
  *     successors.numSuccessors = numBlanks
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             if b.rows[i].row[j]==0:
  */
   for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
@@ -2711,8 +2709,8 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
 
     /* "cexpectimax.pyx":271
  *     successors.numSuccessors = numBlanks
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             if b.rows[i].row[j]==0:
  *                 copyBoard(&successors.succ[curr], &b)
  */
@@ -2720,8 +2718,8 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
       __pyx_v_j = __pyx_t_3;
 
       /* "cexpectimax.pyx":272
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             if b.rows[i].row[j]==0:             # <<<<<<<<<<<<<<
  *                 copyBoard(&successors.succ[curr], &b)
  *                 successors.succ[curr].rows[i].row[j] = newTile
@@ -2730,7 +2728,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
       if (__pyx_t_1) {
 
         /* "cexpectimax.pyx":273
- *         for j in xrange(4):
+ *         for j in range(4):
  *             if b.rows[i].row[j]==0:
  *                 copyBoard(&successors.succ[curr], &b)             # <<<<<<<<<<<<<<
  *                 successors.succ[curr].rows[i].row[j] = newTile
@@ -2929,7 +2927,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
   /* "cexpectimax.pyx":304
  *     cdef int act
  *     cdef char i
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):             # <<<<<<<<<<<<<<
  *         if trans.trans[i].rows[0].row[0] >= 0:
  *             totalScore = 0.
  */
@@ -2938,7 +2936,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
 
     /* "cexpectimax.pyx":305
  *     cdef char i
- *     for i in xrange(4):
+ *     for i in range(4):
  *         if trans.trans[i].rows[0].row[0] >= 0:             # <<<<<<<<<<<<<<
  *             totalScore = 0.
  *             successors = getSuccessors(trans.trans[i], True)
@@ -2947,7 +2945,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
     if (__pyx_t_1) {
 
       /* "cexpectimax.pyx":306
- *     for i in xrange(4):
+ *     for i in range(4):
  *         if trans.trans[i].rows[0].row[0] >= 0:
  *             totalScore = 0.             # <<<<<<<<<<<<<<
  *             successors = getSuccessors(trans.trans[i], True)
@@ -2960,7 +2958,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  *             totalScore = 0.
  *             successors = getSuccessors(trans.trans[i], True)             # <<<<<<<<<<<<<<
  *             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors
- *             for j in xrange(successors.numSuccessors):
+ *             for j in range(successors.numSuccessors):
  */
       __pyx_v_successors = __pyx_f_11cexpectimax_getSuccessors((__pyx_v_trans.trans[__pyx_v_i]), 1);
 
@@ -2968,7 +2966,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  *             totalScore = 0.
  *             successors = getSuccessors(trans.trans[i], True)
  *             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors             # <<<<<<<<<<<<<<
- *             for j in xrange(successors.numSuccessors):
+ *             for j in range(successors.numSuccessors):
  *                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
  */
       if ((__pyx_v_reduceSuccessors != 0)) {
@@ -2991,7 +2989,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
       /* "cexpectimax.pyx":309
  *             successors = getSuccessors(trans.trans[i], True)
  *             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors
- *             for j in xrange(successors.numSuccessors):             # <<<<<<<<<<<<<<
+ *             for j in range(successors.numSuccessors):             # <<<<<<<<<<<<<<
  *                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
  *                 totalScore += actScore.score*percent
  */
@@ -3001,7 +2999,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
 
         /* "cexpectimax.pyx":310
  *             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors
- *             for j in xrange(successors.numSuccessors):
+ *             for j in range(successors.numSuccessors):
  *                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)             # <<<<<<<<<<<<<<
  *                 totalScore += actScore.score*percent
  * 
@@ -3009,7 +3007,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
         __pyx_v_actScore = __pyx_f_11cexpectimax_expectimax((__pyx_v_successors.succ[__pyx_v_j]), (__pyx_v_d - 1), __pyx_v_reduceSuccessors);
 
         /* "cexpectimax.pyx":311
- *             for j in xrange(successors.numSuccessors):
+ *             for j in range(successors.numSuccessors):
  *                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
  *                 totalScore += actScore.score*percent             # <<<<<<<<<<<<<<
  * 
@@ -3033,7 +3031,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  *             if not reduceSuccessors:
  *                 successors = getSuccessors(trans.trans[i], False)             # <<<<<<<<<<<<<<
  *                 percent = 0.1/successors.numSuccessors
- *                 for j in xrange(successors.numSuccessors):
+ *                 for j in range(successors.numSuccessors):
  */
         __pyx_v_successors = __pyx_f_11cexpectimax_getSuccessors((__pyx_v_trans.trans[__pyx_v_i]), 0);
 
@@ -3041,7 +3039,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  *             if not reduceSuccessors:
  *                 successors = getSuccessors(trans.trans[i], False)
  *                 percent = 0.1/successors.numSuccessors             # <<<<<<<<<<<<<<
- *                 for j in xrange(successors.numSuccessors):
+ *                 for j in range(successors.numSuccessors):
  *                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
  */
         if (unlikely(__pyx_v_successors.numSuccessors == 0)) {
@@ -3059,7 +3057,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
         /* "cexpectimax.pyx":316
  *                 successors = getSuccessors(trans.trans[i], False)
  *                 percent = 0.1/successors.numSuccessors
- *                 for j in xrange(successors.numSuccessors):             # <<<<<<<<<<<<<<
+ *                 for j in range(successors.numSuccessors):             # <<<<<<<<<<<<<<
  *                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
  *                     totalScore += actScore.score*percent
  */
@@ -3069,7 +3067,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
 
           /* "cexpectimax.pyx":317
  *                 percent = 0.1/successors.numSuccessors
- *                 for j in xrange(successors.numSuccessors):
+ *                 for j in range(successors.numSuccessors):
  *                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)             # <<<<<<<<<<<<<<
  *                     totalScore += actScore.score*percent
  * 
@@ -3077,7 +3075,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
           __pyx_v_actScore = __pyx_f_11cexpectimax_expectimax((__pyx_v_successors.succ[__pyx_v_j]), (__pyx_v_d - 1), __pyx_v_reduceSuccessors);
 
           /* "cexpectimax.pyx":318
- *                 for j in xrange(successors.numSuccessors):
+ *                 for j in range(successors.numSuccessors):
  *                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
  *                     totalScore += actScore.score*percent             # <<<<<<<<<<<<<<
  * 
@@ -3154,7 +3152,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
  * def getAction(b,d,r=False):             # <<<<<<<<<<<<<<
  *     cdef Board board
- *     for i in xrange(4):
+ *     for i in range(4):
  */
 
 /* Python wrapper */
@@ -3260,11 +3258,11 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
   /* "cexpectimax.pyx":329
  * def getAction(b,d,r=False):
  *     cdef Board board
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             board.rows[i].row[j] = b[i*4+j]
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
@@ -3309,12 +3307,12 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
 
     /* "cexpectimax.pyx":330
  *     cdef Board board
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             board.rows[i].row[j] = b[i*4+j]
  *     #printBoard(board)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_5 = __pyx_t_1; __Pyx_INCREF(__pyx_t_5); __pyx_t_6 = 0;
@@ -3358,8 +3356,8 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
       __pyx_t_1 = 0;
 
       /* "cexpectimax.pyx":331
- *     for i in xrange(4):
- *         for j in xrange(4):
+ *     for i in range(4):
+ *         for j in range(4):
  *             board.rows[i].row[j] = b[i*4+j]             # <<<<<<<<<<<<<<
  *     #printBoard(board)
  *     #t = time()
@@ -3380,8 +3378,8 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
 
       /* "cexpectimax.pyx":330
  *     cdef Board board
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             board.rows[i].row[j] = b[i*4+j]
  *     #printBoard(board)
  */
@@ -3391,8 +3389,8 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
     /* "cexpectimax.pyx":329
  * def getAction(b,d,r=False):
  *     cdef Board board
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             board.rows[i].row[j] = b[i*4+j]
  */
   }
@@ -3441,7 +3439,7 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
  * def getAction(b,d,r=False):             # <<<<<<<<<<<<<<
  *     cdef Board board
- *     for i in xrange(4):
+ *     for i in range(4):
  */
 
   /* function exit code */
@@ -3511,15 +3509,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_time, __pyx_k_time, sizeof(__pyx_k_time), 0, 0, 1, 1},
   {&__pyx_n_s_useRowUtility, __pyx_k_useRowUtility, sizeof(__pyx_k_useRowUtility), 0, 0, 1, 1},
   {&__pyx_n_s_utility, __pyx_k_utility, sizeof(__pyx_k_utility), 0, 0, 1, 1},
-  {&__pyx_n_s_xrange, __pyx_k_xrange, sizeof(__pyx_k_xrange), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  #if PY_MAJOR_VERSION >= 3
-  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_xrange) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  #else
-  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  #endif
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3532,8 +3525,8 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cexpectimax.pyx":329
  * def getAction(b,d,r=False):
  *     cdef Board board
- *     for i in xrange(4):             # <<<<<<<<<<<<<<
- *         for j in xrange(4):
+ *     for i in range(4):             # <<<<<<<<<<<<<<
+ *         for j in range(4):
  *             board.rows[i].row[j] = b[i*4+j]
  */
   __pyx_tuple_ = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3542,8 +3535,8 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "cexpectimax.pyx":330
  *     cdef Board board
- *     for i in xrange(4):
- *         for j in xrange(4):             # <<<<<<<<<<<<<<
+ *     for i in range(4):
+ *         for j in range(4):             # <<<<<<<<<<<<<<
  *             board.rows[i].row[j] = b[i*4+j]
  *     #printBoard(board)
  */
@@ -3556,7 +3549,7 @@ static int __Pyx_InitCachedConstants(void) {
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
  * def getAction(b,d,r=False):             # <<<<<<<<<<<<<<
  *     cdef Board board
- *     for i in xrange(4):
+ *     for i in range(4):
  */
   __pyx_tuple__3 = PyTuple_Pack(7, __pyx_n_s_b, __pyx_n_s_d, __pyx_n_s_r, __pyx_n_s_board, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_actScore); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
@@ -3719,7 +3712,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  * cdef int util
  * cdef Row r
  * cdef bint useRowUtility = utility.useRowUtility             # <<<<<<<<<<<<<<
- * for a in xrange(16):
+ * for a in range(16):
  *     r.row[0] = a
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_utility); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3734,64 +3727,64 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
   /* "cexpectimax.pyx":78
  * cdef Row r
  * cdef bint useRowUtility = utility.useRowUtility
- * for a in xrange(16):             # <<<<<<<<<<<<<<
+ * for a in range(16):             # <<<<<<<<<<<<<<
  *     r.row[0] = a
- *     for b in xrange(16):
+ *     for b in range(16):
  */
   for (__pyx_t_4 = 0; __pyx_t_4 < 16; __pyx_t_4+=1) {
     __pyx_v_11cexpectimax_a = __pyx_t_4;
 
     /* "cexpectimax.pyx":79
  * cdef bint useRowUtility = utility.useRowUtility
- * for a in xrange(16):
+ * for a in range(16):
  *     r.row[0] = a             # <<<<<<<<<<<<<<
- *     for b in xrange(16):
+ *     for b in range(16):
  *         r.row[1] = b
  */
     (__pyx_v_11cexpectimax_r.row[0]) = __pyx_v_11cexpectimax_a;
 
     /* "cexpectimax.pyx":80
- * for a in xrange(16):
+ * for a in range(16):
  *     r.row[0] = a
- *     for b in xrange(16):             # <<<<<<<<<<<<<<
+ *     for b in range(16):             # <<<<<<<<<<<<<<
  *         r.row[1] = b
- *         for c in xrange(16):
+ *         for c in range(16):
  */
     for (__pyx_t_5 = 0; __pyx_t_5 < 16; __pyx_t_5+=1) {
       __pyx_v_11cexpectimax_b = __pyx_t_5;
 
       /* "cexpectimax.pyx":81
  *     r.row[0] = a
- *     for b in xrange(16):
+ *     for b in range(16):
  *         r.row[1] = b             # <<<<<<<<<<<<<<
- *         for c in xrange(16):
+ *         for c in range(16):
  *             r.row[2] = c
  */
       (__pyx_v_11cexpectimax_r.row[1]) = __pyx_v_11cexpectimax_b;
 
       /* "cexpectimax.pyx":82
- *     for b in xrange(16):
+ *     for b in range(16):
  *         r.row[1] = b
- *         for c in xrange(16):             # <<<<<<<<<<<<<<
+ *         for c in range(16):             # <<<<<<<<<<<<<<
  *             r.row[2] = c
- *             for d in xrange(16):
+ *             for d in range(16):
  */
       for (__pyx_t_6 = 0; __pyx_t_6 < 16; __pyx_t_6+=1) {
         __pyx_v_11cexpectimax_c = __pyx_t_6;
 
         /* "cexpectimax.pyx":83
  *         r.row[1] = b
- *         for c in xrange(16):
+ *         for c in range(16):
  *             r.row[2] = c             # <<<<<<<<<<<<<<
- *             for d in xrange(16):
+ *             for d in range(16):
  *                 r.row[3] = d
  */
         (__pyx_v_11cexpectimax_r.row[2]) = __pyx_v_11cexpectimax_c;
 
         /* "cexpectimax.pyx":84
- *         for c in xrange(16):
+ *         for c in range(16):
  *             r.row[2] = c
- *             for d in xrange(16):             # <<<<<<<<<<<<<<
+ *             for d in range(16):             # <<<<<<<<<<<<<<
  *                 r.row[3] = d
  *                 idx = compressRow(r)
  */
@@ -3800,7 +3793,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
 
           /* "cexpectimax.pyx":85
  *             r.row[2] = c
- *             for d in xrange(16):
+ *             for d in range(16):
  *                 r.row[3] = d             # <<<<<<<<<<<<<<
  *                 idx = compressRow(r)
  *                 tr = getRowTrans(r)
@@ -3808,7 +3801,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
           (__pyx_v_11cexpectimax_r.row[3]) = __pyx_v_11cexpectimax_d;
 
           /* "cexpectimax.pyx":86
- *             for d in xrange(16):
+ *             for d in range(16):
  *                 r.row[3] = d
  *                 idx = compressRow(r)             # <<<<<<<<<<<<<<
  *                 tr = getRowTrans(r)
@@ -4046,7 +4039,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
  * def getAction(b,d,r=False):             # <<<<<<<<<<<<<<
  *     cdef Board board
- *     for i in xrange(4):
+ *     for i in range(4):
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11cexpectimax_1getAction, NULL, __pyx_n_s_cexpectimax); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
