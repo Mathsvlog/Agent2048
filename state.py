@@ -1,6 +1,5 @@
 from random import random,choice,randint
 from array import array
-from t import *
 
 # function used to precompute row transitions
 def _getRowTrans(s):
