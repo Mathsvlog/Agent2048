@@ -1,25 +1,33 @@
 from state import State2048, initialState
 from random import choice
-from expectimax import Expectimax2048
+from cexpectimax import getAction
+from depth import getDepth
 
 class Agent2048:
 
-	def __init__(self, depth=1, reduceSuccessors=False, doPrint=True):
-		self.state = State2048(initialState())
-		self.expectimax = Expectimax2048(depth, reduceSuccessors)
-		self.doPrint = doPrint
-		self.printState()
+    def __init__(self, depth=3, reduceSuccessors=False, doPrint=True):
 
-	def playGame(self):
-		while len(self.state.getTransitions())>0:
-			action = self.expectimax.getAction(self.state)
-			self.state = self.state.move(action)
-			self.printState()
-		if self.doPrint:
-			print "GAME OVER"
+        self.depth = depth
+        self.reduceSuccessors = reduceSuccessors
 
-	def printState(self):
-		if self.doPrint:
-			print "SCORE: %s"%self.state.getScore()
-			print "VALUE: %s"%self.expectimax.utility(self.state)
-			print self.state
+        self.state = State2048(initialState())
+        self.doPrint = doPrint
+        self.value = ""
+        self.printState()
+
+    def playGame(self):
+        while len(self.state.getTransitions())>0:
+            depth = getDepth(self.depth, self.state.board)
+            action,self.value = getAction(self.state.board, depth, self.reduceSuccessors)
+            self.state = self.state.move(action)
+            print "ACTION: "+action
+            print "DEPTH: "+str(depth)
+            self.printState()
+        if self.doPrint:
+            print "GAME OVER"
+
+    def printState(self):
+        if self.doPrint:
+            print "SCORE: %s"%self.state.getScore()
+            print "VALUE: %s"%self.value
+            print self.state
