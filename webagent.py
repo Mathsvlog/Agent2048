@@ -29,14 +29,14 @@ class WebAgent2048:
             hitKey(self.actionToKey[action])
             sleep(0.25)
             self.extractImageState()
-            print "ACTION: "+action
-            print "DEPTH: "+str(depth)
+            print("ACTION: "+action)
+            print("DEPTH: "+str(depth))
             self.printState()
 
     def printState(self):
-        print "SCORE: %s"%self.state.getScore()
-        print "VALUE: %s"%self.value
-        print self.state
+        print("SCORE: %s"%self.state.getScore())
+        print("VALUE: %s"%self.value)
+        print(self.state)
 
     def extractImageState(self):
         img = ImageGrab.grab(self.box)

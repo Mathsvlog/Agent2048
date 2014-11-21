@@ -22,7 +22,7 @@ if __name__ == "__main__":
 	(options, _) = o.parse_args()
 
 	if options.depth < 1:
-		print "DEPTH MUST BE AT LEAST 1"
+		print("DEPTH MUST BE AT LEAST 1")
 		sys.exit()
 
 	if options.mode=="a":

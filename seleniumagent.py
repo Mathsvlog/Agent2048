@@ -41,9 +41,9 @@ class SeleniumAgent2048:
         self.webdriver = w
 
     def printState(self):
-        print "SCORE: %s"%self.state.getScore()
-        print "VALUE: %s"%self.value
-        print self.state
+        print("SCORE: %s"%self.state.getScore())
+        print("VALUE: %s"%self.value)
+        print(self.state)
 
     def playGame(self, runForever=False):
         keys2048 = {Action2048.UP:Keys.UP, Action2048.RIGHT:Keys.RIGHT, Action2048.DOWN:Keys.DOWN, Action2048.LEFT:Keys.LEFT}
@@ -60,7 +60,7 @@ class SeleniumAgent2048:
             while len(self.state.getTransitions())>0:
                 # if achieved 2048, press continue button
                 if not hasAchieved2048 and 11 in self.state.board:
-                    print "ACHIEVED 2048 in "+str(time()-t2048)+" s"
+                    print("ACHIEVED 2048 in "+str(time()-t2048)+" s")
                     hasAchieved2048 = True
                     sleep(3)
                     resetButton = self.webdriver.find_element_by_class_name("keep-playing-button")
@@ -79,18 +79,18 @@ class SeleniumAgent2048:
 
                 # read output
                 self.readBoard()
-                print "ACTION: "+action
-                print "DEPTH: "+str(depth)
+                print("ACTION: "+action)
+                print("DEPTH: "+str(depth))
                 self.printState()
                 
-            print "GAME OVER"
+            print("GAME OVER")
             if not runForever:
                 doRun = False
             else:
                 sleep(2)
                 self.resetGame()
                 self.readBoard()
-                print "\nNEW GAME"
+                print("\nNEW GAME")
         raw_input("ENTER TO CLOSE")
         self.webdriver.close()
 
