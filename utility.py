@@ -1,6 +1,6 @@
 """
-True uses board utility defined in cexpectimax
-False uses getRowUtility
+True uses getRowUtility
+False uses board utility defined in cexpectimax
 """
 useRowUtility = False
 
