@@ -2,7 +2,11 @@ from agent import *
 import optparse, sys
 from time import sleep
 
-from seleniumagent import *
+try:
+	from seleniumagent import *
+except:
+	print("Selenium probably not installed; cannot run SeleniumAgent")
+	print("")
 
 # Windows specific code (webagent, boxfinder, util)
 import os
