@@ -323,6 +323,7 @@ cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:
     return bestActionScore
 
 
+
 actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
 def getAction(b,d,r=False):
     cdef Board board
@@ -333,3 +334,4 @@ def getAction(b,d,r=False):
     #t = time()
     actScore = expectimax(board,d,r)
     return actionDict[actScore.action], actScore.score
+
