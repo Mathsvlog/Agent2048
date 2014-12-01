@@ -13,7 +13,7 @@
 #endif
 #endif
 #endif
-#include "python2.7/Python.h"
+#include "Python.h"
 #ifndef Py_PYTHON_H
     #error Python headers needed to compile C extensions, please install development version of Python.
 #elif PY_VERSION_HEX < 0x02060000 || (0x03000000 <= PY_VERSION_HEX && PY_VERSION_HEX < 0x03020000)
@@ -425,7 +425,7 @@ struct __pyx_t_11cexpectimax_Transitions;
 struct __pyx_t_11cexpectimax_ActionScore;
 struct __pyx_t_11cexpectimax_Successors;
 
-/* "cexpectimax.pyx":28
+/* "cexpectimax.pyx":29
  * 
  * # ACTIONS
  * cdef enum Action:             # <<<<<<<<<<<<<<
@@ -440,7 +440,7 @@ enum __pyx_t_11cexpectimax_Action {
   __pyx_e_11cexpectimax_NONE = 4
 };
 
-/* "cexpectimax.pyx":6
+/* "cexpectimax.pyx":7
  * 
  * # Row of 4 tiles
  * cdef struct Row:             # <<<<<<<<<<<<<<
@@ -451,7 +451,7 @@ struct __pyx_t_11cexpectimax_Row {
   char row[4];
 };
 
-/* "cexpectimax.pyx":10
+/* "cexpectimax.pyx":11
  * 
  * # Board of 4 Rows
  * cdef struct Board:             # <<<<<<<<<<<<<<
@@ -462,7 +462,7 @@ struct __pyx_t_11cexpectimax_Board {
   struct __pyx_t_11cexpectimax_Row rows[4];
 };
 
-/* "cexpectimax.pyx":14
+/* "cexpectimax.pyx":15
  * 
  * # UDLR transitions of a Board
  * cdef struct Transitions:             # <<<<<<<<<<<<<<
@@ -473,7 +473,7 @@ struct __pyx_t_11cexpectimax_Transitions {
   struct __pyx_t_11cexpectimax_Board trans[4];
 };
 
-/* "cexpectimax.pyx":18
+/* "cexpectimax.pyx":19
  * 
  * # stores an action/score pair
  * cdef struct ActionScore:             # <<<<<<<<<<<<<<
@@ -485,7 +485,7 @@ struct __pyx_t_11cexpectimax_ActionScore {
   int score;
 };
 
-/* "cexpectimax.pyx":23
+/* "cexpectimax.pyx":24
  * 
  * # stores all possible successors of a Board (for 2 or 4)
  * cdef struct Successors:             # <<<<<<<<<<<<<<
@@ -736,6 +736,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
 /* Module declarations from 'cexpectimax' */
+static int __pyx_v_11cexpectimax_reduceAfterFirstDepth;
 static unsigned short __pyx_v_11cexpectimax_rowTrans[65536];
 static int __pyx_v_11cexpectimax_rowUtilInner[65536];
 static int __pyx_v_11cexpectimax_rowUtilOuter[65536];
@@ -786,6 +787,7 @@ static char __pyx_k_test[] = "__test__";
 static char __pyx_k_time[] = "time";
 static char __pyx_k_board[] = "board";
 static char __pyx_k_clock[] = "clock";
+static char __pyx_k_depth[] = "depth";
 static char __pyx_k_print[] = "print";
 static char __pyx_k_range[] = "range";
 static char __pyx_k_import[] = "__import__";
@@ -796,6 +798,7 @@ static char __pyx_k_actionDict[] = "actionDict";
 static char __pyx_k_cexpectimax[] = "cexpectimax";
 static char __pyx_k_getRowUtility[] = "getRowUtility";
 static char __pyx_k_useRowUtility[] = "useRowUtility";
+static char __pyx_k_reduceAfterFirstDepth[] = "reduceAfterFirstDepth";
 static char __pyx_k_C_Users_Jason_Desktop_2048_cexpe[] = "C:\\Users\\Jason\\Desktop\\2048\\cexpectimax\\cexpectimax.pyx";
 static PyObject *__pyx_kp_s_C_Users_Jason_Desktop_2048_cexpe;
 static PyObject *__pyx_n_s_D;
@@ -809,6 +812,7 @@ static PyObject *__pyx_n_s_board;
 static PyObject *__pyx_n_s_cexpectimax;
 static PyObject *__pyx_n_s_clock;
 static PyObject *__pyx_n_s_d;
+static PyObject *__pyx_n_s_depth;
 static PyObject *__pyx_n_s_end;
 static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_getAction;
@@ -820,6 +824,7 @@ static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_r;
 static PyObject *__pyx_n_s_range;
+static PyObject *__pyx_n_s_reduceAfterFirstDepth;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_time;
 static PyObject *__pyx_n_s_useRowUtility;
@@ -830,7 +835,7 @@ static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_codeobj__4;
 
-/* "cexpectimax.pyx":36
+/* "cexpectimax.pyx":37
  * 
  * # compresses Row into a short
  * cdef unsigned short compressRow(Row r) nogil:             # <<<<<<<<<<<<<<
@@ -841,7 +846,7 @@ static PyObject *__pyx_codeobj__4;
 static unsigned short __pyx_f_11cexpectimax_compressRow(struct __pyx_t_11cexpectimax_Row __pyx_v_r) {
   unsigned short __pyx_r;
 
-  /* "cexpectimax.pyx":37
+  /* "cexpectimax.pyx":38
  * # compresses Row into a short
  * cdef unsigned short compressRow(Row r) nogil:
  *     return r.row[0]<<12 | r.row[1]<<8 | r.row[2]<<4 | r.row[3]             # <<<<<<<<<<<<<<
@@ -851,7 +856,7 @@ static unsigned short __pyx_f_11cexpectimax_compressRow(struct __pyx_t_11cexpect
   __pyx_r = (((((__pyx_v_r.row[0]) << 12) | ((__pyx_v_r.row[1]) << 8)) | ((__pyx_v_r.row[2]) << 4)) | (__pyx_v_r.row[3]));
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":36
+  /* "cexpectimax.pyx":37
  * 
  * # compresses Row into a short
  * cdef unsigned short compressRow(Row r) nogil:             # <<<<<<<<<<<<<<
@@ -864,7 +869,7 @@ static unsigned short __pyx_f_11cexpectimax_compressRow(struct __pyx_t_11cexpect
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":40
+/* "cexpectimax.pyx":41
  * 
  * # converts a short into a Row
  * cdef Row decompressRow(short s) nogil:             # <<<<<<<<<<<<<<
@@ -876,7 +881,7 @@ static struct __pyx_t_11cexpectimax_Row __pyx_f_11cexpectimax_decompressRow(shor
   struct __pyx_t_11cexpectimax_Row __pyx_v_r;
   struct __pyx_t_11cexpectimax_Row __pyx_r;
 
-  /* "cexpectimax.pyx":42
+  /* "cexpectimax.pyx":43
  * cdef Row decompressRow(short s) nogil:
  *     cdef Row r
  *     r.row[0] = s>>12 & 0xf             # <<<<<<<<<<<<<<
@@ -885,7 +890,7 @@ static struct __pyx_t_11cexpectimax_Row __pyx_f_11cexpectimax_decompressRow(shor
  */
   (__pyx_v_r.row[0]) = ((__pyx_v_s >> 12) & 0xf);
 
-  /* "cexpectimax.pyx":43
+  /* "cexpectimax.pyx":44
  *     cdef Row r
  *     r.row[0] = s>>12 & 0xf
  *     r.row[1] = s>>8 & 0xf             # <<<<<<<<<<<<<<
@@ -894,7 +899,7 @@ static struct __pyx_t_11cexpectimax_Row __pyx_f_11cexpectimax_decompressRow(shor
  */
   (__pyx_v_r.row[1]) = ((__pyx_v_s >> 8) & 0xf);
 
-  /* "cexpectimax.pyx":44
+  /* "cexpectimax.pyx":45
  *     r.row[0] = s>>12 & 0xf
  *     r.row[1] = s>>8 & 0xf
  *     r.row[2] = s>>4 & 0xf             # <<<<<<<<<<<<<<
@@ -903,7 +908,7 @@ static struct __pyx_t_11cexpectimax_Row __pyx_f_11cexpectimax_decompressRow(shor
  */
   (__pyx_v_r.row[2]) = ((__pyx_v_s >> 4) & 0xf);
 
-  /* "cexpectimax.pyx":45
+  /* "cexpectimax.pyx":46
  *     r.row[1] = s>>8 & 0xf
  *     r.row[2] = s>>4 & 0xf
  *     r.row[3] = s & 0xf             # <<<<<<<<<<<<<<
@@ -912,7 +917,7 @@ static struct __pyx_t_11cexpectimax_Row __pyx_f_11cexpectimax_decompressRow(shor
  */
   (__pyx_v_r.row[3]) = (__pyx_v_s & 0xf);
 
-  /* "cexpectimax.pyx":46
+  /* "cexpectimax.pyx":47
  *     r.row[2] = s>>4 & 0xf
  *     r.row[3] = s & 0xf
  *     return r             # <<<<<<<<<<<<<<
@@ -922,7 +927,7 @@ static struct __pyx_t_11cexpectimax_Row __pyx_f_11cexpectimax_decompressRow(shor
   __pyx_r = __pyx_v_r;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":40
+  /* "cexpectimax.pyx":41
  * 
  * # converts a short into a Row
  * cdef Row decompressRow(short s) nogil:             # <<<<<<<<<<<<<<
@@ -935,7 +940,7 @@ static struct __pyx_t_11cexpectimax_Row __pyx_f_11cexpectimax_decompressRow(shor
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":49
+/* "cexpectimax.pyx":50
  * 
  * # gets transition of a row
  * cdef short getRowTrans(Row r) nogil:             # <<<<<<<<<<<<<<
@@ -955,7 +960,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
   int __pyx_t_6;
   long __pyx_t_7;
 
-  /* "cexpectimax.pyx":51
+  /* "cexpectimax.pyx":52
  * cdef short getRowTrans(Row r) nogil:
  *     cdef char i,j
  *     for i in range(1,4):             # <<<<<<<<<<<<<<
@@ -965,7 +970,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
   for (__pyx_t_1 = 1; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":52
+    /* "cexpectimax.pyx":53
  *     cdef char i,j
  *     for i in range(1,4):
  *         if r.row[i]!=0:             # <<<<<<<<<<<<<<
@@ -975,7 +980,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
     __pyx_t_2 = (((__pyx_v_r.row[__pyx_v_i]) != 0) != 0);
     if (__pyx_t_2) {
 
-      /* "cexpectimax.pyx":53
+      /* "cexpectimax.pyx":54
  *     for i in range(1,4):
  *         if r.row[i]!=0:
  *             j = i             # <<<<<<<<<<<<<<
@@ -984,7 +989,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
  */
       __pyx_v_j = __pyx_v_i;
 
-      /* "cexpectimax.pyx":54
+      /* "cexpectimax.pyx":55
  *         if r.row[i]!=0:
  *             j = i
  *             while j>0 and r.row[j-1] in [0,r.row[i]]:             # <<<<<<<<<<<<<<
@@ -1014,7 +1019,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
         __pyx_L8_bool_binop_done:;
         if (!__pyx_t_2) break;
 
-        /* "cexpectimax.pyx":55
+        /* "cexpectimax.pyx":56
  *             j = i
  *             while j>0 and r.row[j-1] in [0,r.row[i]]:
  *                 j-=1             # <<<<<<<<<<<<<<
@@ -1024,7 +1029,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
         __pyx_v_j = (__pyx_v_j - 1);
       }
 
-      /* "cexpectimax.pyx":56
+      /* "cexpectimax.pyx":57
  *             while j>0 and r.row[j-1] in [0,r.row[i]]:
  *                 j-=1
  *             if i==j:             # <<<<<<<<<<<<<<
@@ -1036,7 +1041,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
         goto __pyx_L12;
       }
 
-      /* "cexpectimax.pyx":58
+      /* "cexpectimax.pyx":59
  *             if i==j:
  *                 pass
  *             elif r.row[i]==r.row[j]:             # <<<<<<<<<<<<<<
@@ -1046,7 +1051,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
       __pyx_t_2 = (((__pyx_v_r.row[__pyx_v_i]) == (__pyx_v_r.row[__pyx_v_j])) != 0);
       if (__pyx_t_2) {
 
-        /* "cexpectimax.pyx":59
+        /* "cexpectimax.pyx":60
  *                 pass
  *             elif r.row[i]==r.row[j]:
  *                 r.row[i],r.row[j] = 0, -r.row[j]-1             # <<<<<<<<<<<<<<
@@ -1061,7 +1066,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
       }
       /*else*/ {
 
-        /* "cexpectimax.pyx":61
+        /* "cexpectimax.pyx":62
  *                 r.row[i],r.row[j] = 0, -r.row[j]-1
  *             else:
  *                 r.row[i],r.row[j] = 0, r.row[i]             # <<<<<<<<<<<<<<
@@ -1079,7 +1084,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
     __pyx_L5:;
   }
 
-  /* "cexpectimax.pyx":63
+  /* "cexpectimax.pyx":64
  *                 r.row[i],r.row[j] = 0, r.row[i]
  * 
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -1089,7 +1094,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":64
+    /* "cexpectimax.pyx":65
  * 
  *     for i in range(4):
  *         if r.row[i]<0:             # <<<<<<<<<<<<<<
@@ -1099,7 +1104,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
     __pyx_t_2 = (((__pyx_v_r.row[__pyx_v_i]) < 0) != 0);
     if (__pyx_t_2) {
 
-      /* "cexpectimax.pyx":65
+      /* "cexpectimax.pyx":66
  *     for i in range(4):
  *         if r.row[i]<0:
  *             r.row[i] *= -1             # <<<<<<<<<<<<<<
@@ -1113,17 +1118,17 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
     __pyx_L15:;
   }
 
-  /* "cexpectimax.pyx":67
+  /* "cexpectimax.pyx":68
  *             r.row[i] *= -1
  * 
  *     return compressRow(r)             # <<<<<<<<<<<<<<
  * 
- * # precomputation of row transitions
+ * cdef bint reduceAfterFirstDepth = depth.reduceAfterFirstDepth
  */
   __pyx_r = __pyx_f_11cexpectimax_compressRow(__pyx_v_r);
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":49
+  /* "cexpectimax.pyx":50
  * 
  * # gets transition of a row
  * cdef short getRowTrans(Row r) nogil:             # <<<<<<<<<<<<<<
@@ -1136,7 +1141,7 @@ static short __pyx_f_11cexpectimax_getRowTrans(struct __pyx_t_11cexpectimax_Row 
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":99
+/* "cexpectimax.pyx":102
  * 
  * # converts a number into an action
  * cdef Action charToAction(char a) nogil:             # <<<<<<<<<<<<<<
@@ -1148,7 +1153,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
   enum __pyx_t_11cexpectimax_Action __pyx_r;
   int __pyx_t_1;
 
-  /* "cexpectimax.pyx":100
+  /* "cexpectimax.pyx":103
  * # converts a number into an action
  * cdef Action charToAction(char a) nogil:
  *     if a==UP:             # <<<<<<<<<<<<<<
@@ -1158,7 +1163,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
   __pyx_t_1 = ((__pyx_v_a == __pyx_e_11cexpectimax_UP) != 0);
   if (__pyx_t_1) {
 
-    /* "cexpectimax.pyx":101
+    /* "cexpectimax.pyx":104
  * cdef Action charToAction(char a) nogil:
  *     if a==UP:
  *         return UP             # <<<<<<<<<<<<<<
@@ -1169,7 +1174,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
     goto __pyx_L0;
   }
 
-  /* "cexpectimax.pyx":102
+  /* "cexpectimax.pyx":105
  *     if a==UP:
  *         return UP
  *     if a==DOWN:             # <<<<<<<<<<<<<<
@@ -1179,7 +1184,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
   __pyx_t_1 = ((__pyx_v_a == __pyx_e_11cexpectimax_DOWN) != 0);
   if (__pyx_t_1) {
 
-    /* "cexpectimax.pyx":103
+    /* "cexpectimax.pyx":106
  *         return UP
  *     if a==DOWN:
  *         return DOWN             # <<<<<<<<<<<<<<
@@ -1190,7 +1195,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
     goto __pyx_L0;
   }
 
-  /* "cexpectimax.pyx":104
+  /* "cexpectimax.pyx":107
  *     if a==DOWN:
  *         return DOWN
  *     if a==LEFT:             # <<<<<<<<<<<<<<
@@ -1200,7 +1205,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
   __pyx_t_1 = ((__pyx_v_a == __pyx_e_11cexpectimax_LEFT) != 0);
   if (__pyx_t_1) {
 
-    /* "cexpectimax.pyx":105
+    /* "cexpectimax.pyx":108
  *         return DOWN
  *     if a==LEFT:
  *         return LEFT             # <<<<<<<<<<<<<<
@@ -1211,7 +1216,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
     goto __pyx_L0;
   }
 
-  /* "cexpectimax.pyx":106
+  /* "cexpectimax.pyx":109
  *     if a==LEFT:
  *         return LEFT
  *     if a==RIGHT:             # <<<<<<<<<<<<<<
@@ -1221,7 +1226,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
   __pyx_t_1 = ((__pyx_v_a == __pyx_e_11cexpectimax_RIGHT) != 0);
   if (__pyx_t_1) {
 
-    /* "cexpectimax.pyx":107
+    /* "cexpectimax.pyx":110
  *         return LEFT
  *     if a==RIGHT:
  *         return RIGHT             # <<<<<<<<<<<<<<
@@ -1232,7 +1237,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
     goto __pyx_L0;
   }
 
-  /* "cexpectimax.pyx":108
+  /* "cexpectimax.pyx":111
  *     if a==RIGHT:
  *         return RIGHT
  *     return NONE             # <<<<<<<<<<<<<<
@@ -1242,7 +1247,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
   __pyx_r = __pyx_e_11cexpectimax_NONE;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":99
+  /* "cexpectimax.pyx":102
  * 
  * # converts a number into an action
  * cdef Action charToAction(char a) nogil:             # <<<<<<<<<<<<<<
@@ -1255,7 +1260,7 @@ static enum __pyx_t_11cexpectimax_Action __pyx_f_11cexpectimax_charToAction(char
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":111
+/* "cexpectimax.pyx":114
  * 
  * # prints a Row
  * cdef void printRow(Row r):             # <<<<<<<<<<<<<<
@@ -1274,9 +1279,9 @@ static void __pyx_f_11cexpectimax_printRow(struct __pyx_t_11cexpectimax_Row __py
   int __pyx_clineno = 0;
   __Pyx_TraceDeclarations
   __Pyx_RefNannySetupContext("printRow", 0);
-  __Pyx_TraceCall("printRow", __pyx_f[0], 111);
+  __Pyx_TraceCall("printRow", __pyx_f[0], 114);
 
-  /* "cexpectimax.pyx":112
+  /* "cexpectimax.pyx":115
  * # prints a Row
  * cdef void printRow(Row r):
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -1286,34 +1291,34 @@ static void __pyx_f_11cexpectimax_printRow(struct __pyx_t_11cexpectimax_Row __py
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":113
+    /* "cexpectimax.pyx":116
  * cdef void printRow(Row r):
  *     for i in range(4):
  *         print r.row[i],             # <<<<<<<<<<<<<<
  *     print
  * 
  */
-    __pyx_t_2 = __Pyx_PyInt_From_char((__pyx_v_r.row[__pyx_v_i])); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_char((__pyx_v_r.row[__pyx_v_i])); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     __pyx_t_2 = 0;
-    if (__Pyx_Print(0, __pyx_t_3, 0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (__Pyx_Print(0, __pyx_t_3, 0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
 
-  /* "cexpectimax.pyx":114
+  /* "cexpectimax.pyx":117
  *     for i in range(4):
  *         print r.row[i],
  *     print             # <<<<<<<<<<<<<<
  * 
  * # prints a Board
  */
-  if (__Pyx_Print(0, __pyx_empty_tuple, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_Print(0, __pyx_empty_tuple, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cexpectimax.pyx":111
+  /* "cexpectimax.pyx":114
  * 
  * # prints a Row
  * cdef void printRow(Row r):             # <<<<<<<<<<<<<<
@@ -1332,7 +1337,7 @@ static void __pyx_f_11cexpectimax_printRow(struct __pyx_t_11cexpectimax_Row __py
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cexpectimax.pyx":117
+/* "cexpectimax.pyx":120
  * 
  * # prints a Board
  * cdef void printBoard(Board b):             # <<<<<<<<<<<<<<
@@ -1349,9 +1354,9 @@ static void __pyx_f_11cexpectimax_printBoard(struct __pyx_t_11cexpectimax_Board 
   int __pyx_clineno = 0;
   __Pyx_TraceDeclarations
   __Pyx_RefNannySetupContext("printBoard", 0);
-  __Pyx_TraceCall("printBoard", __pyx_f[0], 117);
+  __Pyx_TraceCall("printBoard", __pyx_f[0], 120);
 
-  /* "cexpectimax.pyx":118
+  /* "cexpectimax.pyx":121
  * # prints a Board
  * cdef void printBoard(Board b):
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -1361,7 +1366,7 @@ static void __pyx_f_11cexpectimax_printBoard(struct __pyx_t_11cexpectimax_Board 
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":119
+    /* "cexpectimax.pyx":122
  * cdef void printBoard(Board b):
  *     for i in range(4):
  *         printRow(b.rows[i])             # <<<<<<<<<<<<<<
@@ -1371,16 +1376,16 @@ static void __pyx_f_11cexpectimax_printBoard(struct __pyx_t_11cexpectimax_Board 
     __pyx_f_11cexpectimax_printRow((__pyx_v_b.rows[__pyx_v_i]));
   }
 
-  /* "cexpectimax.pyx":120
+  /* "cexpectimax.pyx":123
  *     for i in range(4):
  *         printRow(b.rows[i])
  *     print             # <<<<<<<<<<<<<<
  * 
  * # converts a Board into a transition Board
  */
-  if (__Pyx_Print(0, __pyx_empty_tuple, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_Print(0, __pyx_empty_tuple, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cexpectimax.pyx":117
+  /* "cexpectimax.pyx":120
  * 
  * # prints a Board
  * cdef void printBoard(Board b):             # <<<<<<<<<<<<<<
@@ -1397,7 +1402,7 @@ static void __pyx_f_11cexpectimax_printBoard(struct __pyx_t_11cexpectimax_Board 
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cexpectimax.pyx":123
+/* "cexpectimax.pyx":126
  * 
  * # converts a Board into a transition Board
  * cdef Board transU(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -1417,7 +1422,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
   char __pyx_t_2;
   int __pyx_t_3;
 
-  /* "cexpectimax.pyx":124
+  /* "cexpectimax.pyx":127
  * # converts a Board into a transition Board
  * cdef Board transU(Board b) nogil:
  *     cdef bint isValid = False             # <<<<<<<<<<<<<<
@@ -1426,7 +1431,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
  */
   __pyx_v_isValid = 0;
 
-  /* "cexpectimax.pyx":128
+  /* "cexpectimax.pyx":131
  *     cdef short rowShort
  *     cdef char i,j
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -1436,7 +1441,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":129
+    /* "cexpectimax.pyx":132
  *     cdef char i,j
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -1446,7 +1451,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "cexpectimax.pyx":130
+      /* "cexpectimax.pyx":133
  *     for i in range(4):
  *         for j in range(4):
  *             r.row[j] = b.rows[j].row[i]             # <<<<<<<<<<<<<<
@@ -1456,7 +1461,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
       (__pyx_v_r.row[__pyx_v_j]) = ((__pyx_v_b.rows[__pyx_v_j]).row[__pyx_v_i]);
     }
 
-    /* "cexpectimax.pyx":131
+    /* "cexpectimax.pyx":134
  *         for j in range(4):
  *             r.row[j] = b.rows[j].row[i]
  *         rowShort = rowTrans[compressRow(r)]             # <<<<<<<<<<<<<<
@@ -1465,7 +1470,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
  */
     __pyx_v_rowShort = (__pyx_v_11cexpectimax_rowTrans[__pyx_f_11cexpectimax_compressRow(__pyx_v_r)]);
 
-    /* "cexpectimax.pyx":132
+    /* "cexpectimax.pyx":135
  *             r.row[j] = b.rows[j].row[i]
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:             # <<<<<<<<<<<<<<
@@ -1475,7 +1480,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
     __pyx_t_3 = ((__pyx_v_rowShort != -1) != 0);
     if (__pyx_t_3) {
 
-      /* "cexpectimax.pyx":133
+      /* "cexpectimax.pyx":136
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:
  *             isValid = True             # <<<<<<<<<<<<<<
@@ -1484,7 +1489,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
  */
       __pyx_v_isValid = 1;
 
-      /* "cexpectimax.pyx":134
+      /* "cexpectimax.pyx":137
  *         if rowShort!=-1:
  *             isValid = True
  *             newRow = decompressRow(rowShort)             # <<<<<<<<<<<<<<
@@ -1493,7 +1498,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
  */
       __pyx_v_newRow = __pyx_f_11cexpectimax_decompressRow(__pyx_v_rowShort);
 
-      /* "cexpectimax.pyx":135
+      /* "cexpectimax.pyx":138
  *             isValid = True
  *             newRow = decompressRow(rowShort)
  *             for j in range(4):             # <<<<<<<<<<<<<<
@@ -1503,7 +1508,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
       for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
         __pyx_v_j = __pyx_t_2;
 
-        /* "cexpectimax.pyx":136
+        /* "cexpectimax.pyx":139
  *             newRow = decompressRow(rowShort)
  *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[j]             # <<<<<<<<<<<<<<
@@ -1517,7 +1522,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
     __pyx_L7:;
   }
 
-  /* "cexpectimax.pyx":137
+  /* "cexpectimax.pyx":140
  *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[j]
  *     if not isValid:             # <<<<<<<<<<<<<<
@@ -1527,7 +1532,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
   __pyx_t_3 = ((!(__pyx_v_isValid != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "cexpectimax.pyx":138
+    /* "cexpectimax.pyx":141
  *                 b.rows[j].row[i] = newRow.row[j]
  *     if not isValid:
  *         b.rows[0].row[0] = -1             # <<<<<<<<<<<<<<
@@ -1539,7 +1544,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
   }
   __pyx_L10:;
 
-  /* "cexpectimax.pyx":139
+  /* "cexpectimax.pyx":142
  *     if not isValid:
  *         b.rows[0].row[0] = -1
  *     return b             # <<<<<<<<<<<<<<
@@ -1549,7 +1554,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
   __pyx_r = __pyx_v_b;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":123
+  /* "cexpectimax.pyx":126
  * 
  * # converts a Board into a transition Board
  * cdef Board transU(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -1562,7 +1567,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transU(struct __
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":141
+/* "cexpectimax.pyx":144
  *     return b
  * 
  * cdef Board transD(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -1582,7 +1587,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
   char __pyx_t_2;
   int __pyx_t_3;
 
-  /* "cexpectimax.pyx":142
+  /* "cexpectimax.pyx":145
  * 
  * cdef Board transD(Board b) nogil:
  *     cdef bint isValid = False             # <<<<<<<<<<<<<<
@@ -1591,7 +1596,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
  */
   __pyx_v_isValid = 0;
 
-  /* "cexpectimax.pyx":146
+  /* "cexpectimax.pyx":149
  *     cdef short rowShort
  *     cdef char i,j
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -1601,7 +1606,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":147
+    /* "cexpectimax.pyx":150
  *     cdef char i,j
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -1611,7 +1616,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "cexpectimax.pyx":148
+      /* "cexpectimax.pyx":151
  *     for i in range(4):
  *         for j in range(4):
  *             r.row[j] = b.rows[3-j].row[i]             # <<<<<<<<<<<<<<
@@ -1621,7 +1626,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
       (__pyx_v_r.row[__pyx_v_j]) = ((__pyx_v_b.rows[(3 - __pyx_v_j)]).row[__pyx_v_i]);
     }
 
-    /* "cexpectimax.pyx":149
+    /* "cexpectimax.pyx":152
  *         for j in range(4):
  *             r.row[j] = b.rows[3-j].row[i]
  *         rowShort = rowTrans[compressRow(r)]             # <<<<<<<<<<<<<<
@@ -1630,7 +1635,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
  */
     __pyx_v_rowShort = (__pyx_v_11cexpectimax_rowTrans[__pyx_f_11cexpectimax_compressRow(__pyx_v_r)]);
 
-    /* "cexpectimax.pyx":150
+    /* "cexpectimax.pyx":153
  *             r.row[j] = b.rows[3-j].row[i]
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:             # <<<<<<<<<<<<<<
@@ -1640,7 +1645,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
     __pyx_t_3 = ((__pyx_v_rowShort != -1) != 0);
     if (__pyx_t_3) {
 
-      /* "cexpectimax.pyx":151
+      /* "cexpectimax.pyx":154
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:
  *             isValid = True             # <<<<<<<<<<<<<<
@@ -1649,7 +1654,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
  */
       __pyx_v_isValid = 1;
 
-      /* "cexpectimax.pyx":152
+      /* "cexpectimax.pyx":155
  *         if rowShort!=-1:
  *             isValid = True
  *             newRow = decompressRow(rowShort)             # <<<<<<<<<<<<<<
@@ -1658,7 +1663,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
  */
       __pyx_v_newRow = __pyx_f_11cexpectimax_decompressRow(__pyx_v_rowShort);
 
-      /* "cexpectimax.pyx":153
+      /* "cexpectimax.pyx":156
  *             isValid = True
  *             newRow = decompressRow(rowShort)
  *             for j in range(4):             # <<<<<<<<<<<<<<
@@ -1668,7 +1673,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
       for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
         __pyx_v_j = __pyx_t_2;
 
-        /* "cexpectimax.pyx":154
+        /* "cexpectimax.pyx":157
  *             newRow = decompressRow(rowShort)
  *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[3-j]             # <<<<<<<<<<<<<<
@@ -1682,7 +1687,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
     __pyx_L7:;
   }
 
-  /* "cexpectimax.pyx":155
+  /* "cexpectimax.pyx":158
  *             for j in range(4):
  *                 b.rows[j].row[i] = newRow.row[3-j]
  *     if not isValid:             # <<<<<<<<<<<<<<
@@ -1692,7 +1697,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
   __pyx_t_3 = ((!(__pyx_v_isValid != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "cexpectimax.pyx":156
+    /* "cexpectimax.pyx":159
  *                 b.rows[j].row[i] = newRow.row[3-j]
  *     if not isValid:
  *         b.rows[0].row[0] = -1             # <<<<<<<<<<<<<<
@@ -1704,7 +1709,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
   }
   __pyx_L10:;
 
-  /* "cexpectimax.pyx":157
+  /* "cexpectimax.pyx":160
  *     if not isValid:
  *         b.rows[0].row[0] = -1
  *     return b             # <<<<<<<<<<<<<<
@@ -1714,7 +1719,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
   __pyx_r = __pyx_v_b;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":141
+  /* "cexpectimax.pyx":144
  *     return b
  * 
  * cdef Board transD(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -1727,7 +1732,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transD(struct __
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":159
+/* "cexpectimax.pyx":162
  *     return b
  * 
  * cdef Board transL(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -1747,7 +1752,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
   char __pyx_t_2;
   int __pyx_t_3;
 
-  /* "cexpectimax.pyx":160
+  /* "cexpectimax.pyx":163
  * 
  * cdef Board transL(Board b) nogil:
  *     cdef bint isValid = False             # <<<<<<<<<<<<<<
@@ -1756,7 +1761,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
  */
   __pyx_v_isValid = 0;
 
-  /* "cexpectimax.pyx":164
+  /* "cexpectimax.pyx":167
  *     cdef short rowShort
  *     cdef char i,j
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -1766,7 +1771,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":165
+    /* "cexpectimax.pyx":168
  *     cdef char i,j
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -1776,7 +1781,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "cexpectimax.pyx":166
+      /* "cexpectimax.pyx":169
  *     for i in range(4):
  *         for j in range(4):
  *             r.row[j] = b.rows[i].row[j]             # <<<<<<<<<<<<<<
@@ -1786,7 +1791,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
       (__pyx_v_r.row[__pyx_v_j]) = ((__pyx_v_b.rows[__pyx_v_i]).row[__pyx_v_j]);
     }
 
-    /* "cexpectimax.pyx":167
+    /* "cexpectimax.pyx":170
  *         for j in range(4):
  *             r.row[j] = b.rows[i].row[j]
  *         rowShort = rowTrans[compressRow(r)]             # <<<<<<<<<<<<<<
@@ -1795,7 +1800,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
  */
     __pyx_v_rowShort = (__pyx_v_11cexpectimax_rowTrans[__pyx_f_11cexpectimax_compressRow(__pyx_v_r)]);
 
-    /* "cexpectimax.pyx":168
+    /* "cexpectimax.pyx":171
  *             r.row[j] = b.rows[i].row[j]
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:             # <<<<<<<<<<<<<<
@@ -1805,7 +1810,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
     __pyx_t_3 = ((__pyx_v_rowShort != -1) != 0);
     if (__pyx_t_3) {
 
-      /* "cexpectimax.pyx":169
+      /* "cexpectimax.pyx":172
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:
  *             isValid = True             # <<<<<<<<<<<<<<
@@ -1814,7 +1819,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
  */
       __pyx_v_isValid = 1;
 
-      /* "cexpectimax.pyx":170
+      /* "cexpectimax.pyx":173
  *         if rowShort!=-1:
  *             isValid = True
  *             newRow = decompressRow(rowShort)             # <<<<<<<<<<<<<<
@@ -1823,7 +1828,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
  */
       __pyx_v_newRow = __pyx_f_11cexpectimax_decompressRow(__pyx_v_rowShort);
 
-      /* "cexpectimax.pyx":171
+      /* "cexpectimax.pyx":174
  *             isValid = True
  *             newRow = decompressRow(rowShort)
  *             for j in range(4):             # <<<<<<<<<<<<<<
@@ -1833,7 +1838,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
       for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
         __pyx_v_j = __pyx_t_2;
 
-        /* "cexpectimax.pyx":172
+        /* "cexpectimax.pyx":175
  *             newRow = decompressRow(rowShort)
  *             for j in range(4):
  *                 b.rows[i].row[j] = newRow.row[j]             # <<<<<<<<<<<<<<
@@ -1847,7 +1852,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
     __pyx_L7:;
   }
 
-  /* "cexpectimax.pyx":173
+  /* "cexpectimax.pyx":176
  *             for j in range(4):
  *                 b.rows[i].row[j] = newRow.row[j]
  *     if not isValid:             # <<<<<<<<<<<<<<
@@ -1857,7 +1862,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
   __pyx_t_3 = ((!(__pyx_v_isValid != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "cexpectimax.pyx":174
+    /* "cexpectimax.pyx":177
  *                 b.rows[i].row[j] = newRow.row[j]
  *     if not isValid:
  *         b.rows[0].row[0] = -1             # <<<<<<<<<<<<<<
@@ -1869,7 +1874,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
   }
   __pyx_L10:;
 
-  /* "cexpectimax.pyx":175
+  /* "cexpectimax.pyx":178
  *     if not isValid:
  *         b.rows[0].row[0] = -1
  *     return b             # <<<<<<<<<<<<<<
@@ -1879,7 +1884,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
   __pyx_r = __pyx_v_b;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":159
+  /* "cexpectimax.pyx":162
  *     return b
  * 
  * cdef Board transL(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -1892,7 +1897,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transL(struct __
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":177
+/* "cexpectimax.pyx":180
  *     return b
  * 
  * cdef Board transR(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -1912,7 +1917,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
   char __pyx_t_2;
   int __pyx_t_3;
 
-  /* "cexpectimax.pyx":178
+  /* "cexpectimax.pyx":181
  * 
  * cdef Board transR(Board b) nogil:
  *     cdef bint isValid = False             # <<<<<<<<<<<<<<
@@ -1921,7 +1926,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
  */
   __pyx_v_isValid = 0;
 
-  /* "cexpectimax.pyx":182
+  /* "cexpectimax.pyx":185
  *     cdef short rowShort
  *     cdef char i,j
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -1931,7 +1936,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":183
+    /* "cexpectimax.pyx":186
  *     cdef char i,j
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -1941,7 +1946,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "cexpectimax.pyx":184
+      /* "cexpectimax.pyx":187
  *     for i in range(4):
  *         for j in range(4):
  *             r.row[j] = b.rows[i].row[3-j]             # <<<<<<<<<<<<<<
@@ -1951,7 +1956,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
       (__pyx_v_r.row[__pyx_v_j]) = ((__pyx_v_b.rows[__pyx_v_i]).row[(3 - __pyx_v_j)]);
     }
 
-    /* "cexpectimax.pyx":185
+    /* "cexpectimax.pyx":188
  *         for j in range(4):
  *             r.row[j] = b.rows[i].row[3-j]
  *         rowShort = rowTrans[compressRow(r)]             # <<<<<<<<<<<<<<
@@ -1960,7 +1965,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
  */
     __pyx_v_rowShort = (__pyx_v_11cexpectimax_rowTrans[__pyx_f_11cexpectimax_compressRow(__pyx_v_r)]);
 
-    /* "cexpectimax.pyx":186
+    /* "cexpectimax.pyx":189
  *             r.row[j] = b.rows[i].row[3-j]
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:             # <<<<<<<<<<<<<<
@@ -1970,7 +1975,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
     __pyx_t_3 = ((__pyx_v_rowShort != -1) != 0);
     if (__pyx_t_3) {
 
-      /* "cexpectimax.pyx":187
+      /* "cexpectimax.pyx":190
  *         rowShort = rowTrans[compressRow(r)]
  *         if rowShort!=-1:
  *             isValid = True             # <<<<<<<<<<<<<<
@@ -1979,7 +1984,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
  */
       __pyx_v_isValid = 1;
 
-      /* "cexpectimax.pyx":188
+      /* "cexpectimax.pyx":191
  *         if rowShort!=-1:
  *             isValid = True
  *             newRow = decompressRow(rowShort)             # <<<<<<<<<<<<<<
@@ -1988,7 +1993,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
  */
       __pyx_v_newRow = __pyx_f_11cexpectimax_decompressRow(__pyx_v_rowShort);
 
-      /* "cexpectimax.pyx":189
+      /* "cexpectimax.pyx":192
  *             isValid = True
  *             newRow = decompressRow(rowShort)
  *             for j in range(4):             # <<<<<<<<<<<<<<
@@ -1998,7 +2003,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
       for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
         __pyx_v_j = __pyx_t_2;
 
-        /* "cexpectimax.pyx":190
+        /* "cexpectimax.pyx":193
  *             newRow = decompressRow(rowShort)
  *             for j in range(4):
  *                 b.rows[i].row[3-j] = newRow.row[j]             # <<<<<<<<<<<<<<
@@ -2012,7 +2017,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
     __pyx_L7:;
   }
 
-  /* "cexpectimax.pyx":191
+  /* "cexpectimax.pyx":194
  *             for j in range(4):
  *                 b.rows[i].row[3-j] = newRow.row[j]
  *     if not isValid:             # <<<<<<<<<<<<<<
@@ -2022,7 +2027,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
   __pyx_t_3 = ((!(__pyx_v_isValid != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "cexpectimax.pyx":192
+    /* "cexpectimax.pyx":195
  *                 b.rows[i].row[3-j] = newRow.row[j]
  *     if not isValid:
  *         b.rows[0].row[0] = -1             # <<<<<<<<<<<<<<
@@ -2034,7 +2039,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
   }
   __pyx_L10:;
 
-  /* "cexpectimax.pyx":193
+  /* "cexpectimax.pyx":196
  *     if not isValid:
  *         b.rows[0].row[0] = -1
  *     return b             # <<<<<<<<<<<<<<
@@ -2044,7 +2049,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
   __pyx_r = __pyx_v_b;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":177
+  /* "cexpectimax.pyx":180
  *     return b
  * 
  * cdef Board transR(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -2057,7 +2062,7 @@ static struct __pyx_t_11cexpectimax_Board __pyx_f_11cexpectimax_transR(struct __
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":196
+/* "cexpectimax.pyx":199
  * 
  * # creates a Transitions from a Board
  * cdef Transitions getTransitions(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -2069,7 +2074,7 @@ static struct __pyx_t_11cexpectimax_Transitions __pyx_f_11cexpectimax_getTransit
   struct __pyx_t_11cexpectimax_Transitions __pyx_v_trans;
   struct __pyx_t_11cexpectimax_Transitions __pyx_r;
 
-  /* "cexpectimax.pyx":198
+  /* "cexpectimax.pyx":201
  * cdef Transitions getTransitions(Board b) nogil:
  *     cdef Transitions trans
  *     trans.trans[0] = transU(b)             # <<<<<<<<<<<<<<
@@ -2078,7 +2083,7 @@ static struct __pyx_t_11cexpectimax_Transitions __pyx_f_11cexpectimax_getTransit
  */
   (__pyx_v_trans.trans[0]) = __pyx_f_11cexpectimax_transU(__pyx_v_b);
 
-  /* "cexpectimax.pyx":199
+  /* "cexpectimax.pyx":202
  *     cdef Transitions trans
  *     trans.trans[0] = transU(b)
  *     trans.trans[1] = transD(b)             # <<<<<<<<<<<<<<
@@ -2087,7 +2092,7 @@ static struct __pyx_t_11cexpectimax_Transitions __pyx_f_11cexpectimax_getTransit
  */
   (__pyx_v_trans.trans[1]) = __pyx_f_11cexpectimax_transD(__pyx_v_b);
 
-  /* "cexpectimax.pyx":200
+  /* "cexpectimax.pyx":203
  *     trans.trans[0] = transU(b)
  *     trans.trans[1] = transD(b)
  *     trans.trans[2] = transL(b)             # <<<<<<<<<<<<<<
@@ -2096,7 +2101,7 @@ static struct __pyx_t_11cexpectimax_Transitions __pyx_f_11cexpectimax_getTransit
  */
   (__pyx_v_trans.trans[2]) = __pyx_f_11cexpectimax_transL(__pyx_v_b);
 
-  /* "cexpectimax.pyx":201
+  /* "cexpectimax.pyx":204
  *     trans.trans[1] = transD(b)
  *     trans.trans[2] = transL(b)
  *     trans.trans[3] = transR(b)             # <<<<<<<<<<<<<<
@@ -2105,7 +2110,7 @@ static struct __pyx_t_11cexpectimax_Transitions __pyx_f_11cexpectimax_getTransit
  */
   (__pyx_v_trans.trans[3]) = __pyx_f_11cexpectimax_transR(__pyx_v_b);
 
-  /* "cexpectimax.pyx":202
+  /* "cexpectimax.pyx":205
  *     trans.trans[2] = transL(b)
  *     trans.trans[3] = transR(b)
  *     return trans             # <<<<<<<<<<<<<<
@@ -2115,7 +2120,7 @@ static struct __pyx_t_11cexpectimax_Transitions __pyx_f_11cexpectimax_getTransit
   __pyx_r = __pyx_v_trans;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":196
+  /* "cexpectimax.pyx":199
  * 
  * # creates a Transitions from a Board
  * cdef Transitions getTransitions(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -2128,7 +2133,7 @@ static struct __pyx_t_11cexpectimax_Transitions __pyx_f_11cexpectimax_getTransit
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":205
+/* "cexpectimax.pyx":208
  * 
  * # counts the valid Boards in a Transitions
  * cdef char countTransitions(Transitions t) nogil:             # <<<<<<<<<<<<<<
@@ -2143,7 +2148,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
   char __pyx_t_1;
   int __pyx_t_2;
 
-  /* "cexpectimax.pyx":206
+  /* "cexpectimax.pyx":209
  * # counts the valid Boards in a Transitions
  * cdef char countTransitions(Transitions t) nogil:
  *     cdef char num = 0             # <<<<<<<<<<<<<<
@@ -2152,7 +2157,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
  */
   __pyx_v_num = 0;
 
-  /* "cexpectimax.pyx":208
+  /* "cexpectimax.pyx":211
  *     cdef char num = 0
  *     cdef char i
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -2162,7 +2167,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":209
+    /* "cexpectimax.pyx":212
  *     cdef char i
  *     for i in range(4):
  *         if t.trans[i].rows[0].row[0] >= 0:             # <<<<<<<<<<<<<<
@@ -2172,7 +2177,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
     __pyx_t_2 = (((((__pyx_v_t.trans[__pyx_v_i]).rows[0]).row[0]) >= 0) != 0);
     if (__pyx_t_2) {
 
-      /* "cexpectimax.pyx":210
+      /* "cexpectimax.pyx":213
  *     for i in range(4):
  *         if t.trans[i].rows[0].row[0] >= 0:
  *             num+=1             # <<<<<<<<<<<<<<
@@ -2185,7 +2190,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
     __pyx_L5:;
   }
 
-  /* "cexpectimax.pyx":211
+  /* "cexpectimax.pyx":214
  *         if t.trans[i].rows[0].row[0] >= 0:
  *             num+=1
  *     return num             # <<<<<<<<<<<<<<
@@ -2195,7 +2200,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
   __pyx_r = __pyx_v_num;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":205
+  /* "cexpectimax.pyx":208
  * 
  * # counts the valid Boards in a Transitions
  * cdef char countTransitions(Transitions t) nogil:             # <<<<<<<<<<<<<<
@@ -2208,7 +2213,7 @@ static char __pyx_f_11cexpectimax_countTransitions(struct __pyx_t_11cexpectimax_
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":214
+/* "cexpectimax.pyx":217
  * 
  * # computes the utility of a board
  * cdef int getUtility(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -2233,7 +2238,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "cexpectimax.pyx":215
+  /* "cexpectimax.pyx":218
  * # computes the utility of a board
  * cdef int getUtility(Board b) nogil:
  *     cdef int score = 0             # <<<<<<<<<<<<<<
@@ -2242,7 +2247,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  */
   __pyx_v_score = 0;
 
-  /* "cexpectimax.pyx":219
+  /* "cexpectimax.pyx":222
  *     cdef char i,j
  *     cdef Row r
  *     if useRowUtility:             # <<<<<<<<<<<<<<
@@ -2252,7 +2257,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
   __pyx_t_1 = (__pyx_v_11cexpectimax_useRowUtility != 0);
   if (__pyx_t_1) {
 
-    /* "cexpectimax.pyx":220
+    /* "cexpectimax.pyx":223
  *     cdef Row r
  *     if useRowUtility:
  *         for i in range(4):             # <<<<<<<<<<<<<<
@@ -2262,7 +2267,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "cexpectimax.pyx":221
+      /* "cexpectimax.pyx":224
  *     if useRowUtility:
  *         for i in range(4):
  *             idx = compressRow(b.rows[i])             # <<<<<<<<<<<<<<
@@ -2271,7 +2276,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  */
       __pyx_v_idx = __pyx_f_11cexpectimax_compressRow((__pyx_v_b.rows[__pyx_v_i]));
 
-      /* "cexpectimax.pyx":222
+      /* "cexpectimax.pyx":225
  *         for i in range(4):
  *             idx = compressRow(b.rows[i])
  *             score += rowUtilInner[idx]             # <<<<<<<<<<<<<<
@@ -2281,7 +2286,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       __pyx_v_score = (__pyx_v_score + (__pyx_v_11cexpectimax_rowUtilInner[__pyx_v_idx]));
     }
 
-    /* "cexpectimax.pyx":224
+    /* "cexpectimax.pyx":227
  *             score += rowUtilInner[idx]
  * 
  *         for i in range(4):             # <<<<<<<<<<<<<<
@@ -2291,7 +2296,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "cexpectimax.pyx":225
+      /* "cexpectimax.pyx":228
  * 
  *         for i in range(4):
  *             for j in range(4):             # <<<<<<<<<<<<<<
@@ -2301,7 +2306,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       for (__pyx_t_3 = 0; __pyx_t_3 < 4; __pyx_t_3+=1) {
         __pyx_v_j = __pyx_t_3;
 
-        /* "cexpectimax.pyx":226
+        /* "cexpectimax.pyx":229
  *         for i in range(4):
  *             for j in range(4):
  *                 r.row[i] = b.rows[j].row[i]             # <<<<<<<<<<<<<<
@@ -2311,7 +2316,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
         (__pyx_v_r.row[__pyx_v_i]) = ((__pyx_v_b.rows[__pyx_v_j]).row[__pyx_v_i]);
       }
 
-      /* "cexpectimax.pyx":227
+      /* "cexpectimax.pyx":230
  *             for j in range(4):
  *                 r.row[i] = b.rows[j].row[i]
  *             idx = compressRow(r)             # <<<<<<<<<<<<<<
@@ -2320,7 +2325,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  */
       __pyx_v_idx = __pyx_f_11cexpectimax_compressRow(__pyx_v_r);
 
-      /* "cexpectimax.pyx":228
+      /* "cexpectimax.pyx":231
  *                 r.row[i] = b.rows[j].row[i]
  *             idx = compressRow(r)
  *             score += rowUtilInner[idx]             # <<<<<<<<<<<<<<
@@ -2330,7 +2335,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       __pyx_v_score = (__pyx_v_score + (__pyx_v_11cexpectimax_rowUtilInner[__pyx_v_idx]));
     }
 
-    /* "cexpectimax.pyx":230
+    /* "cexpectimax.pyx":233
  *             score += rowUtilInner[idx]
  * 
  *         return score             # <<<<<<<<<<<<<<
@@ -2341,7 +2346,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     goto __pyx_L0;
   }
 
-  /* "cexpectimax.pyx":233
+  /* "cexpectimax.pyx":236
  * 
  *     # board utility
  *     cdef int blanks = 1             # <<<<<<<<<<<<<<
@@ -2350,7 +2355,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  */
   __pyx_v_blanks = 1;
 
-  /* "cexpectimax.pyx":234
+  /* "cexpectimax.pyx":237
  *     # board utility
  *     cdef int blanks = 1
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -2360,7 +2365,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
   for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "cexpectimax.pyx":235
+    /* "cexpectimax.pyx":238
  *     cdef int blanks = 1
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -2370,7 +2375,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     for (__pyx_t_3 = 0; __pyx_t_3 < 4; __pyx_t_3+=1) {
       __pyx_v_j = __pyx_t_3;
 
-      /* "cexpectimax.pyx":236
+      /* "cexpectimax.pyx":239
  *     for i in range(4):
  *         for j in range(4):
  *             idx = b.rows[i].row[j]             # <<<<<<<<<<<<<<
@@ -2379,7 +2384,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  */
       __pyx_v_idx = ((__pyx_v_b.rows[__pyx_v_i]).row[__pyx_v_j]);
 
-      /* "cexpectimax.pyx":237
+      /* "cexpectimax.pyx":240
  *         for j in range(4):
  *             idx = b.rows[i].row[j]
  *             if idx==0:             # <<<<<<<<<<<<<<
@@ -2389,7 +2394,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       __pyx_t_1 = ((__pyx_v_idx == 0) != 0);
       if (__pyx_t_1) {
 
-        /* "cexpectimax.pyx":238
+        /* "cexpectimax.pyx":241
  *             idx = b.rows[i].row[j]
  *             if idx==0:
  *                 blanks += 1             # <<<<<<<<<<<<<<
@@ -2401,7 +2406,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
       }
       /*else*/ {
 
-        /* "cexpectimax.pyx":240
+        /* "cexpectimax.pyx":243
  *                 blanks += 1
  *             else:
  *                 score += idx**2             # <<<<<<<<<<<<<<
@@ -2414,7 +2419,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     }
   }
 
-  /* "cexpectimax.pyx":241
+  /* "cexpectimax.pyx":244
  *             else:
  *                 score += idx**2
  *     cdef int filled = 16-blanks             # <<<<<<<<<<<<<<
@@ -2423,7 +2428,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
  */
   __pyx_v_filled = (16 - __pyx_v_blanks);
 
-  /* "cexpectimax.pyx":242
+  /* "cexpectimax.pyx":245
  *                 score += idx**2
  *     cdef int filled = 16-blanks
  *     return score / filled**2 * blanks**2             # <<<<<<<<<<<<<<
@@ -2439,7 +2444,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   else if (sizeof(long) == sizeof(long) && (!(((long)-1) > 0)) && unlikely(__pyx_t_4 == (long)-1)  && unlikely(UNARY_NEG_WOULD_OVERFLOW(__pyx_v_score))) {
     #ifdef WITH_THREAD
@@ -2449,12 +2454,12 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_r = (__Pyx_div_long(__pyx_v_score, __pyx_t_4) * __Pyx_pow_long(((long)__pyx_v_blanks), 2));
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":214
+  /* "cexpectimax.pyx":217
  * 
  * # computes the utility of a board
  * cdef int getUtility(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -2470,7 +2475,7 @@ static int __pyx_f_11cexpectimax_getUtility(struct __pyx_t_11cexpectimax_Board _
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":246
+/* "cexpectimax.pyx":249
  * 
  * # returns count of the number of 0 tiles on a board
  * cdef char getNumBlanks(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -2487,7 +2492,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
   long __pyx_t_2;
   int __pyx_t_3;
 
-  /* "cexpectimax.pyx":247
+  /* "cexpectimax.pyx":250
  * # returns count of the number of 0 tiles on a board
  * cdef char getNumBlanks(Board b) nogil:
  *     cdef char num = 0             # <<<<<<<<<<<<<<
@@ -2496,7 +2501,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
  */
   __pyx_v_num = 0;
 
-  /* "cexpectimax.pyx":248
+  /* "cexpectimax.pyx":251
  * cdef char getNumBlanks(Board b) nogil:
  *     cdef char num = 0
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -2506,7 +2511,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":249
+    /* "cexpectimax.pyx":252
  *     cdef char num = 0
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -2516,7 +2521,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "cexpectimax.pyx":250
+      /* "cexpectimax.pyx":253
  *     for i in range(4):
  *         for j in range(4):
  *             if b.rows[i].row[j]==0:             # <<<<<<<<<<<<<<
@@ -2526,7 +2531,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
       __pyx_t_3 = ((((__pyx_v_b.rows[__pyx_v_i]).row[__pyx_v_j]) == 0) != 0);
       if (__pyx_t_3) {
 
-        /* "cexpectimax.pyx":251
+        /* "cexpectimax.pyx":254
  *         for j in range(4):
  *             if b.rows[i].row[j]==0:
  *                 num += 1             # <<<<<<<<<<<<<<
@@ -2540,7 +2545,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
     }
   }
 
-  /* "cexpectimax.pyx":252
+  /* "cexpectimax.pyx":255
  *             if b.rows[i].row[j]==0:
  *                 num += 1
  *     return num             # <<<<<<<<<<<<<<
@@ -2550,7 +2555,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
   __pyx_r = __pyx_v_num;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":246
+  /* "cexpectimax.pyx":249
  * 
  * # returns count of the number of 0 tiles on a board
  * cdef char getNumBlanks(Board b) nogil:             # <<<<<<<<<<<<<<
@@ -2563,7 +2568,7 @@ static char __pyx_f_11cexpectimax_getNumBlanks(struct __pyx_t_11cexpectimax_Boar
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":254
+/* "cexpectimax.pyx":257
  *     return num
  * 
  * cdef void copyBoard(Board *bd, Board *bs) nogil:             # <<<<<<<<<<<<<<
@@ -2577,7 +2582,7 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
   long __pyx_t_1;
   long __pyx_t_2;
 
-  /* "cexpectimax.pyx":256
+  /* "cexpectimax.pyx":259
  * cdef void copyBoard(Board *bd, Board *bs) nogil:
  *     #memcpy(bd, bs, sizeof(Board))
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -2587,7 +2592,7 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cexpectimax.pyx":257
+    /* "cexpectimax.pyx":260
  *     #memcpy(bd, bs, sizeof(Board))
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -2597,7 +2602,7 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
     for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "cexpectimax.pyx":258
+      /* "cexpectimax.pyx":261
  *     for i in range(4):
  *         for j in range(4):
  *             bd.rows[i].row[j] = bs.rows[i].row[j]             # <<<<<<<<<<<<<<
@@ -2608,7 +2613,7 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
     }
   }
 
-  /* "cexpectimax.pyx":254
+  /* "cexpectimax.pyx":257
  *     return num
  * 
  * cdef void copyBoard(Board *bd, Board *bs) nogil:             # <<<<<<<<<<<<<<
@@ -2619,7 +2624,7 @@ static void __pyx_f_11cexpectimax_copyBoard(struct __pyx_t_11cexpectimax_Board *
   /* function exit code */
 }
 
-/* "cexpectimax.pyx":261
+/* "cexpectimax.pyx":264
  * 
  * # generates all possible successors of a Board with 2 or 4
  * cdef Successors getSuccessors(Board b, bint two) nogil:             # <<<<<<<<<<<<<<
@@ -2639,7 +2644,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
   long __pyx_t_2;
   long __pyx_t_3;
 
-  /* "cexpectimax.pyx":262
+  /* "cexpectimax.pyx":265
  * # generates all possible successors of a Board with 2 or 4
  * cdef Successors getSuccessors(Board b, bint two) nogil:
  *     cdef char numBlanks = getNumBlanks(b)             # <<<<<<<<<<<<<<
@@ -2648,7 +2653,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
  */
   __pyx_v_numBlanks = __pyx_f_11cexpectimax_getNumBlanks(__pyx_v_b);
 
-  /* "cexpectimax.pyx":264
+  /* "cexpectimax.pyx":267
  *     cdef char numBlanks = getNumBlanks(b)
  *     cdef Successors successors
  *     cdef char curr = 0             # <<<<<<<<<<<<<<
@@ -2657,7 +2662,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
  */
   __pyx_v_curr = 0;
 
-  /* "cexpectimax.pyx":265
+  /* "cexpectimax.pyx":268
  *     cdef Successors successors
  *     cdef char curr = 0
  *     cdef char newTile = 2             # <<<<<<<<<<<<<<
@@ -2666,7 +2671,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
  */
   __pyx_v_newTile = 2;
 
-  /* "cexpectimax.pyx":266
+  /* "cexpectimax.pyx":269
  *     cdef char curr = 0
  *     cdef char newTile = 2
  *     if two:             # <<<<<<<<<<<<<<
@@ -2676,7 +2681,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
   __pyx_t_1 = (__pyx_v_two != 0);
   if (__pyx_t_1) {
 
-    /* "cexpectimax.pyx":267
+    /* "cexpectimax.pyx":270
  *     cdef char newTile = 2
  *     if two:
  *         newTile = 1             # <<<<<<<<<<<<<<
@@ -2688,7 +2693,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
   }
   __pyx_L3:;
 
-  /* "cexpectimax.pyx":269
+  /* "cexpectimax.pyx":272
  *         newTile = 1
  * 
  *     successors.numSuccessors = numBlanks             # <<<<<<<<<<<<<<
@@ -2697,7 +2702,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
  */
   __pyx_v_successors.numSuccessors = __pyx_v_numBlanks;
 
-  /* "cexpectimax.pyx":270
+  /* "cexpectimax.pyx":273
  * 
  *     successors.numSuccessors = numBlanks
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -2707,7 +2712,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
   for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "cexpectimax.pyx":271
+    /* "cexpectimax.pyx":274
  *     successors.numSuccessors = numBlanks
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -2717,7 +2722,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
     for (__pyx_t_3 = 0; __pyx_t_3 < 4; __pyx_t_3+=1) {
       __pyx_v_j = __pyx_t_3;
 
-      /* "cexpectimax.pyx":272
+      /* "cexpectimax.pyx":275
  *     for i in range(4):
  *         for j in range(4):
  *             if b.rows[i].row[j]==0:             # <<<<<<<<<<<<<<
@@ -2727,7 +2732,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
       __pyx_t_1 = ((((__pyx_v_b.rows[__pyx_v_i]).row[__pyx_v_j]) == 0) != 0);
       if (__pyx_t_1) {
 
-        /* "cexpectimax.pyx":273
+        /* "cexpectimax.pyx":276
  *         for j in range(4):
  *             if b.rows[i].row[j]==0:
  *                 copyBoard(&successors.succ[curr], &b)             # <<<<<<<<<<<<<<
@@ -2736,7 +2741,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
  */
         __pyx_f_11cexpectimax_copyBoard((&(__pyx_v_successors.succ[__pyx_v_curr])), (&__pyx_v_b));
 
-        /* "cexpectimax.pyx":274
+        /* "cexpectimax.pyx":277
  *             if b.rows[i].row[j]==0:
  *                 copyBoard(&successors.succ[curr], &b)
  *                 successors.succ[curr].rows[i].row[j] = newTile             # <<<<<<<<<<<<<<
@@ -2745,7 +2750,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
  */
         (((__pyx_v_successors.succ[__pyx_v_curr]).rows[__pyx_v_i]).row[__pyx_v_j]) = __pyx_v_newTile;
 
-        /* "cexpectimax.pyx":275
+        /* "cexpectimax.pyx":278
  *                 copyBoard(&successors.succ[curr], &b)
  *                 successors.succ[curr].rows[i].row[j] = newTile
  *                 curr += 1             # <<<<<<<<<<<<<<
@@ -2759,7 +2764,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
     }
   }
 
-  /* "cexpectimax.pyx":277
+  /* "cexpectimax.pyx":280
  *                 curr += 1
  * 
  *     return successors             # <<<<<<<<<<<<<<
@@ -2769,7 +2774,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
   __pyx_r = __pyx_v_successors;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":261
+  /* "cexpectimax.pyx":264
  * 
  * # generates all possible successors of a Board with 2 or 4
  * cdef Successors getSuccessors(Board b, bint two) nogil:             # <<<<<<<<<<<<<<
@@ -2782,7 +2787,7 @@ static struct __pyx_t_11cexpectimax_Successors __pyx_f_11cexpectimax_getSuccesso
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":280
+/* "cexpectimax.pyx":283
  * 
  * # runs expectimax, returns the best action/score pair
  * cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:             # <<<<<<<<<<<<<<
@@ -2806,11 +2811,12 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
   double __pyx_t_3;
   int __pyx_t_4;
   int __pyx_t_5;
+  int __pyx_t_6;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "cexpectimax.pyx":281
+  /* "cexpectimax.pyx":284
  * # runs expectimax, returns the best action/score pair
  * cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:
  *     cdef Transitions trans = getTransitions(b)             # <<<<<<<<<<<<<<
@@ -2819,7 +2825,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
   __pyx_v_trans = __pyx_f_11cexpectimax_getTransitions(__pyx_v_b);
 
-  /* "cexpectimax.pyx":282
+  /* "cexpectimax.pyx":285
  * cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:
  *     cdef Transitions trans = getTransitions(b)
  *     cdef char numTransitions = countTransitions(trans)             # <<<<<<<<<<<<<<
@@ -2828,7 +2834,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
   __pyx_v_numTransitions = __pyx_f_11cexpectimax_countTransitions(__pyx_v_trans);
 
-  /* "cexpectimax.pyx":286
+  /* "cexpectimax.pyx":289
  * 
  *     # losing state
  *     if numTransitions==0:             # <<<<<<<<<<<<<<
@@ -2838,7 +2844,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
   __pyx_t_1 = ((__pyx_v_numTransitions == 0) != 0);
   if (__pyx_t_1) {
 
-    /* "cexpectimax.pyx":287
+    /* "cexpectimax.pyx":290
  *     # losing state
  *     if numTransitions==0:
  *         actScore.score = 0             # <<<<<<<<<<<<<<
@@ -2847,7 +2853,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
     __pyx_v_actScore.score = 0;
 
-    /* "cexpectimax.pyx":288
+    /* "cexpectimax.pyx":291
  *     if numTransitions==0:
  *         actScore.score = 0
  *         actScore.action = NONE             # <<<<<<<<<<<<<<
@@ -2856,7 +2862,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
     __pyx_v_actScore.action = __pyx_e_11cexpectimax_NONE;
 
-    /* "cexpectimax.pyx":289
+    /* "cexpectimax.pyx":292
  *         actScore.score = 0
  *         actScore.action = NONE
  *         return actScore             # <<<<<<<<<<<<<<
@@ -2867,7 +2873,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
     goto __pyx_L0;
   }
 
-  /* "cexpectimax.pyx":292
+  /* "cexpectimax.pyx":295
  * 
  *     # depth reached
  *     elif d==0:             # <<<<<<<<<<<<<<
@@ -2877,7 +2883,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
   __pyx_t_1 = ((__pyx_v_d == 0) != 0);
   if (__pyx_t_1) {
 
-    /* "cexpectimax.pyx":293
+    /* "cexpectimax.pyx":296
  *     # depth reached
  *     elif d==0:
  *         actScore.score = getUtility(b)             # <<<<<<<<<<<<<<
@@ -2886,7 +2892,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
     __pyx_v_actScore.score = __pyx_f_11cexpectimax_getUtility(__pyx_v_b);
 
-    /* "cexpectimax.pyx":294
+    /* "cexpectimax.pyx":297
  *     elif d==0:
  *         actScore.score = getUtility(b)
  *         actScore.action = NONE             # <<<<<<<<<<<<<<
@@ -2895,7 +2901,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
     __pyx_v_actScore.action = __pyx_e_11cexpectimax_NONE;
 
-    /* "cexpectimax.pyx":295
+    /* "cexpectimax.pyx":298
  *         actScore.score = getUtility(b)
  *         actScore.action = NONE
  *         return actScore             # <<<<<<<<<<<<<<
@@ -2906,7 +2912,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
     goto __pyx_L0;
   }
 
-  /* "cexpectimax.pyx":299
+  /* "cexpectimax.pyx":302
  *     # compute best action/score
  *     cdef ActionScore bestActionScore
  *     bestActionScore.action = NONE             # <<<<<<<<<<<<<<
@@ -2915,7 +2921,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
   __pyx_v_bestActionScore.action = __pyx_e_11cexpectimax_NONE;
 
-  /* "cexpectimax.pyx":300
+  /* "cexpectimax.pyx":303
  *     cdef ActionScore bestActionScore
  *     bestActionScore.action = NONE
  *     bestActionScore.score = -1             # <<<<<<<<<<<<<<
@@ -2924,7 +2930,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
   __pyx_v_bestActionScore.score = -1;
 
-  /* "cexpectimax.pyx":304
+  /* "cexpectimax.pyx":307
  *     cdef int act
  *     cdef char i
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -2934,7 +2940,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
   for (__pyx_t_2 = 0; __pyx_t_2 < 4; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "cexpectimax.pyx":305
+    /* "cexpectimax.pyx":308
  *     cdef char i
  *     for i in range(4):
  *         if trans.trans[i].rows[0].row[0] >= 0:             # <<<<<<<<<<<<<<
@@ -2944,7 +2950,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
     __pyx_t_1 = (((((__pyx_v_trans.trans[__pyx_v_i]).rows[0]).row[0]) >= 0) != 0);
     if (__pyx_t_1) {
 
-      /* "cexpectimax.pyx":306
+      /* "cexpectimax.pyx":309
  *     for i in range(4):
  *         if trans.trans[i].rows[0].row[0] >= 0:
  *             totalScore = 0.             # <<<<<<<<<<<<<<
@@ -2953,7 +2959,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
       __pyx_v_totalScore = 0.;
 
-      /* "cexpectimax.pyx":307
+      /* "cexpectimax.pyx":310
  *         if trans.trans[i].rows[0].row[0] >= 0:
  *             totalScore = 0.
  *             successors = getSuccessors(trans.trans[i], True)             # <<<<<<<<<<<<<<
@@ -2962,12 +2968,12 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
       __pyx_v_successors = __pyx_f_11cexpectimax_getSuccessors((__pyx_v_trans.trans[__pyx_v_i]), 1);
 
-      /* "cexpectimax.pyx":308
+      /* "cexpectimax.pyx":311
  *             totalScore = 0.
  *             successors = getSuccessors(trans.trans[i], True)
  *             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors             # <<<<<<<<<<<<<<
  *             for j in range(successors.numSuccessors):
- *                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
+ *                 actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)
  */
       if ((__pyx_v_reduceSuccessors != 0)) {
         __pyx_t_3 = 1.0;
@@ -2982,33 +2988,42 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
         #ifdef WITH_THREAD
         PyGILState_Release(__pyx_gilstate_save);
         #endif
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       __pyx_v_percent = (__pyx_t_3 / __pyx_v_successors.numSuccessors);
 
-      /* "cexpectimax.pyx":309
+      /* "cexpectimax.pyx":312
  *             successors = getSuccessors(trans.trans[i], True)
  *             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors
  *             for j in range(successors.numSuccessors):             # <<<<<<<<<<<<<<
- *                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
+ *                 actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)
  *                 totalScore += actScore.score*percent
  */
       __pyx_t_4 = __pyx_v_successors.numSuccessors;
       for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
         __pyx_v_j = __pyx_t_5;
 
-        /* "cexpectimax.pyx":310
+        /* "cexpectimax.pyx":313
  *             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors
  *             for j in range(successors.numSuccessors):
- *                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)             # <<<<<<<<<<<<<<
+ *                 actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)             # <<<<<<<<<<<<<<
  *                 totalScore += actScore.score*percent
  * 
  */
-        __pyx_v_actScore = __pyx_f_11cexpectimax_expectimax((__pyx_v_successors.succ[__pyx_v_j]), (__pyx_v_d - 1), __pyx_v_reduceSuccessors);
+        __pyx_t_6 = (__pyx_v_11cexpectimax_reduceAfterFirstDepth != 0);
+        if (!__pyx_t_6) {
+        } else {
+          __pyx_t_1 = __pyx_t_6;
+          goto __pyx_L9_bool_binop_done;
+        }
+        __pyx_t_6 = (__pyx_v_reduceSuccessors != 0);
+        __pyx_t_1 = __pyx_t_6;
+        __pyx_L9_bool_binop_done:;
+        __pyx_v_actScore = __pyx_f_11cexpectimax_expectimax((__pyx_v_successors.succ[__pyx_v_j]), (__pyx_v_d - 1), __pyx_t_1);
 
-        /* "cexpectimax.pyx":311
+        /* "cexpectimax.pyx":314
  *             for j in range(successors.numSuccessors):
- *                 actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
+ *                 actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)
  *                 totalScore += actScore.score*percent             # <<<<<<<<<<<<<<
  * 
  *             if not reduceSuccessors:
@@ -3016,7 +3031,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
         __pyx_v_totalScore = (__pyx_v_totalScore + (__pyx_v_actScore.score * __pyx_v_percent));
       }
 
-      /* "cexpectimax.pyx":313
+      /* "cexpectimax.pyx":316
  *                 totalScore += actScore.score*percent
  * 
  *             if not reduceSuccessors:             # <<<<<<<<<<<<<<
@@ -3026,7 +3041,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
       __pyx_t_1 = ((!(__pyx_v_reduceSuccessors != 0)) != 0);
       if (__pyx_t_1) {
 
-        /* "cexpectimax.pyx":314
+        /* "cexpectimax.pyx":317
  * 
  *             if not reduceSuccessors:
  *                 successors = getSuccessors(trans.trans[i], False)             # <<<<<<<<<<<<<<
@@ -3035,12 +3050,12 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
         __pyx_v_successors = __pyx_f_11cexpectimax_getSuccessors((__pyx_v_trans.trans[__pyx_v_i]), 0);
 
-        /* "cexpectimax.pyx":315
+        /* "cexpectimax.pyx":318
  *             if not reduceSuccessors:
  *                 successors = getSuccessors(trans.trans[i], False)
  *                 percent = 0.1/successors.numSuccessors             # <<<<<<<<<<<<<<
  *                 for j in range(successors.numSuccessors):
- *                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
+ *                     actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)
  */
         if (unlikely(__pyx_v_successors.numSuccessors == 0)) {
           #ifdef WITH_THREAD
@@ -3050,44 +3065,53 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
           #ifdef WITH_THREAD
           PyGILState_Release(__pyx_gilstate_save);
           #endif
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         __pyx_v_percent = (0.1 / __pyx_v_successors.numSuccessors);
 
-        /* "cexpectimax.pyx":316
+        /* "cexpectimax.pyx":319
  *                 successors = getSuccessors(trans.trans[i], False)
  *                 percent = 0.1/successors.numSuccessors
  *                 for j in range(successors.numSuccessors):             # <<<<<<<<<<<<<<
- *                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
+ *                     actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)
  *                     totalScore += actScore.score*percent
  */
         __pyx_t_4 = __pyx_v_successors.numSuccessors;
         for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
           __pyx_v_j = __pyx_t_5;
 
-          /* "cexpectimax.pyx":317
+          /* "cexpectimax.pyx":320
  *                 percent = 0.1/successors.numSuccessors
  *                 for j in range(successors.numSuccessors):
- *                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)             # <<<<<<<<<<<<<<
+ *                     actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)             # <<<<<<<<<<<<<<
  *                     totalScore += actScore.score*percent
  * 
  */
-          __pyx_v_actScore = __pyx_f_11cexpectimax_expectimax((__pyx_v_successors.succ[__pyx_v_j]), (__pyx_v_d - 1), __pyx_v_reduceSuccessors);
+          __pyx_t_6 = (__pyx_v_11cexpectimax_reduceAfterFirstDepth != 0);
+          if (!__pyx_t_6) {
+          } else {
+            __pyx_t_1 = __pyx_t_6;
+            goto __pyx_L14_bool_binop_done;
+          }
+          __pyx_t_6 = (__pyx_v_reduceSuccessors != 0);
+          __pyx_t_1 = __pyx_t_6;
+          __pyx_L14_bool_binop_done:;
+          __pyx_v_actScore = __pyx_f_11cexpectimax_expectimax((__pyx_v_successors.succ[__pyx_v_j]), (__pyx_v_d - 1), __pyx_t_1);
 
-          /* "cexpectimax.pyx":318
+          /* "cexpectimax.pyx":321
  *                 for j in range(successors.numSuccessors):
- *                     actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
+ *                     actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)
  *                     totalScore += actScore.score*percent             # <<<<<<<<<<<<<<
  * 
  *             if totalScore > bestActionScore.score:
  */
           __pyx_v_totalScore = (__pyx_v_totalScore + (__pyx_v_actScore.score * __pyx_v_percent));
         }
-        goto __pyx_L9;
+        goto __pyx_L11;
       }
-      __pyx_L9:;
+      __pyx_L11:;
 
-      /* "cexpectimax.pyx":320
+      /* "cexpectimax.pyx":323
  *                     totalScore += actScore.score*percent
  * 
  *             if totalScore > bestActionScore.score:             # <<<<<<<<<<<<<<
@@ -3097,7 +3121,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
       __pyx_t_1 = ((__pyx_v_totalScore > __pyx_v_bestActionScore.score) != 0);
       if (__pyx_t_1) {
 
-        /* "cexpectimax.pyx":321
+        /* "cexpectimax.pyx":324
  * 
  *             if totalScore > bestActionScore.score:
  *                 bestActionScore.score = int(totalScore)             # <<<<<<<<<<<<<<
@@ -3106,7 +3130,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  */
         __pyx_v_bestActionScore.score = ((int)__pyx_v_totalScore);
 
-        /* "cexpectimax.pyx":322
+        /* "cexpectimax.pyx":325
  *             if totalScore > bestActionScore.score:
  *                 bestActionScore.score = int(totalScore)
  *                 bestActionScore.action = charToAction(i)             # <<<<<<<<<<<<<<
@@ -3114,15 +3138,15 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
  * 
  */
         __pyx_v_bestActionScore.action = __pyx_f_11cexpectimax_charToAction(__pyx_v_i);
-        goto __pyx_L12;
+        goto __pyx_L16;
       }
-      __pyx_L12:;
+      __pyx_L16:;
       goto __pyx_L6;
     }
     __pyx_L6:;
   }
 
-  /* "cexpectimax.pyx":323
+  /* "cexpectimax.pyx":326
  *                 bestActionScore.score = int(totalScore)
  *                 bestActionScore.action = charToAction(i)
  *     return bestActionScore             # <<<<<<<<<<<<<<
@@ -3132,7 +3156,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
   __pyx_r = __pyx_v_bestActionScore;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":280
+  /* "cexpectimax.pyx":283
  * 
  * # runs expectimax, returns the best action/score pair
  * cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:             # <<<<<<<<<<<<<<
@@ -3147,7 +3171,7 @@ static struct __pyx_t_11cexpectimax_ActionScore __pyx_f_11cexpectimax_expectimax
   return __pyx_r;
 }
 
-/* "cexpectimax.pyx":328
+/* "cexpectimax.pyx":331
  * 
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
  * def getAction(b,d,r=False):             # <<<<<<<<<<<<<<
@@ -3190,7 +3214,7 @@ static PyObject *__pyx_pw_11cexpectimax_1getAction(PyObject *__pyx_self, PyObjec
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_d)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("getAction", 0, 2, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("getAction", 0, 2, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -3199,7 +3223,7 @@ static PyObject *__pyx_pw_11cexpectimax_1getAction(PyObject *__pyx_self, PyObjec
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "getAction") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "getAction") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3216,7 +3240,7 @@ static PyObject *__pyx_pw_11cexpectimax_1getAction(PyObject *__pyx_self, PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getAction", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("getAction", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cexpectimax.getAction", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3253,24 +3277,24 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
   int __pyx_clineno = 0;
   __Pyx_TraceDeclarations
   __Pyx_RefNannySetupContext("getAction", 0);
-  __Pyx_TraceCall("getAction", __pyx_f[0], 328);
+  __Pyx_TraceCall("getAction", __pyx_f[0], 331);
 
-  /* "cexpectimax.pyx":330
+  /* "cexpectimax.pyx":333
  * def getAction(b,d,r=False):
  *     cdef Board board
  *     for i in range(4):             # <<<<<<<<<<<<<<
  *         for j in range(4):
  *             board.rows[i].row[j] = b[i*4+j]
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -3278,16 +3302,16 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #endif
       }
     } else {
@@ -3296,7 +3320,7 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -3305,22 +3329,22 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "cexpectimax.pyx":331
+    /* "cexpectimax.pyx":334
  *     cdef Board board
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
  *             board.rows[i].row[j] = b[i*4+j]
  *     #printBoard(board)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_5 = __pyx_t_1; __Pyx_INCREF(__pyx_t_5); __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -3328,16 +3352,16 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
         if (likely(PyList_CheckExact(__pyx_t_5))) {
           if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_5)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #endif
         } else {
           if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_5)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #endif
         }
       } else {
@@ -3346,7 +3370,7 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           break;
         }
@@ -3355,28 +3379,28 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
       __Pyx_XDECREF_SET(__pyx_v_j, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "cexpectimax.pyx":332
+      /* "cexpectimax.pyx":335
  *     for i in range(4):
  *         for j in range(4):
  *             board.rows[i].row[j] = b[i*4+j]             # <<<<<<<<<<<<<<
  *     #printBoard(board)
  *     #t = time()
  */
-      __pyx_t_1 = PyNumber_Multiply(__pyx_v_i, __pyx_int_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyNumber_Multiply(__pyx_v_i, __pyx_int_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = PyNumber_Add(__pyx_t_1, __pyx_v_j); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = PyNumber_Add(__pyx_t_1, __pyx_v_j); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyObject_GetItem(__pyx_v_b, __pyx_t_8); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = PyObject_GetItem(__pyx_v_b, __pyx_t_8); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_9 = __Pyx_PyInt_As_char(__pyx_t_1); if (unlikely((__pyx_t_9 == (char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_As_char(__pyx_t_1); if (unlikely((__pyx_t_9 == (char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_10 = __Pyx_PyIndex_AsSsize_t(__pyx_v_i); if (unlikely((__pyx_t_10 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_11 = __Pyx_PyIndex_AsSsize_t(__pyx_v_j); if (unlikely((__pyx_t_11 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = __Pyx_PyIndex_AsSsize_t(__pyx_v_i); if (unlikely((__pyx_t_10 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __Pyx_PyIndex_AsSsize_t(__pyx_v_j); if (unlikely((__pyx_t_11 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       ((__pyx_v_board.rows[__pyx_t_10]).row[__pyx_t_11]) = __pyx_t_9;
 
-      /* "cexpectimax.pyx":331
+      /* "cexpectimax.pyx":334
  *     cdef Board board
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
@@ -3386,7 +3410,7 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "cexpectimax.pyx":330
+    /* "cexpectimax.pyx":333
  * def getAction(b,d,r=False):
  *     cdef Board board
  *     for i in range(4):             # <<<<<<<<<<<<<<
@@ -3396,35 +3420,33 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cexpectimax.pyx":335
+  /* "cexpectimax.pyx":338
  *     #printBoard(board)
  *     #t = time()
  *     actScore = expectimax(board,d,r)             # <<<<<<<<<<<<<<
  *     return actionDict[actScore.action], actScore.score
- * 
  */
-  __pyx_t_9 = __Pyx_PyInt_As_char(__pyx_v_d); if (unlikely((__pyx_t_9 == (char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_v_r); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyInt_As_char(__pyx_v_d); if (unlikely((__pyx_t_9 == (char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_v_r); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_actScore = __pyx_f_11cexpectimax_expectimax(__pyx_v_board, __pyx_t_9, __pyx_t_12);
 
-  /* "cexpectimax.pyx":336
+  /* "cexpectimax.pyx":339
  *     #t = time()
  *     actScore = expectimax(board,d,r)
  *     return actionDict[actScore.action], actScore.score             # <<<<<<<<<<<<<<
- * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_actionDict); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_actionDict); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyInt_FromLong(__pyx_v_actScore.action); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyInt_FromLong(__pyx_v_actScore.action); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = PyObject_GetItem(__pyx_t_2, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = PyObject_GetItem(__pyx_t_2, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_actScore.score); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_actScore.score); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -3436,7 +3458,7 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cexpectimax.pyx":328
+  /* "cexpectimax.pyx":331
  * 
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
  * def getAction(b,d,r=False):             # <<<<<<<<<<<<<<
@@ -3496,6 +3518,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cexpectimax, __pyx_k_cexpectimax, sizeof(__pyx_k_cexpectimax), 0, 0, 1, 1},
   {&__pyx_n_s_clock, __pyx_k_clock, sizeof(__pyx_k_clock), 0, 0, 1, 1},
   {&__pyx_n_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 1},
+  {&__pyx_n_s_depth, __pyx_k_depth, sizeof(__pyx_k_depth), 0, 0, 1, 1},
   {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
   {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_getAction, __pyx_k_getAction, sizeof(__pyx_k_getAction), 0, 0, 1, 1},
@@ -3507,6 +3530,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_r, __pyx_k_r, sizeof(__pyx_k_r), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
+  {&__pyx_n_s_reduceAfterFirstDepth, __pyx_k_reduceAfterFirstDepth, sizeof(__pyx_k_reduceAfterFirstDepth), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_time, __pyx_k_time, sizeof(__pyx_k_time), 0, 0, 1, 1},
   {&__pyx_n_s_useRowUtility, __pyx_k_useRowUtility, sizeof(__pyx_k_useRowUtility), 0, 0, 1, 1},
@@ -3514,7 +3538,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3524,39 +3548,39 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cexpectimax.pyx":330
+  /* "cexpectimax.pyx":333
  * def getAction(b,d,r=False):
  *     cdef Board board
  *     for i in range(4):             # <<<<<<<<<<<<<<
  *         for j in range(4):
  *             board.rows[i].row[j] = b[i*4+j]
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cexpectimax.pyx":331
+  /* "cexpectimax.pyx":334
  *     cdef Board board
  *     for i in range(4):
  *         for j in range(4):             # <<<<<<<<<<<<<<
  *             board.rows[i].row[j] = b[i*4+j]
  *     #printBoard(board)
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "cexpectimax.pyx":328
+  /* "cexpectimax.pyx":331
  * 
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
  * def getAction(b,d,r=False):             # <<<<<<<<<<<<<<
  *     cdef Board board
  *     for i in range(4):
  */
-  __pyx_tuple__3 = PyTuple_Pack(7, __pyx_n_s_b, __pyx_n_s_d, __pyx_n_s_r, __pyx_n_s_board, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_actScore); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__3 = PyTuple_Pack(7, __pyx_n_s_b, __pyx_n_s_d, __pyx_n_s_r, __pyx_n_s_board, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_actScore); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(3, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_Users_Jason_Desktop_2048_cexpe, __pyx_n_s_getAction, 328, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(3, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_Users_Jason_Desktop_2048_cexpe, __pyx_n_s_getAction, 331, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3675,7 +3699,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  * # cython: profile=True
  * from time import time, clock             # <<<<<<<<<<<<<<
  * import utility
- * 
+ * import depth
  */
   __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -3702,31 +3726,59 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  * # cython: profile=True
  * from time import time, clock
  * import utility             # <<<<<<<<<<<<<<
+ * import depth
  * 
- * # Row of 4 tiles
  */
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_utility, 0, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_utility, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cexpectimax.pyx":77
+  /* "cexpectimax.pyx":4
+ * from time import time, clock
+ * import utility
+ * import depth             # <<<<<<<<<<<<<<
+ * 
+ * # Row of 4 tiles
+ */
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_depth, 0, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_depth, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cexpectimax.pyx":70
+ *     return compressRow(r)
+ * 
+ * cdef bint reduceAfterFirstDepth = depth.reduceAfterFirstDepth             # <<<<<<<<<<<<<<
+ * 
+ * # precomputation of row transitions
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_depth); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_reduceAfterFirstDepth); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_11cexpectimax_reduceAfterFirstDepth = __pyx_t_3;
+
+  /* "cexpectimax.pyx":80
  * cdef int util
  * cdef Row r
  * cdef bint useRowUtility = utility.useRowUtility             # <<<<<<<<<<<<<<
  * for a in range(16):
  *     r.row[0] = a
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_utility); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_useRowUtility); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_utility); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_useRowUtility); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_11cexpectimax_useRowUtility = __pyx_t_3;
 
-  /* "cexpectimax.pyx":78
+  /* "cexpectimax.pyx":81
  * cdef Row r
  * cdef bint useRowUtility = utility.useRowUtility
  * for a in range(16):             # <<<<<<<<<<<<<<
@@ -3736,7 +3788,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
   for (__pyx_t_4 = 0; __pyx_t_4 < 16; __pyx_t_4+=1) {
     __pyx_v_11cexpectimax_a = __pyx_t_4;
 
-    /* "cexpectimax.pyx":79
+    /* "cexpectimax.pyx":82
  * cdef bint useRowUtility = utility.useRowUtility
  * for a in range(16):
  *     r.row[0] = a             # <<<<<<<<<<<<<<
@@ -3745,7 +3797,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  */
     (__pyx_v_11cexpectimax_r.row[0]) = __pyx_v_11cexpectimax_a;
 
-    /* "cexpectimax.pyx":80
+    /* "cexpectimax.pyx":83
  * for a in range(16):
  *     r.row[0] = a
  *     for b in range(16):             # <<<<<<<<<<<<<<
@@ -3755,7 +3807,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
     for (__pyx_t_5 = 0; __pyx_t_5 < 16; __pyx_t_5+=1) {
       __pyx_v_11cexpectimax_b = __pyx_t_5;
 
-      /* "cexpectimax.pyx":81
+      /* "cexpectimax.pyx":84
  *     r.row[0] = a
  *     for b in range(16):
  *         r.row[1] = b             # <<<<<<<<<<<<<<
@@ -3764,7 +3816,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  */
       (__pyx_v_11cexpectimax_r.row[1]) = __pyx_v_11cexpectimax_b;
 
-      /* "cexpectimax.pyx":82
+      /* "cexpectimax.pyx":85
  *     for b in range(16):
  *         r.row[1] = b
  *         for c in range(16):             # <<<<<<<<<<<<<<
@@ -3774,7 +3826,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
       for (__pyx_t_6 = 0; __pyx_t_6 < 16; __pyx_t_6+=1) {
         __pyx_v_11cexpectimax_c = __pyx_t_6;
 
-        /* "cexpectimax.pyx":83
+        /* "cexpectimax.pyx":86
  *         r.row[1] = b
  *         for c in range(16):
  *             r.row[2] = c             # <<<<<<<<<<<<<<
@@ -3783,7 +3835,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  */
         (__pyx_v_11cexpectimax_r.row[2]) = __pyx_v_11cexpectimax_c;
 
-        /* "cexpectimax.pyx":84
+        /* "cexpectimax.pyx":87
  *         for c in range(16):
  *             r.row[2] = c
  *             for d in range(16):             # <<<<<<<<<<<<<<
@@ -3793,7 +3845,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
         for (__pyx_t_7 = 0; __pyx_t_7 < 16; __pyx_t_7+=1) {
           __pyx_v_11cexpectimax_d = __pyx_t_7;
 
-          /* "cexpectimax.pyx":85
+          /* "cexpectimax.pyx":88
  *             r.row[2] = c
  *             for d in range(16):
  *                 r.row[3] = d             # <<<<<<<<<<<<<<
@@ -3802,7 +3854,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  */
           (__pyx_v_11cexpectimax_r.row[3]) = __pyx_v_11cexpectimax_d;
 
-          /* "cexpectimax.pyx":86
+          /* "cexpectimax.pyx":89
  *             for d in range(16):
  *                 r.row[3] = d
  *                 idx = compressRow(r)             # <<<<<<<<<<<<<<
@@ -3811,7 +3863,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  */
           __pyx_v_11cexpectimax_idx = __pyx_f_11cexpectimax_compressRow(__pyx_v_11cexpectimax_r);
 
-          /* "cexpectimax.pyx":87
+          /* "cexpectimax.pyx":90
  *                 r.row[3] = d
  *                 idx = compressRow(r)
  *                 tr = getRowTrans(r)             # <<<<<<<<<<<<<<
@@ -3820,7 +3872,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  */
           __pyx_v_11cexpectimax_tr = __pyx_f_11cexpectimax_getRowTrans(__pyx_v_11cexpectimax_r);
 
-          /* "cexpectimax.pyx":88
+          /* "cexpectimax.pyx":91
  *                 idx = compressRow(r)
  *                 tr = getRowTrans(r)
  *                 if useRowUtility:             # <<<<<<<<<<<<<<
@@ -3830,25 +3882,25 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
           __pyx_t_3 = (__pyx_v_11cexpectimax_useRowUtility != 0);
           if (__pyx_t_3) {
 
-            /* "cexpectimax.pyx":89
+            /* "cexpectimax.pyx":92
  *                 tr = getRowTrans(r)
  *                 if useRowUtility:
  *                     util = utility.getRowUtility(a,b,c,d,True)             # <<<<<<<<<<<<<<
  *                     rowUtilInner[idx] = util
  *                     util = utility.getRowUtility(a,b,c,d,True)
  */
-            __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_utility); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_getRowUtility); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_utility); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_1);
+            __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_getRowUtility); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_a); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_9 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_b); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+            __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_a); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_1);
+            __pyx_t_9 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_b); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_10 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_c); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_10 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_c); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_11 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_d); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_11 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_d); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_11);
             __pyx_t_12 = NULL;
             __pyx_t_13 = 0;
@@ -3862,13 +3914,13 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
                 __pyx_t_13 = 1;
               }
             }
-            __pyx_t_14 = PyTuple_New(5+__pyx_t_13); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_14 = PyTuple_New(5+__pyx_t_13); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_14);
             if (__pyx_t_12) {
               PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_12); __Pyx_GIVEREF(__pyx_t_12); __pyx_t_12 = NULL;
             }
-            PyTuple_SET_ITEM(__pyx_t_14, 0+__pyx_t_13, __pyx_t_2);
-            __Pyx_GIVEREF(__pyx_t_2);
+            PyTuple_SET_ITEM(__pyx_t_14, 0+__pyx_t_13, __pyx_t_1);
+            __Pyx_GIVEREF(__pyx_t_1);
             PyTuple_SET_ITEM(__pyx_t_14, 1+__pyx_t_13, __pyx_t_9);
             __Pyx_GIVEREF(__pyx_t_9);
             PyTuple_SET_ITEM(__pyx_t_14, 2+__pyx_t_13, __pyx_t_10);
@@ -3878,19 +3930,19 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
             __Pyx_INCREF(Py_True);
             PyTuple_SET_ITEM(__pyx_t_14, 4+__pyx_t_13, Py_True);
             __Pyx_GIVEREF(Py_True);
-            __pyx_t_2 = 0;
+            __pyx_t_1 = 0;
             __pyx_t_9 = 0;
             __pyx_t_10 = 0;
             __pyx_t_11 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_14, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_1);
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_14, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-            __pyx_t_15 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+            __pyx_t_15 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_v_11cexpectimax_util = __pyx_t_15;
 
-            /* "cexpectimax.pyx":90
+            /* "cexpectimax.pyx":93
  *                 if useRowUtility:
  *                     util = utility.getRowUtility(a,b,c,d,True)
  *                     rowUtilInner[idx] = util             # <<<<<<<<<<<<<<
@@ -3899,42 +3951,42 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
  */
             (__pyx_v_11cexpectimax_rowUtilInner[__pyx_v_11cexpectimax_idx]) = __pyx_v_11cexpectimax_util;
 
-            /* "cexpectimax.pyx":91
+            /* "cexpectimax.pyx":94
  *                     util = utility.getRowUtility(a,b,c,d,True)
  *                     rowUtilInner[idx] = util
  *                     util = utility.getRowUtility(a,b,c,d,True)             # <<<<<<<<<<<<<<
  *                     rowUtilOuter[idx] = util
  *                 if idx!=tr:
  */
-            __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_utility); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_utility); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_getRowUtility); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_getRowUtility); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_14);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-            __pyx_t_8 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_a); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_8 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_a); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_11 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_b); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_11 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_b); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_10 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_c); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_10 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_c); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_9 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_d); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_9 = __Pyx_PyInt_From_char(__pyx_v_11cexpectimax_d); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_2 = NULL;
+            __pyx_t_1 = NULL;
             __pyx_t_13 = 0;
             if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_14))) {
-              __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_14);
-              if (likely(__pyx_t_2)) {
+              __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_14);
+              if (likely(__pyx_t_1)) {
                 PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
-                __Pyx_INCREF(__pyx_t_2);
+                __Pyx_INCREF(__pyx_t_1);
                 __Pyx_INCREF(function);
                 __Pyx_DECREF_SET(__pyx_t_14, function);
                 __pyx_t_13 = 1;
               }
             }
-            __pyx_t_12 = PyTuple_New(5+__pyx_t_13); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_12 = PyTuple_New(5+__pyx_t_13); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_12);
-            if (__pyx_t_2) {
-              PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
+            if (__pyx_t_1) {
+              PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
             }
             PyTuple_SET_ITEM(__pyx_t_12, 0+__pyx_t_13, __pyx_t_8);
             __Pyx_GIVEREF(__pyx_t_8);
@@ -3951,15 +4003,15 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
             __pyx_t_11 = 0;
             __pyx_t_10 = 0;
             __pyx_t_9 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_12, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_1);
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_12, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
             __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-            __pyx_t_15 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+            __pyx_t_15 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_v_11cexpectimax_util = __pyx_t_15;
 
-            /* "cexpectimax.pyx":92
+            /* "cexpectimax.pyx":95
  *                     rowUtilInner[idx] = util
  *                     util = utility.getRowUtility(a,b,c,d,True)
  *                     rowUtilOuter[idx] = util             # <<<<<<<<<<<<<<
@@ -3971,7 +4023,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
           }
           __pyx_L10:;
 
-          /* "cexpectimax.pyx":93
+          /* "cexpectimax.pyx":96
  *                     util = utility.getRowUtility(a,b,c,d,True)
  *                     rowUtilOuter[idx] = util
  *                 if idx!=tr:             # <<<<<<<<<<<<<<
@@ -3981,7 +4033,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
           __pyx_t_3 = ((__pyx_v_11cexpectimax_idx != __pyx_v_11cexpectimax_tr) != 0);
           if (__pyx_t_3) {
 
-            /* "cexpectimax.pyx":94
+            /* "cexpectimax.pyx":97
  *                     rowUtilOuter[idx] = util
  *                 if idx!=tr:
  *                     rowTrans[idx] = tr             # <<<<<<<<<<<<<<
@@ -3993,7 +4045,7 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
           }
           /*else*/ {
 
-            /* "cexpectimax.pyx":96
+            /* "cexpectimax.pyx":99
  *                     rowTrans[idx] = tr
  *                 else:
  *                     rowTrans[idx] = -1             # <<<<<<<<<<<<<<
@@ -4008,55 +4060,55 @@ PyMODINIT_FUNC PyInit_cexpectimax(void)
     }
   }
 
-  /* "cexpectimax.pyx":327
+  /* "cexpectimax.pyx":330
  * 
  * 
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}             # <<<<<<<<<<<<<<
  * def getAction(b,d,r=False):
  *     cdef Board board
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_14 = PyInt_FromLong(__pyx_e_11cexpectimax_UP); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_14 = PyInt_FromLong(__pyx_e_11cexpectimax_UP); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_14);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_t_14, __pyx_n_s_U) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_14, __pyx_n_s_U) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __pyx_t_14 = PyInt_FromLong(__pyx_e_11cexpectimax_DOWN); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_14 = PyInt_FromLong(__pyx_e_11cexpectimax_DOWN); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_14);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_t_14, __pyx_n_s_D) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_14, __pyx_n_s_D) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __pyx_t_14 = PyInt_FromLong(__pyx_e_11cexpectimax_LEFT); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_14 = PyInt_FromLong(__pyx_e_11cexpectimax_LEFT); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_14);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_t_14, __pyx_n_s_L) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_14, __pyx_n_s_L) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __pyx_t_14 = PyInt_FromLong(__pyx_e_11cexpectimax_RIGHT); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_14 = PyInt_FromLong(__pyx_e_11cexpectimax_RIGHT); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_14);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_t_14, __pyx_n_s_R) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_14, __pyx_n_s_R) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_actionDict, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_actionDict, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cexpectimax.pyx":328
+  /* "cexpectimax.pyx":331
  * 
  * actionDict = {UP:"U",DOWN:"D",LEFT:"L",RIGHT:"R"}
  * def getAction(b,d,r=False):             # <<<<<<<<<<<<<<
  *     cdef Board board
  *     for i in range(4):
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11cexpectimax_1getAction, NULL, __pyx_n_s_cexpectimax); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_getAction, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_11cexpectimax_1getAction, NULL, __pyx_n_s_cexpectimax); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_getAction, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cexpectimax.pyx":1
  * # cython: profile=True             # <<<<<<<<<<<<<<
  * from time import time, clock
  * import utility
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /*--- Wrapped vars code ---*/
 

@@ -1,6 +1,7 @@
 # cython: profile=True
 from time import time, clock
 import utility
+import depth
 
 # Row of 4 tiles
 cdef struct Row:
@@ -65,6 +66,8 @@ cdef short getRowTrans(Row r) nogil:
             r.row[i] *= -1
 
     return compressRow(r)
+
+cdef bint reduceAfterFirstDepth = depth.reduceAfterFirstDepth
 
 # precomputation of row transitions
 cdef unsigned short rowTrans[65536]
@@ -307,14 +310,14 @@ cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:
             successors = getSuccessors(trans.trans[i], True)
             percent = (1.0 if reduceSuccessors else 0.9)/successors.numSuccessors
             for j in range(successors.numSuccessors):
-                actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
+                actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)
                 totalScore += actScore.score*percent
 
             if not reduceSuccessors:
                 successors = getSuccessors(trans.trans[i], False)
                 percent = 0.1/successors.numSuccessors
                 for j in range(successors.numSuccessors):
-                    actScore = expectimax(successors.succ[j], d-1, reduceSuccessors)
+                    actScore = expectimax(successors.succ[j], d-1, reduceAfterFirstDepth or reduceSuccessors)
                     totalScore += actScore.score*percent
 
             if totalScore > bestActionScore.score:
@@ -334,4 +337,3 @@ def getAction(b,d,r=False):
     #t = time()
     actScore = expectimax(board,d,r)
     return actionDict[actScore.action], actScore.score
-
