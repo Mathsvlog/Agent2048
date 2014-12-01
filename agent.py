@@ -19,7 +19,10 @@ class Agent2048:
     def playGame(self):
         t = time()
         t2048 = None
+        t4096 = None
         hasAchieved2048 = False
+        hasAchieved4096 = False
+
 
         while len(self.state.getTransitions())>0:
             depth = getDepth(self.depth, self.state.board)
@@ -28,13 +31,16 @@ class Agent2048:
             if not hasAchieved2048 and 11 in self.state.board:
                 t2048 = time()-t
                 hasAchieved2048 = True
+            elif not hasAchieved4096 and 12 in self.state.board:
+                t4096 = time()-t
+                hasAchieved4096 = True
             if self.doPrint:
                 print("ACTION: "+action)
                 print("DEPTH: "+str(depth))
                 self.printState()
         if self.doPrint:
             print("GAME OVER")
-        return time()-t, t2048
+        return time()-t, t2048, t4096
 
     def printState(self):
         if self.doPrint:

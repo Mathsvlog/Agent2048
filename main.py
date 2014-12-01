@@ -60,11 +60,19 @@ if __name__ == "__main__":
 		a.playGame(runForever=options.forever)
 
 	elif options.mode=="f":
+		f = open("output.csv", "r")
+		lines = f.readlines()
+		f.close()
+		i = len(lines)
 		while True:
+			print i
 			a = Agent2048(depth=options.depth, reduceSuccessors=options.reduce, doPrint=False)
-			t, t2048 = a.playGame()
+			t, t2048, t4096 = a.playGame()
 			f = open("output.csv", "a")
 			s = ",".join(map(lambda x:str(x),a.state.board))
-			s += "," + str(t) + ","+str(t2048)+"\n"
+			#s += "," + str(t) + ","+str(t2048)+","+str(t4096)+"\n"
+			s += ",".join(["",str(t),str(t2048),str(t4096)]) + "\n"
 			f.write(s)
 			f.close()
+			i += 1
+			print s
