@@ -340,3 +340,4 @@ def getAction(b,d,r=False):
     #t = time()
     actScore = expectimax(board,d,r)
     return actionDict[actScore.action], actScore.score
+

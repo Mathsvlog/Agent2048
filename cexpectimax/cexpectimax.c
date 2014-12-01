@@ -3366,6 +3366,7 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
  *     #t = time()
  *     actScore = expectimax(board,d,r)             # <<<<<<<<<<<<<<
  *     return actionDict[actScore.action], actScore.score
+ * 
  */
   __pyx_t_9 = __Pyx_PyInt_As_char(__pyx_v_d); if (unlikely((__pyx_t_9 == (char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_v_r); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3375,6 +3376,7 @@ static PyObject *__pyx_pf_11cexpectimax_getAction(CYTHON_UNUSED PyObject *__pyx_
  *     #t = time()
  *     actScore = expectimax(board,d,r)
  *     return actionDict[actScore.action], actScore.score             # <<<<<<<<<<<<<<
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_actionDict); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
