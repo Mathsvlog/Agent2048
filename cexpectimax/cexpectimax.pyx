@@ -2,6 +2,7 @@
 from time import time, clock
 import utility
 import depth
+cimport cython
 
 # Row of 4 tiles
 cdef struct Row:
@@ -214,6 +215,7 @@ cdef char countTransitions(Transitions t) nogil:
     return num
 
 # computes the utility of a board
+@cython.cdivision(True)
 cdef int getUtility(Board b) nogil:
     cdef int score = 0
     cdef unsigned short idx
@@ -280,6 +282,7 @@ cdef Successors getSuccessors(Board b, bint two) nogil:
     return successors
 
 # runs expectimax, returns the best action/score pair
+@cython.cdivision(True)
 cdef ActionScore expectimax(Board b, char d, bint reduceSuccessors) nogil:
     cdef Transitions trans = getTransitions(b)
     cdef char numTransitions = countTransitions(trans)
