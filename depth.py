@@ -16,7 +16,6 @@ def getDepth(depth, board):
             depth += 1
             if numBlanks==0:
             	depth += 1
-    depth = 4
     return depth
 
 
