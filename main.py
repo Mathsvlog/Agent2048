@@ -58,3 +58,13 @@ if __name__ == "__main__":
 	elif options.mode=="s":
 		a = SeleniumAgent2048(delay=options.delay, depth=options.depth, reduceSuccessors=options.reduce)
 		a.playGame(runForever=options.forever)
+
+	elif options.mode=="f":
+		while True:
+			a = Agent2048(depth=options.depth, reduceSuccessors=options.reduce, doPrint=False)
+			t, t2048 = a.playGame()
+			f = open("output.csv", "a")
+			s = ",".join(map(lambda x:str(x),a.state.board))
+			s += "," + str(t) + ","+str(t2048)+"\n"
+			f.write(s)
+			f.close()
