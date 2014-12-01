@@ -14,9 +14,6 @@ if os.name=="nt":
 	from webagent import *
 	from webboxfinder import *
 
-#from random import seed
-#seed(1)
-
 if __name__ == "__main__":
 	o = optparse.OptionParser()
 	o.add_option("-m", "--mode", type="str", dest="mode", default="a", help="'a':Agent, 'w':WebAgent, 'b':BoxFinder->WebAgent, 's':SeleniumAgent, default 'a'")
@@ -34,10 +31,7 @@ if __name__ == "__main__":
 
 	if options.mode=="a":
 		a = Agent2048(depth=options.depth, reduceSuccessors=options.reduce)
-		#from time import time
-		#t = time()
 		a.playGame()
-		#print "TIME TO COMPLETE: "+str(time()-t)
 		
 
 	elif options.mode=="w":
