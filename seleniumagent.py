@@ -57,6 +57,7 @@ class SeleniumAgent2048:
         keys2048 = {Action2048.UP:Keys.UP, Action2048.RIGHT:Keys.RIGHT, Action2048.DOWN:Keys.DOWN, Action2048.LEFT:Keys.LEFT}
         body = self.webdriver.find_element_by_tag_name("body")
         doRun = True
+        raw_input()
         # run forever if option enabled
         while doRun:
             sleep(0.5)
@@ -87,8 +88,12 @@ class SeleniumAgent2048:
                 t = time()
 
                 # read output
+                attempts = 0
                 while not self.readBoard(action):
                     print "-",
+                    attempts+=1
+                    if attempts==10:
+                        break
                 print
                 print("ACTION: "+action)
                 print("DEPTH: "+str(depth))
@@ -111,9 +116,11 @@ class SeleniumAgent2048:
         lines = self.webdriver.execute_script(self.getTilesScript)
         tiles = {}
         for line in lines:
+            # tile tile-4096 tile-position-2-3 tile-super
+            # tile tile-8 tile-position-2-2
             words = line.split(" ")
             tile = tuple(map(lambda i:int(i),words[2][14:].split("-")))
-            if tile not in tiles or len(words)==4:
+            if tile not in tiles or len(words)>=4:
                 tiles[tile] = self.mapVals[int(words[1][5:])]# mapValue
 
         board = array("b", [0 for _ in range(16)])

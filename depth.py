@@ -10,14 +10,14 @@ compute a reasonable depth value
 """
 def getDepth(depth, board):
     numBlanks = board.count(0)
+
     if numBlanks <= 6:
         depth += 1
         if numBlanks <= 3:
             depth += 1
             if numBlanks==0:
-            	depth += 1
+                depth += 1
     return depth
-
 
 """
 def getDepth(depth, board):
