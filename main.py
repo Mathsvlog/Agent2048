@@ -22,6 +22,7 @@ if __name__ == "__main__":
 	o.add_option("-l", "--lastBox", dest="lastBox", default=False, action="store_true", help="uses the box from last use of BoxFinder")
 	o.add_option("-s", "--sleep", type="float", dest="delay", default=0, help="seconds SeleniumAgent waits between moves, default 0")
 	o.add_option("-f", "--forever", dest="forever", default=False, action="store_true", help="SeleniumAgent will run forever")
+	o.add_option("-z", "--staticdepth", dest="staticDepth", default=False, action="store_true", help="Fixes depth so that it is not dynamic")
 
 	(options, _) = o.parse_args()
 
@@ -30,8 +31,8 @@ if __name__ == "__main__":
 		sys.exit()
 
 	if options.mode=="a":
-		a = Agent2048(depth=options.depth, reduceSuccessors=options.reduce)
-		a.playGame()
+		a = Agent2048(depth=options.depth, reduceSuccessors=options.reduce, staticDepth=options.staticDepth)
+		a.playGame(runForever=options.forever)
 		
 
 	elif options.mode=="w":
@@ -56,13 +57,18 @@ if __name__ == "__main__":
 		a.playGame()
 
 	elif options.mode=="s":
-		a = SeleniumAgent2048(delay=options.delay, depth=options.depth, reduceSuccessors=options.reduce)
+		a = SeleniumAgent2048(delay=options.delay, depth=options.depth, reduceSuccessors=options.reduce, staticDepth=options.staticDepth)
 		a.playGame(runForever=options.forever)
 
 	elif options.mode=="f":
-		f = open("output.csv", "r")
-		lines = f.readlines()
-		f.close()
+		try:
+			f = open("output.csv", "r")
+			lines = f.readlines()
+			f.close()
+		except:
+			f = open("output.csv", "w")
+			lines = []
+			f.close()
 		i = len(lines)
 		while True:
 			print i
@@ -70,7 +76,6 @@ if __name__ == "__main__":
 			t, t2048, t4096 = a.playGame()
 			f = open("output.csv", "a")
 			s = ",".join(map(lambda x:str(x),a.state.board))
-			#s += "," + str(t) + ","+str(t2048)+","+str(t4096)+"\n"
 			s += ",".join(["",str(t),str(t2048),str(t4096)]) + "\n"
 			f.write(s)
 			f.close()

@@ -15,10 +15,12 @@ Detect exactly when state changes
 
 class SeleniumAgent2048:
 
-    def __init__(self, delay=0, depth=3, reduceSuccessors=False):
+    def __init__(self, delay=0, depth=3, reduceSuccessors=False, staticDepth=False):
         self.delay = delay
         self.depth = depth
         self.reduceSuccessors = reduceSuccessors
+        self.staticDepth = staticDepth
+
         self._setupBrowser()
         self.state = State2048(array("b", [0 for _ in range(16)]))
         self.readBoard()
@@ -57,7 +59,7 @@ class SeleniumAgent2048:
         keys2048 = {Action2048.UP:Keys.UP, Action2048.RIGHT:Keys.RIGHT, Action2048.DOWN:Keys.DOWN, Action2048.LEFT:Keys.LEFT}
         body = self.webdriver.find_element_by_tag_name("body")
         doRun = True
-        raw_input()
+        raw_input("ENTER TO START")
         # run forever if option enabled
         while doRun:
             sleep(0.5)
@@ -66,7 +68,6 @@ class SeleniumAgent2048:
             t2048 = time()
             hasAchieved2048 = False
             # for each turn
-            #while len(self.state.getTransitions())>0:
             while not self.isGameOver():
                 # if achieved 2048, press continue button
                 if not hasAchieved2048 and 11 in self.state.board:
@@ -76,7 +77,7 @@ class SeleniumAgent2048:
                     resetButton = self.webdriver.find_element_by_class_name("keep-playing-button")
                     resetButton.click()
                 # run expectimax to get acion, value pair
-                depth = getDepth(self.depth, self.state.board)
+                depth = getDepth(self.depth, self.state.board, self.staticDepth)
                 action,self.value = getAction(self.state.board, depth, self.reduceSuccessors)
                 
                 # send action key
@@ -111,13 +112,9 @@ class SeleniumAgent2048:
         self.webdriver.close()
 
     def readBoard(self, action=None):
-        #boardUpdated = False
-        #while not boardUpdated:
         lines = self.webdriver.execute_script(self.getTilesScript)
         tiles = {}
         for line in lines:
-            # tile tile-4096 tile-position-2-3 tile-super
-            # tile tile-8 tile-position-2-2
             words = line.split(" ")
             tile = tuple(map(lambda i:int(i),words[2][14:].split("-")))
             if tile not in tiles or len(words)>=4:
@@ -141,15 +138,8 @@ class SeleniumAgent2048:
                 print discrepancy
                 return False
 
-
         self.state = State2048(board)
         return True
-        #newState = State2048(board)
-        #if newState.board != self.state.board:
-        #    boardUpdated = True
-        #    self.state = newState
-        #else:
-        #    sleep(0.1)
                 
     def resetGame(self):
         resetButton = self.webdriver.find_element_by_class_name("restart-button")
